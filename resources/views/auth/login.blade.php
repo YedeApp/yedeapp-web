@@ -27,7 +27,7 @@
                                 <div class="form-group row {{ $errors->has('account') ? ' has-error' : '' }}">
                                     <label for="account" class="col-3 col-form-label text-right">帐　号</label>
                                     <div class="col-md-7">
-                                        <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" placeholder="手机/邮箱/用户名" required autofocus>
+                                        <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" placeholder="请输入手机或邮箱" required autofocus>
         
                                         @if ($errors->has('account'))
                                             <span class="form-text">
@@ -74,7 +74,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-7 offset-md-3">
                                         <button type="submit" class="btn btn-primary btn-w-100">登录</button>
-                                        <a class="btn btn-link text-right" href="{{ route('password.request') }}">忘记密码?</a>
+                                        <a class="btn btn-link text-right" href="{{ route('password.request') }}">忘记密码？</a>
                                     </div>
                                 </div>
                             </form>
