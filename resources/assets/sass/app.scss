@@ -1,5 +1,4 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Fonts url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
 @import "variables";
@@ -9,9 +8,34 @@
 
 // Common
 body {
-  font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
-  font-size: 15px;
-  color: #393939;
-  background-color: #f3f3f3;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $font-color-base;
+  line-height: $line-height-base;
+  background-color: $body-bg;
 }
 
+header {
+  height: 50px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  background-color: $bg-color;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: $bg-color;
+  box-shadow: 0 -1px 1px rgba(26,26,26,.1);
+
+  a {
+    color: $font-color-base;
+  }
+  
+  .info {
+    padding: 20px 0px;
+  }
+}
