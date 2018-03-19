@@ -6,36 +6,87 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Fixes
+@import "fixes";
+
 // Common
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   color: $font-color-base;
   line-height: $line-height-base;
-  background-color: $body-bg;
+  background-color: $body-bg-color;
 }
 
+ul > li {
+  list-style-type: none;
+}
+
+.btn-w-100 {
+  width: 100px;
+}
+
+.btn-w-200 {
+  width: 200px;
+}
+
+// Header
 header {
   height: 50px;
   margin-bottom: 15px;
   overflow: hidden;
-  background-color: $bg-color;
+  background-color: $block-bg-color;
   box-shadow: 0 1px 3px rgba(26,26,26,.1);
+
+  a {
+    color: $font-color-base;
+  }
+
+  .logo {
+    float: left;
+    margin-top: 7px;
+  }
+
+  .info {
+    float: right;
+    margin-top: 12px;
+
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  } //end info
 }
 
+// Footer
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  background-color: $bg-color;
+  background-color: $block-bg-color;
   box-shadow: 0 -1px 1px rgba(26,26,26,.1);
 
   a {
     color: $font-color-base;
   }
-  
+
   .info {
     padding: 20px 0px;
   }
+}
+
+// Login page
+.login-page {
+  .card {
+    margin-top: 8%;
+
+    a {
+      color: $font-color-base;
+    }
+
+    .tab-content {
+      padding-top: 25px;
+    }
+  } // end card
 }
