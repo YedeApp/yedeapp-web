@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
     public function isAuthorOf($model)
     {
         return $this->id == $model->user_id;

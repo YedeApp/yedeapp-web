@@ -25,6 +25,11 @@ class Course extends Model
         return $this->hasMany(Topic::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
