@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Chapter;
 
 class ChaptersTableSeeder extends Seeder
 {
@@ -11,6 +12,8 @@ class ChaptersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $chapters = factory(Chapter::class)->times(20)->make()->toArray();
+        
+        Chapter::insert($chapters);
     }
 }

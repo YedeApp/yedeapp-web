@@ -12,8 +12,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = app(Faker\Generator::class);
-
         $users = factory(User::class)->times(10)->make();
         
         // Make sure user hidden fields are visible, so they can be manipulated

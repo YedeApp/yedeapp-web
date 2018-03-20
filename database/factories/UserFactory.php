@@ -1,7 +1,6 @@
 <?php
 
-// use Faker\Generator as Faker;
-// use Carbon\Carbon;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +18,9 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     $faker->addProvider(new Faker\Provider\zh_CN\PhoneNumber($faker));
     
     // Created_at and updated_at
-    $now = Carbon\Carbon::now()->toDateTimeString();
+    $now = Carbon::now()->toDateTimeString();
 
-    // Use phphub avatars cause can't reach the image provider lorempixel.com
+    // Can not reach lorempixel.com the image provider
     $avatars = [
         'https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/s5ehp11z6s.png?imageView2/1/w/200/h/200',
         'https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/Lhd1SHqu86.png?imageView2/1/w/200/h/200',
