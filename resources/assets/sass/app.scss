@@ -10,7 +10,13 @@
 @import "fixes";
 
 // Common
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
+  margin-bottom: 60px;
   font-family: $font-family-base;
   font-size: $font-size-base;
   color: $font-color-base;
@@ -67,13 +73,14 @@ header {
 
     li {
       float: left;
-      margin-left: 15px;
+      margin-left: 20px;
     }
   } //end info
 }
 
 // Footer
 footer {
+  position: absolute;
   bottom: 0;
   width: 100%;
   overflow: hidden;

@@ -10016,7 +10016,13 @@ a.text-dark:focus {
   color: #ccc;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
+  margin-bottom: 60px;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
   font-size: 0.9rem;
   color: #393939;
@@ -10077,10 +10083,11 @@ header .info {
 
 header .info li {
   float: left;
-  margin-left: 15px;
+  margin-left: 20px;
 }
 
 footer {
+  position: absolute;
   bottom: 0;
   width: 100%;
   overflow: hidden;
