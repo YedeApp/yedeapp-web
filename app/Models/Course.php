@@ -15,4 +15,24 @@ class Course extends Model
         'name', 'slug', 'cover', 'banner', 'intro', 'introduction', 'price', 'sorting'
     ];
 
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function getPriceForHumans()
+    {
+        return ($this->price / 100);
+    }
+
 }
