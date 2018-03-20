@@ -1,4 +1,4 @@
-<footer>
+<footer class="position-absolute">
     <div class="container clearfix">
         <div class="info float-left">
             <span class="homepage">{!! outlink('https://www.yedeapp.com', 'YedeApp.com', 'blank') !!}</span>

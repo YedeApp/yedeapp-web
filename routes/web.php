@@ -13,6 +13,7 @@
 
 // Home
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/welcome', 'HomeController@welcome')->name('welcome');
 
 // Authentication Routes
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -29,4 +30,10 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+// Course Routes
+Route::resource('course', 'CourseController', ['only' => ['show', 'create', 'store', 'update', 'edit']]);
+Route::get('course/{course}/chapters', 'CourseController@chapters')->name('course.chapters');
+Route::get('course/{course}/purchase', 'CourseController@purchase')->name('course.purchase');
+Route::get('course/purchase/push', 'CourseController@push')->name('course.push');
+Route::get('course/purchase/pull', 'CourseController@pull')->name('course.pull');
 

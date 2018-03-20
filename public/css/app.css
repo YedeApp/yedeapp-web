@@ -9994,6 +9994,12 @@ a.text-dark:focus {
   }
 }
 
+@media (min-width: 1200px) {
+  .container {
+    width: 990px;
+  }
+}
+
 .form-control::-webkit-input-placeholder {
   color: #ccc;
 }
@@ -10022,12 +10028,28 @@ ul > li {
   list-style-type: none;
 }
 
+.card {
+  margin-bottom: 15px;
+  border: 0;
+  -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+          box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+}
+
 .btn-w-100 {
   width: 100px;
 }
 
+.btn-w-150 {
+  width: 150px;
+}
+
 .btn-w-200 {
   width: 200px;
+}
+
+.img-shadow {
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 header {
@@ -10059,10 +10081,10 @@ header .info li {
 }
 
 footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   overflow: hidden;
+  font-size: 13px;
   background-color: #fff;
   -webkit-box-shadow: 0 -1px 1px rgba(26, 26, 26, 0.1);
           box-shadow: 0 -1px 1px rgba(26, 26, 26, 0.1);
@@ -10074,6 +10096,18 @@ footer a {
 
 footer .info {
   padding: 20px 0px;
+}
+
+.home-page .card .name {
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.home-page .card .intro {
+  font-size: 15px;
+  margin-top: 1rem;
+  line-height: 1.8rem;
 }
 
 .login-page .card {
