@@ -1,7 +1,7 @@
 <footer>
   <div class="container clearfix">
     <div class="info float-left">
-      <span class="homepage">{!! outlink('https://www.yedeapp.com', 'YedeApp.com', 'blank') !!}</span>
+      <span class="homepage"><a href="https://www.yedeapp.com" target="_blank">YedeApp.com</a></span>
       <span class="copyright">&copy;野得 2018</span>
     </div>
     <div class="info float-right">
