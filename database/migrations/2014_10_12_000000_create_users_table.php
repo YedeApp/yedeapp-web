@@ -17,10 +17,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->index();
             $table->string('phone')->unique();
-            $table->string('email')->nullable()->unique();
+            $table->string('email')->unique();
             $table->string('password');
-            $table->string('weixin_openid')->nullable()->unique();
-            $table->string('weixin_unionid')->nullable()->unique();
+            $table->string('avatar')->nullable();
+            $table->string('introduction')->nullable();
+            $table->string('weixin_openid')->unique();
+            $table->string('weixin_unionid')->unique();
             $table->rememberToken();
             $table->timestamps();
         });
