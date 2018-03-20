@@ -17,7 +17,7 @@ class CourseController extends Controller
     }
 
     /**
-     * The course's intro page.
+     * Course index page containing simple intros.
      *
      * @param  App\Models\Course  $course
      * @return View
