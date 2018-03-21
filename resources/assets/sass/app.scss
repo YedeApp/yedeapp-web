@@ -166,4 +166,8 @@ footer {
 
 .course-chapters-page {
   @include course-header;
+
+  .extra {
+    margin: 25px 0;
+  }
 }

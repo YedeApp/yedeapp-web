@@ -15,6 +15,11 @@ class Topic extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function chapter()
+    {
+        return $this->belongsTo(Chapter::class);
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class);
@@ -24,5 +29,5 @@ class Topic extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    
+
 }

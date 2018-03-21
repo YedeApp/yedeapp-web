@@ -12,16 +12,16 @@ class Comment extends Model
 
     public function course()
     {
-        $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function author()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function topic()
     {
-        $this->belongsTo(Topic::class);
+        return $this->belongsTo(Topic::class);
     }
 }
