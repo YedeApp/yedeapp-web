@@ -9,6 +9,20 @@
 // Fixes
 @import "fixes";
 
+// Mixins
+@mixin course-header {
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .author {
+    margin-top: 15px;
+    padding-right: 10px;
+    text-align: right;
+  }
+}
+
 // Common
 html {
   position: relative;
@@ -136,16 +150,7 @@ footer {
 
 // Course pages
 .course-show-page {
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-  }
-
-  .author {
-    margin-top: 15px;
-    padding-right: 10px;
-    text-align: right;
-  }
+  @include course-header;
 
   .intro {
     margin-top: 15px;
@@ -158,3 +163,4 @@ footer {
     text-align: center;
   }
 }
+
