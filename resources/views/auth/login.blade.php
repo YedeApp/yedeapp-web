@@ -23,14 +23,14 @@
             <form method="POST" action="{{ route('login') }}">
               {{ csrf_field() }}
 
-              <div class="form-group row {{ $errors->has('account') ? ' has-error' : '' }}">
-                <label for="account" class="col-3 col-form-label text-right">帐　号</label>
+              <div class="form-group row {{ $errors->has('email') ? ' has-error' : '' }}">
+                <label for="email" class="col-3 col-form-label text-right">帐　号</label>
                 <div class="col-md-7">
-                  <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" placeholder="请输入手机或邮箱" required autofocus>
+                  <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="请输入手机或邮箱" required autofocus>
 
-                  @if ($errors->has('account'))
+                  @if ($errors->has('email'))
                     <span class="form-text">
-                      <strong>{{ $errors->first('account') }}</strong>
+                      <strong>{{ $errors->first('email') }}</strong>
                     </span>
                   @endif
                 </div>
@@ -53,6 +53,7 @@
                 <label for="captcha" class="col-3 col-form-label text-right">验证码</label>
                 <div class="col-md-7">
                   <input id="captcha" type="text" class="form-control" name="captcha" placeholder="请输入验证码" required>
+                  <img class="captcha rounded" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片刷新验证码">
 
                   @if ($errors->has('captcha'))
                     <span class="form-text">

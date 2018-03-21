@@ -10143,6 +10143,11 @@ footer .info {
   padding-top: 25px;
 }
 
+.login-page .card .captcha {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
 .course-show-page h1 {
   font-size: 1.8rem;
   font-weight: 700;
