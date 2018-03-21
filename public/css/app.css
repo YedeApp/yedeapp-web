@@ -10156,3 +10156,14 @@ footer .info {
   text-align: center;
 }
 
+.course-chapters-page h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.course-chapters-page .author {
+  margin-top: 15px;
+  padding-right: 10px;
+  text-align: right;
+}
+

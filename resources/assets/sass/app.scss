@@ -164,3 +164,6 @@ footer {
   }
 }
 
+.course-chapters-page {
+  @include course-header;
+}
