@@ -18,11 +18,22 @@
             <dt>{{ $chapter->name }}</dt>
             @foreach ($chapter->topics as $topic)
               <dd>
-                {{--subscriber  <a href="#">{{ $topic->title }}</a>  --}}
-                <a href="#"><span class="badge badge-primary">免费试读</span>{{ $topic->title }}</a>
-                <span class="pull-right">
-                  <svg class="icon" aria-hidden="true" title="订阅后开启"><use xlink:href="#icon-lock"></use></svg>
-                </span>
+                {{-- Subscriber --}}
+                @can('show', $course)
+                  <a href="#">{{ $topic->title }}</a>
+                {{-- Guest --}}
+                @else
+                  @if($topic->is_free)
+                    {{-- Free topic--}}
+                    <a href="#"><span class="badge badge-primary">免费试读</span>{{ $topic->title }}</a>
+                  @else
+                    <span>{{ $topic->title }}</span>
+                  @endif
+
+                  @if(!$topic->is_free)
+                    <span class="pull-right"><svg class="icon" aria-hidden="true" title="订阅后开启"><use xlink:href="#icon-lock"></use></svg></span>
+                  @endif
+                @endcan
               </dd>
             @endforeach
           @endforeach
