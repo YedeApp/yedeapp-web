@@ -25,7 +25,7 @@
                 @else
                   @if($topic->is_free)
                     {{-- Free topic--}}
-                    <a href="#"><span class="badge badge-primary">免费试读</span>{{ $topic->title }}</a>
+                    <a href="#"><span class="badge badge-primary">免费试读</span>{{ $topic->title . '-' . $topic->course_id }}</a>
                   @else
                     <span>{{ $topic->title }}</span>
                   @endif

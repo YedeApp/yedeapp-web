@@ -18,10 +18,10 @@ class CourseController extends Controller
     }
 
     /**
-     * Course index page containing simple intros.
+     * Course introduction page.
      *
      * @param  Illuminate\Database\Eloquent\Model\Course  $course
-     * @return View
+     * @return Illuminate\Contracts\View\View
      */
     public function show(Course $course)
     {
@@ -32,11 +32,11 @@ class CourseController extends Controller
      * Course chapters page.
      *
      * @param  Illuminate\Database\Eloquent\Model\Course  $course
-     * @return View
+     * @return Illuminate\Contracts\View\View
      */
     public function chapters(Course $course)
     {
-        $chapters = $course->chapters;
+        $chapters = $course->chapters->load('topics');
         return view('course.chapters', compact('course', 'chapters'));
     }
 }
