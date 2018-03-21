@@ -36,6 +36,7 @@ class CourseController extends Controller
      */
     public function chapters(Course $course)
     {
-        return view('course.chapters', compact('course'));
+        $chapters = $course->chapters;
+        return view('course.chapters', compact('course', 'chapters'));
     }
 }

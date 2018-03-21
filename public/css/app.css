@@ -10023,8 +10023,8 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-  font-size: 0.9rem;
   color: #393939;
   line-height: 1.6;
   background-color: #f6f6f6;
@@ -10065,6 +10065,7 @@ ul > li {
 header {
   height: 50px;
   margin-bottom: 15px;
+  font-size: 0.9rem;
   overflow: hidden;
   background-color: #fff;
   -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
@@ -10116,9 +10117,9 @@ footer .info {
 }
 
 .home-page .card .intro {
-  font-size: 15px;
   margin-top: 1rem;
   line-height: 1.8rem;
+  letter-spacing: 0.5px;
 }
 
 .login-page .card {
@@ -10140,17 +10141,18 @@ footer .info {
 
 .course-show-page .author {
   margin-top: 15px;
+  padding-right: 10px;
   text-align: right;
 }
 
 .course-show-page .intro {
   margin-top: 15px;
-  font-size: 15px;
   line-height: 1.8rem;
+  letter-spacing: 0.5px;
 }
 
 .course-show-page .extra {
-  margin-top: 15px;
+  margin: 25px auto 15px;
   text-align: center;
 }
 

@@ -19,8 +19,4 @@ class HomeController extends Controller
         return view('pages.home', compact('courses'));
     }
 
-    public function welcome()
-    {
-        return view('pages.welcome');
-    }
 }

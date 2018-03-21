@@ -18,7 +18,9 @@
 
     @include('layouts._header')
 
-    @yield('content')
+    <div class="container">
+      @yield('content')
+    </div>
 
     @include('layouts._footer')
   </div>
