@@ -10045,6 +10045,10 @@ ul > li {
   width: 100px;
 }
 
+.btn-w-120 {
+  width: 120px;
+}
+
 .btn-w-150 {
   width: 150px;
 }
@@ -10127,5 +10131,26 @@ footer .info {
 
 .login-page .card .tab-content {
   padding-top: 25px;
+}
+
+.course-show-page h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.course-show-page .author {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.course-show-page .intro {
+  margin-top: 15px;
+  font-size: 15px;
+  line-height: 1.8rem;
+}
+
+.course-show-page .extra {
+  margin-top: 15px;
+  text-align: center;
 }
 

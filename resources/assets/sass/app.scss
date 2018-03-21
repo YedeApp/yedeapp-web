@@ -38,6 +38,10 @@ ul > li {
   width: 100px;
 }
 
+.btn-w-120 {
+  width: 120px;
+}
+
 .btn-w-150 {
   width: 150px;
 }
@@ -127,4 +131,28 @@ footer {
       padding-top: 25px;
     }
   } // end card
+}
+
+// Course pages
+.course-show-page {
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .author {
+    margin-top: 15px;
+    text-align: right;
+  }
+
+  .intro {
+    margin-top: 15px;
+    font-size: 15px;
+    line-height: 1.8rem;
+  }
+
+  .extra {
+    margin-top: 15px;
+    text-align: center;
+  }
 }

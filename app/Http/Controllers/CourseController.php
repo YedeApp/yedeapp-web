@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Course;
 
 class CourseController extends Controller
 {
@@ -19,11 +20,22 @@ class CourseController extends Controller
     /**
      * Course index page containing simple intros.
      *
-     * @param  App\Models\Course  $course
+     * @param  Illuminate\Database\Eloquent\Model\Course  $course
      * @return View
      */
     public function show(Course $course)
     {
         return view('course.show', compact('course'));
+    }
+
+    /**
+     * Course chapters page.
+     *
+     * @param  Illuminate\Database\Eloquent\Model\Course  $course
+     * @return View
+     */
+    public function chapters(Course $course)
+    {
+        return view('course.chapters', compact('course'));
     }
 }
