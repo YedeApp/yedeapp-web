@@ -10103,7 +10103,7 @@ header .info li.link {
 }
 
 header .info li.register {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 header .info li.show {
@@ -10137,8 +10137,10 @@ header .info li .dropdown-menu .dropdown-item {
 }
 
 header .info li .dropdown-menu .dropdown-item:hover,
-header .info li .dropdown-menu .dropdown-item:focus {
+header .info li .dropdown-menu .dropdown-item:focus,
+header .info li .dropdown-menu .dropdown-item:active {
   background-color: #f5f5f5;
+  color: #333;
 }
 
 header .info li .dropdown-menu .button-icon {
