@@ -33,5 +33,6 @@
   {{-- Scripts --}}
   <script src="{{ asset('js/app.js') }}"></script>
   @yield('scripts')
+  <script src="{{ asset('js/iconfont.js') }}"></script>
 </body>
 </html>

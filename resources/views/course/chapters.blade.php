@@ -42,7 +42,3 @@
     </div>
   @endcomponent
 @endsection
-
-@section('scripts')
-<script src="{{ asset('js/iconfont.js') }}"></script>
-@endsection
