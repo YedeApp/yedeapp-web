@@ -28,6 +28,13 @@ class LoginController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * How many minutes throttle users for failed login.
+     *
+     * @var string
+     */
+    protected $decayMinutes = 5;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
