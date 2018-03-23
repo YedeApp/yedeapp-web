@@ -62,4 +62,37 @@ class LoginController extends Controller
             'captcha.captcha' => '验证码不正确，请重新输入',
         ]);
     }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'account';
+    }
+
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        $emailCredentials = [
+            'email' => $request->account,
+            'password' => $request->password
+        ];
+
+        $phoneCredentials = [
+            'phone' => $request->account,
+            'password' => $request->password
+        ];
+
+        $remember = $request->filled('remember');
+
+        return $this->guard()->attempt($emailCredentials, $remember) || $this->guard()->attempt($phoneCredentials, $remember);
+    }
 }

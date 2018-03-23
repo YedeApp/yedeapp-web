@@ -24,3 +24,7 @@
 .form-control::placeholder { // Most modern browsers support this now
   color: $placeholder-color;
 }
+
+.invalid-feedback {
+  font-size: 100%;
+}

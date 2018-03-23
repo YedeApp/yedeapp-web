@@ -7,59 +7,54 @@
       <div class="card-body">
         <ul class="nav nav-tabs nav-fill" role="tablist">
           <li class="nav-item">
-            <a id="weixin-tab" class="nav-link" href="#weixin" data-toggle="tab" role="tab" aria-controls="weixin" aria-selected="false">微信登陆</a>
+            <a id="weixin-tab" class="nav-link" href="#weixin-pane" data-toggle="tab" role="tab" aria-controls="weixin" aria-selected="false">微信登陆</a>
           </li>
           <li class="nav-item">
-            <a id="account-tab" class="nav-link active" href="#account" data-toggle="tab" role="tab" aria-controls="account" aria-selected="true">帐号登录</a>
+            <a id="account-tab" class="nav-link active" href="#account-pane" data-toggle="tab" role="tab" aria-controls="account" aria-selected="true">帐号登录</a>
           </li>
         </ul>
         <div class="tab-content">
           {{-- 微信登录 --}}
-          <div class="tab-pane fade" id="weixin" role="tabpanel" aria-labelledby="weixin-tab">
+          <div class="tab-pane fade" id="weixin-pane" role="tabpanel" aria-labelledby="weixin-tab">
               <div class="text-center">开发中，稍后上线</div>
           </div>
           {{-- 帐号登录 --}}
-          <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+          <div class="tab-pane fade show active" id="account-pane" role="tabpanel" aria-labelledby="account-tab">
             <form method="POST" action="{{ route('login') }}">
               {{ csrf_field() }}
 
-              <div class="form-group row {{ $errors->has('email') ? ' has-error' : '' }}">
-                <label for="email" class="col-3 col-form-label text-right">帐　号</label>
+              <div class="form-group row">
+                <label for="account" class="col-3 col-form-label text-right">帐　号</label>
                 <div class="col-md-7">
-                  <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="请输入手机或邮箱" required autofocus>
+                  <input id="account" type="text" class="form-control {{ $errors->has('account') ? 'is-invalid' : '' }}" name="account" value="{{ old('account') }}" placeholder="请输入手机或邮箱" required autofocus>
 
-                  @if ($errors->has('email'))
-                    <span class="form-text">
-                      <strong>{{ $errors->first('email') }}</strong>
-                    </span>
+                  @if ($errors->has('account'))
+                    <div class="invalid-feedback">{{ $errors->first('account') }}</div>
                   @endif
                 </div>
               </div>
 
-              <div class="form-group row {{ $errors->has('password') ? ' has-error' : '' }}">
+              <div class="form-group row">
                 <label for="password" class="col-3 col-form-label text-right">密　码</label>
                 <div class="col-md-7">
-                  <input id="password" type="password" class="form-control" name="password" placeholder="请输入密码" required>
+                  <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" placeholder="请输入密码" required>
 
                   @if ($errors->has('password'))
-                    <span class="form-text">
-                      <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                    <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                   @endif
                 </div>
               </div>
 
-              <div class="form-group row {{ $errors->has('captcha') ? ' has-error' : '' }}">
+              <div class="form-group row">
                 <label for="captcha" class="col-3 col-form-label text-right">验证码</label>
                 <div class="col-md-7">
-                  <input id="captcha" type="text" class="form-control" name="captcha" placeholder="请输入验证码" required>
-                  <img class="captcha rounded" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片刷新验证码">
+                  <input id="captcha" type="text" class="form-control {{ $errors->has('captcha') ? 'is-invalid' : '' }}" name="captcha" placeholder="请输入验证码" required>
 
                   @if ($errors->has('captcha'))
-                    <span class="form-text">
-                      <strong>{{ $errors->first('captcha') }}</strong>
-                    </span>
+                    <div class="invalid-feedback">{{ $errors->first('captcha') }}</div>
                   @endif
+
+                  <img class="captcha rounded" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片刷新验证码">
                 </div>
               </div>
 
