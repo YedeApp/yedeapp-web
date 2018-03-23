@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -50,15 +51,15 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    // protected function validateLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'account' => 'required|string',
-    //         'password' => 'required|string',
-    //         'captcha' => 'required|captcha',
-    //     ], [
-    //         'captcha.required' => '请输入验证码',
-    //         'captcha.captcha' => '验证码不正确，请重新输入',
-    //     ]);
-    // }
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            'account' => 'required|string',
+            'password' => 'required|string',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.required' => '请输入验证码',
+            'captcha.captcha' => '验证码不正确，请重新输入',
+        ]);
+    }
 }
