@@ -13,7 +13,6 @@
 
 // Home
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/welcome', 'HomeController@welcome')->name('welcome');
 
 // Authentication Routes
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -35,3 +34,5 @@ Route::resource('course', 'CourseController', ['only' => ['show', 'create', 'sto
 Route::get('course/{course}/chapters', 'CourseController@chapters')->name('course.chapters');
 Route::get('course/{course}/purchase', 'CourseController@purchase')->name('course.purchase');
 
+// Topic Routes
+Route::resource('topic', 'TopicController', ['only' => ['show']]);

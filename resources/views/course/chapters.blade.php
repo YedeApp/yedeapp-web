@@ -20,12 +20,12 @@
               <dd>
                 {{-- Subscriber --}}
                 @can('show', $course)
-                  <a href="#">{{ $topic->title }}</a>
+                  <a href="{{ route('topic.show', $topic->id) }}">{{ $topic->title }}</a>
                 {{-- Guest --}}
                 @else
                   @if($topic->is_free)
                     {{-- Free topic--}}
-                    <a href="#"><span class="badge badge-primary">免费试读</span>{{ $topic->title . '-' . $topic->course_id }}</a>
+                    <a href="{{ route('topic.show', $topic->id) }}"><span class="badge badge-primary">免费试读</span>{{ $topic->title . '-' . $topic->course_id }}</a>
                   @else
                     <span>{{ $topic->title }}</span>
                   @endif
