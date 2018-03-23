@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => '帐号或密码错误。',
-    'throttle' => '登录失败次数过多，请在 :seconds 秒后再尝试。',
+    'failed' => '帐号或密码错误',
+    'throttle' => '登录次数过多，请在 :seconds 秒后再尝试',
 
 ];
