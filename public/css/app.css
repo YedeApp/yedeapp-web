@@ -10265,3 +10265,106 @@ footer .info {
   margin-right: 10px;
 }
 
+.topic-show-page .card-body {
+  padding: 2rem;
+}
+
+.topic-show-page .card-body svg {
+  margin-right: 6px;
+}
+
+.topic-show-page .card-body .btn-light {
+  border-color: #ddd;
+}
+
+.topic-show-page .head {
+  line-height: 50px;
+  border-bottom: #ddd 1px solid;
+}
+
+.topic-show-page .head h1 {
+  margin-top: 10px;
+  font-size: 1.25rem;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+}
+
+.topic-show-page .head .button {
+  float: left;
+  margin-left: 10px;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.topic-show-page .body {
+  margin: 1rem auto;
+  line-height: 1.8rem;
+  letter-spacing: 0.5px;
+}
+
+.topic-show-page .sns {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.topic-show-page .sns .wrapper {
+  display: inline-block;
+}
+
+.topic-show-page .sns .wrapper .text,
+.topic-show-page .sns .wrapper .icons,
+.topic-show-page .sns .wrapper .addition {
+  float: left;
+  height: 36px;
+  line-height: 36px;
+}
+
+.topic-show-page .sns .wrapper .addition {
+  margin-top: -3px;
+}
+
+.topic-show-page .comments {
+  letter-spacing: 0.5px;
+}
+
+.topic-show-page .comments .avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.topic-show-page .comments .comment {
+  margin-top: 30px;
+}
+
+.topic-show-page .comments .comment .heading {
+  display: inline-block;
+  margin-top: 0px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.topic-show-page .comments .comment .created {
+  margin-top: 5px;
+  font-size: 13px;
+  color: #999;
+}
+
+.topic-show-page .comments .reply {
+  margin-top: 30px;
+}
+
+.topic-show-page .comments .reply .editor {
+  min-height: 10rem;
+}
+
+.topic-show-page .comments .reply .tip {
+  margin-left: 10px;
+  color: #999;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.topic-show-page .comments .reply button {
+  margin-top: 6px;
+}
+
