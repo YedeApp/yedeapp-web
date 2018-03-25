@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Auth;
 
 class CourseController extends Controller
 {
@@ -37,6 +38,10 @@ class CourseController extends Controller
     public function chapters(Course $course)
     {
         $chapters = $course->chapters->load('topics');
-        return view('course.chapters', compact('course', 'chapters'));
+
+        // Check if user has subscribed to the course.
+        $canshow = optional(Auth::user())->can('show', $course);
+
+        return view('course.chapters', compact('course', 'chapters', 'canshow'));
     }
 }

@@ -47,29 +47,29 @@
         </div>
       </div>
 
-        <div class="comment media">
-          <img class="avatar rounded-circle mr-3" src="https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/LOnMrqbHJn.png?imageView2/1/w/200/h/200">
-          <div class="media-body">
-            <div class="heading">凌小玲</div>
-            <div class="content">一个公司的同事。可能因为都是单身，年纪相仿，就被其他同事开玩笑说在一起在一起，但其实我一点一点都不喜欢他，他也完全不是我喜欢的或可能会喜欢的类型，甚至不是99%以上女性喜欢的类型。</div>
-            <div class="created">1个月前</div>
-          </div>
+      <div class="comment media">
+        <img class="avatar rounded-circle mr-3" src="https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/LOnMrqbHJn.png?imageView2/1/w/200/h/200">
+        <div class="media-body">
+          <div class="heading">凌小玲</div>
+          <div class="content">一个公司的同事。可能因为都是单身，年纪相仿，就被其他同事开玩笑说在一起在一起，但其实我一点一点都不喜欢他，他也完全不是我喜欢的或可能会喜欢的类型，甚至不是99%以上女性喜欢的类型。</div>
+          <div class="created">1个月前</div>
         </div>
+      </div>
 
-        <div class="reply media">
-          <img class="avatar rounded-circle mr-3" src="https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/LOnMrqbHJn.png?imageView2/1/w/200/h/200">
-          <div class="media-body">
-            <div>
-              <form action="#" method="post">
-                {{ csrf_field() }}
-                <input type="hidden" name="topic_id" value="{{ $topic->id }}">
-                <input type="hidden" name="course_id" value="">
-                <textarea name="body" class="editor form-control" placeholder="理性留言的你可以说是很有素质了" required></textarea>
-                <button class="btn btn-primary btn-w-100" type="submit">提交</button><span class="tip">（快捷键 Ctrl + Enter）</span>
-              </form>
-            </div>
+      <div class="reply media">
+        <img class="avatar rounded-circle mr-3" src="https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/LOnMrqbHJn.png?imageView2/1/w/200/h/200">
+        <div class="media-body">
+          <div>
+            <form action="#" method="post">
+              {{ csrf_field() }}
+              <input type="hidden" name="topic_id" value="{{ $topic->id }}">
+              <input type="hidden" name="course_id" value="">
+              <textarea name="body" class="editor form-control" placeholder="理性留言的你可以说是很有素质了" required></textarea>
+              <button class="btn btn-primary btn-w-100" type="submit">提交</button><span class="tip">（快捷键 Ctrl + Enter）</span>
+            </form>
           </div>
         </div>
+      </div>
     </div>
   @endcomponent
 @endsection

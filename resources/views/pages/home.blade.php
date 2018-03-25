@@ -15,7 +15,11 @@
             <p>{{ $course->intro }}</p>
           </div>
           <div class="extra">
-            <a href="{{ route('course.show', $course) }}" class="btn btn-primary btn-w-150">了解更多</a>
+            @if (optional(Auth::user())->isSubscriberOf($course))
+              <a href="{{ route('course.chapters', $course) }}" class="btn btn-primary btn-w-150">开始阅读</a>
+            @else
+              <a href="{{ route('course.show', $course) }}" class="btn btn-primary btn-w-150">了解更多</a>
+            @endif
           </div>
         </div>
       </div>
