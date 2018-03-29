@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Comment;
+use App\Models\Topic;
+
 
 class CommentsTableSeeder extends Seeder
 {
@@ -12,8 +14,14 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $comments = factory(Comment::class)->times(200)->make()->toArray();
-        
+        $comments = factory(Comment::class)
+        ->times(200)
+        ->make()
+        ->each(function($comment, $index) {
+            $comment->course_id = Topic::find($comment->topic_id)->course_id;
+        })
+        ->toArray();
+
         Comment::insert($comments);
     }
 }
