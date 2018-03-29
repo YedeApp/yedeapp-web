@@ -35,4 +35,8 @@ Route::get('course/{course}/chapters', 'CourseController@chapters')->name('cours
 Route::get('course/{course}/purchase', 'CourseController@purchase')->name('course.purchase');
 
 // Topic Routes
-Route::resource('topic', 'TopicController', ['only' => ['show']]);
+Route::resource('topic', 'TopicController', ['only' => ['create']]);
+Route::get('course/{course}/topic/{topic}/{slug?}', 'TopicController@show')->name('topic.show');
+
+// Comment Routes
+Route::resource('comment', 'CommentController', ['only' => ['store']]);

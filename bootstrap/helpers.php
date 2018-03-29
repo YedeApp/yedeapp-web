@@ -1,13 +1,13 @@
 <?php
 
-function route_class()
+function getRouteCls()
 {
     $routeClsName = str_replace('.', '-', Route::currentRouteName());
 
     return $routeClsName;
 }
 
-function outlink($href, $text, $target = 'blank')
+function setOutlink($href, $text, $target = 'blank')
 {
     $rel = '';
 
@@ -16,4 +16,8 @@ function outlink($href, $text, $target = 'blank')
     }
 
     return "<a href=\"{$href}\" target=\"_{$target}\" {$rel}>{$text}</a>";
+}
+
+function jumpToComment($comment) {
+    return $comment->topic->link() . '#comment_' . $comment->id;
 }

@@ -6,6 +6,8 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
     $userIds = App\Models\User::pluck('id')->toArray();
     $courseIds = App\Models\Course::pluck('id')->toArray();
     $topicIds = App\Models\Topic::pluck('id')->toArray();
+    $updated_at = $faker->dateTimeThisMonth();
+    $created_at = $faker->dateTimeThisMonth($updated_at);
 
     return [
         'content' => $faker->text,
@@ -13,5 +15,7 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
         'course_id' => $faker->randomElement($courseIds),
         'topic_id' => $faker->randomElement($topicIds),
         'likes' => $faker->randomDigitNotNull,
+        'created_at' => $created_at,
+        'updated_at' => $updated_at,
     ];
 });

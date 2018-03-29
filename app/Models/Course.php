@@ -13,7 +13,7 @@ class Course extends Model
         'name', 'slug', 'cover', 'banner', 'intro', 'introduction', 'price', 'sorting'
     ];
 
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

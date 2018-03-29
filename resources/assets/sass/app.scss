@@ -321,6 +321,10 @@ footer {
     }
   }
 
+  .jumper {
+    cursor: pointer;
+  }
+
   .comments {
     letter-spacing: $letter-spacing;
 
@@ -344,9 +348,31 @@ footer {
         font-size: 13px;
         color: #999;
       }
+
+      .operations {
+        float: right;
+        a {
+          margin-left: 6px;
+        }
+      }
     }
 
     .reply {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: #eee 1px solid;
+
+      .v-line {
+        display: inline-block;
+        width: 3px;
+        height: 15px;
+        margin-right: 6px;
+        margin-bottom: -2px;
+        background-color: $primary;
+      }
+    }
+
+    .post-reply {
       margin-top: 30px;
 
       .editor {

@@ -14,7 +14,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-  <div id="app" class="{{ route_class() }}-page">
+  <div id="app" class="{{ getRouteCls() }}-page">
 
     @include('layouts._header')
 

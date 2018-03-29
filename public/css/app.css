@@ -10323,6 +10323,10 @@ footer .info {
   margin-top: -3px;
 }
 
+.topic-show-page .jumper {
+  cursor: pointer;
+}
+
 .topic-show-page .comments {
   letter-spacing: 0.5px;
 }
@@ -10349,22 +10353,45 @@ footer .info {
   color: #999;
 }
 
+.topic-show-page .comments .comment .operations {
+  float: right;
+}
+
+.topic-show-page .comments .comment .operations a {
+  margin-left: 6px;
+}
+
 .topic-show-page .comments .reply {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: #eee 1px solid;
+}
+
+.topic-show-page .comments .reply .v-line {
+  display: inline-block;
+  width: 3px;
+  height: 15px;
+  margin-right: 6px;
+  margin-bottom: -2px;
+  background-color: #1890ff;
+}
+
+.topic-show-page .comments .post-reply {
   margin-top: 30px;
 }
 
-.topic-show-page .comments .reply .editor {
+.topic-show-page .comments .post-reply .editor {
   min-height: 10rem;
 }
 
-.topic-show-page .comments .reply .tip {
+.topic-show-page .comments .post-reply .tip {
   margin-left: 10px;
   color: #999;
   font-size: 13px;
   vertical-align: middle;
 }
 
-.topic-show-page .comments .reply button {
+.topic-show-page .comments .post-reply button {
   margin-top: 6px;
 }
 

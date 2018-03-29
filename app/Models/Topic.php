@@ -18,7 +18,7 @@ class Topic extends Model
         return $this->belongsTo(Chapter::class);
     }
 
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -26,6 +26,17 @@ class Topic extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function link($courseSlug = '')
+    {
+        // Provide a course slug to avoidi query db multi-times.
+        if (!$courseSlug) {
+            $courseSlug = $this->course->slug;
+        }
+
+        // Inject parameters according to the order of the topic.show route
+        return route('topic.show', [$courseSlug, $this->id, $this->slug]);
     }
 
 }
