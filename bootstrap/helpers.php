@@ -7,7 +7,7 @@ function getRouteCls()
     return $routeClsName;
 }
 
-function setOutlink($href, $text, $target = 'blank')
+function outlink($href, $text, $target = 'blank')
 {
     $rel = '';
 
@@ -16,6 +16,13 @@ function setOutlink($href, $text, $target = 'blank')
     }
 
     return "<a href=\"{$href}\" target=\"_{$target}\" {$rel}>{$text}</a>";
+}
+
+function truncate($value, $length = 200)
+{
+    $string = trim(preg_replace('/\r\n|\r|\n+/', ' ', strip_tags($value)));
+
+    return str_limit($string, $length);
 }
 
 function jumpToComment($comment) {

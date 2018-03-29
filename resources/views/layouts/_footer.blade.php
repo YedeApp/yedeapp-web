@@ -5,7 +5,7 @@
       <span class="copyright">&copy;野得 2018</span>
     </div>
     <div class="info float-right">
-      <span class="beian">{!! setOutlink('http://www.miibeian.gov.cn', '粤ICP备11107713号-3', 'blank') !!}
+      <span class="beian">{!! outlink('http://www.miibeian.gov.cn', '粤ICP备11107713号-3', 'blank') !!}
     </div>
   </div>
 </footer>

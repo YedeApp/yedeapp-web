@@ -64,20 +64,24 @@
       @endforeach
 
       {{-- 订阅后才能留言 --}}
-      <div class="post-reply media">
-        <img class="avatar rounded-circle mr-3" src="{{ Auth::user()->avatar }}">
-        <div class="media-body">
-          <div>
-            <form action="{{ route('comment.store') }}" method="post">
-              {{ csrf_field() }}
-              <input type="hidden" name="topic_id" value="{{ $topic->id }}">
-              <input type="hidden" name="course_id" value="{{ $topic->course->id }}">
-              <textarea name="content" class="editor form-control" placeholder="理性留言的你可以说是很有素质了" required></textarea>
-              <button class="btn btn-primary btn-w-100" type="submit">提交</button><span class="tip">（快捷键 Ctrl + Enter）</span>
-            </form>
+      @can ('show', $topic->course)
+        <div class="post-reply media">
+          <img class="avatar rounded-circle mr-3" src="{{ Auth::user()->avatar }}">
+          <div class="media-body">
+            <div>
+              <form action="{{ route('comment.store') }}" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="topic_id" value="{{ $topic->id }}">
+                <input type="hidden" name="course_id" value="{{ $topic->course->id }}">
+                <textarea name="content" class="editor form-control" placeholder="理性留言的你可以说是很有素质了" required></textarea>
+                <button class="btn btn-primary btn-w-100" type="submit">提交</button><span class="tip">（快捷键 Ctrl + Enter）</span>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      @else
+        <div class="text-center my-3"><a href="#">留言前请先订阅</a></div>
+      @endcan
     </div>
   @endcomponent
 @endsection
