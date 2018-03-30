@@ -10323,7 +10323,7 @@ footer .info {
   margin-top: -3px;
 }
 
-.topic-show-page .jumper {
+.topic-show-page #jumper {
   cursor: pointer;
 }
 

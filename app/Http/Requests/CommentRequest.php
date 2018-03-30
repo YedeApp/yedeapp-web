@@ -24,7 +24,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content'    => 'required|min:5',
+            'content'    => 'required|min:2',
             'topic_id'   => 'required|numeric',
             'course_id'  => 'required|numeric',
         ];
@@ -39,7 +39,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'content.require' => '请输入留言内容',
-            'content.min' => '请输入至少 5 个字符',
+            'content.min' => '请输入至少 2 个字符',
         ];
 
     }
