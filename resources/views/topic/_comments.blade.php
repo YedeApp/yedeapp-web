@@ -12,10 +12,14 @@
           <div class="heading">{{ $comment->user->name }}</div>
           <div class="operations">
             @if ($can['reply-comment'])
-              <a class="btn btn-light btn-sm btn-reply" role="button" data="{{ $comment->id }}"><svg class="icon" aria-hidden="true" title="回复"><use xlink:href="#icon-message1"></use></svg><span>回复</span></a>
+              <a class="btn btn-light btn-sm btn-comment-reply" role="button" data="{{ $comment->id }}"><svg class="icon" aria-hidden="true" title="回复"><use xlink:href="#icon-message1"></use></svg><span>回复</span></a>
             @endif
             @if ($can['delete-comment'])
-              <a class="btn btn-light btn-sm btn-delete" role="button"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg><span>删除</span></a>
+              <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <a class="btn btn-light btn-sm btn-comment-delete" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $comment->user->name }} 的此条留言？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg><span>删除</span></a>
+              </form>
             @endif
           </div>
           {{-- 原样输出评论有风险，在输入时就需要筛查 --}}
@@ -50,7 +54,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="topic_id" value="{{ $topic->id }}">
                 <input type="hidden" name="course_id" value="{{ $course->id }}">
-                <textarea name="content" class="editor form-control" placeholder="理性留言的你可以说是很有素质了" required minlength="2" maxlength="1000"></textarea>
+                <textarea name="content" class="editor form-control" placeholder="理性留言的你可以说是很有素质了" required minlength="3" maxlength="1000"></textarea>
                 <button class="btn btn-primary btn-w-100" type="submit">提交</button><span class="tip">（快捷键 Ctrl + Enter）</span>
               </form>
             </div>
@@ -61,4 +65,8 @@
       <div class="text-center my-3"><a href="#">留言请先订阅</a></div>
     @endcan
   </div>
+
+{{-- 删除询问框 --}}
+@include('components.confirm')
+
 @endcomponent

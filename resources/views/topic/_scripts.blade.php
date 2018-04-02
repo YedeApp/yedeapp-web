@@ -3,8 +3,10 @@
 var $editor = $('.post-reply .editor');
 var $editorForm = $('.post-reply form');
 var $jumper = $('#jumper');
-var $btnSubmit = $('.post-reply').find('button.btn');
-var $btnReply = $('.operations .btn-reply');
+var $btnConfirm = $('#modalConfirm .btn-confirm-yes');
+var $btnCommentReply = $('.operations .btn-comment-reply');
+var $btnCommentDelete = $('.operations .btn-comment-delete');
+var $btnTopicDelete = $('.head .button .btn-topic-delete');
 
 // Init prev and next popup tips
 $(function () {
@@ -40,26 +42,49 @@ $editorForm.submit(function() {
 })
 
 // Call author reply editor
-$btnReply.click(function() {
-    var $wrapper = $(this).parents('.media-body').find('.editor-wrapper');
-    var isCollapsed = $(this).data('isCollapsed');
+$btnCommentReply.click(function() {
+  var $wrapper = $(this).parents('.media-body').find('.editor-wrapper');
+  var isCollapsed = $(this).data('isCollapsed');
 
-    if (isCollapsed) {
-        $wrapper.find('.post-reply').remove();
-        $(this).children('span').text('回复');
-        $(this).data('isCollapsed', false);
-    } else {
-        var $cloneEditor = $('#reply-wrapper').children('.post-reply').clone({'withDataAndEvents':true});
-        var $cloneForm = $cloneEditor.find('form');
-        $cloneForm.children('.editor').val('');
+  if (isCollapsed) {
+    $wrapper.find('.post-reply').remove();
+    $(this).children('span').text('回复');
+    $(this).data('isCollapsed', false);
+  } else {
+    var $cloneEditor = $('#reply-wrapper').children('.post-reply').clone({'withDataAndEvents':true});
+    var $cloneForm = $cloneEditor.find('form');
+    $cloneForm.children('.editor').val('');
 
-        var id = $(this).attr('data');
-        var $input = $('<input type="hidden" name="parent_id" value="' + parseInt(id) + '">');
-        $input.appendTo($cloneForm);
+    var id = $(this).attr('data');
+    var $input = $('<input type="hidden" name="parent_id" value="' + parseInt(id) + '">');
+    $input.appendTo($cloneForm);
 
-        $cloneEditor.appendTo($wrapper);
-        $(this).children('span').text('取消回复');
-        $(this).data('isCollapsed', true);
-    }
+    $cloneEditor.appendTo($wrapper);
+    $(this).children('span').text('取消回复');
+    $(this).data('isCollapsed', true);
+  }
 });
+
+// Confirm modal
+$('#modalConfirm').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var message = button.data('message');
+
+  var modal = $(this);
+  modal.find('.modal-body .message').text(message);
+})
+
+// Comment delete
+$btnCommentDelete.click(function() {
+  $btnConfirm.click(function() {
+    $btnCommentDelete.parent('form').submit();
+  })
+})
+
+// Topic delete
+$btnTopicDelete.click(function() {
+  $btnConfirm.click(function() {
+    $btnTopicDelete.parent('form').submit();
+  })
+})
 </script>

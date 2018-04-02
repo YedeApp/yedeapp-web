@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Course;
+use App\Models\Topic;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ModelPolicy
+class TopicPolicy
 {
     use HandlesAuthorization;
 
@@ -21,15 +21,14 @@ class ModelPolicy
     }
 
     /**
-     * Check if user has subscribed to the course.
+     * Check if can user delete his/her own topic.
      *
      * @param  Illuminate\Foundation\Auth\User  $user
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
+     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
      * @return boolean
      */
-    public function show(User $user, Course $course)
+    public function destroy(User $user, Topic $topic)
     {
-        return $user->isSubscriberOf($course);
+        return $user->isAuthorOf($topic);
     }
-
 }

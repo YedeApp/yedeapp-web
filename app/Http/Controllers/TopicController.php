@@ -49,4 +49,20 @@ class TopicController extends Controller
         return view('topic.show', compact('course', 'topic', 'comments', 'replies', 'prev', 'next', 'can'));
     }
 
+    /**
+     * Delete a topic.
+     *
+     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return redirect
+     */
+    public function destroy(Topic $topic)
+    {
+        $this->authorize('destroy', $topic);
+
+		$topic->delete();
+
+        return redirect()->route('course.chapters', $topic->course)->with('message', '删除成功');
+
+    }
+
 }

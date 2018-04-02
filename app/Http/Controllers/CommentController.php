@@ -23,5 +23,20 @@ class CommentController extends Controller
         $comment->save();
 
 		return redirect(jumpToComment($comment));
-	}
+    }
+
+    /**
+     * Delete a comment.
+     *
+     * @param  Illuminate\Database\Eloquent\Model\Comment  $comment
+     * @return redirect
+     */
+    public function destroy(Comment $comment)
+    {
+        $this->authorize('destroy', $comment);
+
+		$comment->delete();
+
+        return redirect($comment->topic->link())->with('message', '删除成功');
+    }
 }

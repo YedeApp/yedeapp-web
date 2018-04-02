@@ -35,8 +35,8 @@ Route::get('course/{course}/chapters', 'CourseController@chapters')->name('cours
 Route::get('course/{course}/purchase', 'CourseController@purchase')->name('course.purchase');
 
 // Topic Routes
-Route::resource('topic', 'TopicController', ['only' => ['create']]);
+Route::resource('topic', 'TopicController', ['only' => ['create', 'destroy']]);
 Route::get('course/{course}/topic/{topic}/{slug?}', 'TopicController@show')->name('topic.show');
 
 // Comment Routes
-Route::resource('comment', 'CommentController', ['only' => ['store']]);
+Route::resource('comment', 'CommentController', ['only' => ['store', 'destroy']]);

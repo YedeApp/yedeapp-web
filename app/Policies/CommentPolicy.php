@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Course;
+use App\Models\Comment;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ModelPolicy
+class CommentPolicy
 {
     use HandlesAuthorization;
 
@@ -21,15 +21,15 @@ class ModelPolicy
     }
 
     /**
-     * Check if user has subscribed to the course.
+     * Check if can the user delete the comment.
      *
      * @param  Illuminate\Foundation\Auth\User  $user
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
+     * @param  Illuminate\Database\Eloquent\Model\Comment  $comment
      * @return boolean
      */
-    public function show(User $user, Course $course)
+    public function destroy(User $user, Comment $comment)
     {
-        return $user->isSubscriberOf($course);
+        // User can't destroy his/her own comments.
+        return false;
     }
-
 }

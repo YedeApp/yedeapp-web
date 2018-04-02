@@ -10358,7 +10358,11 @@ footer .info {
 }
 
 .topic-show-page .comments .comment .operations a {
-  margin-left: 6px;
+  margin-left: 5px;
+}
+
+.topic-show-page .comments .comment .operations form {
+  display: inline-block;
 }
 
 .topic-show-page .comments .reply {

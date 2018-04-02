@@ -351,8 +351,13 @@ footer {
 
       .operations {
         float: right;
+
         a {
-          margin-left: 6px;
+          margin-left: 5px;
+        }
+
+        form {
+          display: inline-block;
         }
       }
     }
