@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $users = factory(User::class)->times(10)->make();
-        
+
         // Make sure user hidden fields are visible, so they can be manipulated
         // and be put into an array.
         $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();
@@ -30,15 +30,12 @@ class UsersTableSeeder extends Seeder
         $user->phone = '18129835206';
         $user->avatar = 'https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png?imageView2/1/w/200/h/200';
         $user->save();
-        // $user->assignRole('Superadmin');        
+        $user->assignRole('SuperAdmin');
 
-        // $user = User::find(2);
-        // $user->assignRole('Admin');
+        $user = User::find(2);
+        $user->assignRole('Admin');
 
-        // $user = User::find(3);
-        // $user->assignRole('Writer');
-
-        // $user = User::find(4);
-        // $user->assignRole('Subscriber');
+        $user = User::find(3);
+        $user->assignRole('Writer');
     }
 }
