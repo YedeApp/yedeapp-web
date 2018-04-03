@@ -8,6 +8,13 @@ var $btnCommentReply = $('.operations .btn-comment-reply');
 var $btnCommentDelete = $('.operations .btn-comment-delete');
 var $btnTopicDelete = $('.head .button .btn-topic-delete');
 
+// Functions
+function confirmAndSubmit(btn) {
+  $btnConfirm.click(function() {
+    $(btn).parent('form').submit();
+  })
+}
+
 // Init prev and next popup tips
 $(function () {
   $('[data-toggle="popover"]').popover()
@@ -76,15 +83,11 @@ $('#modalConfirm').on('show.bs.modal', function (event) {
 
 // Comment delete
 $btnCommentDelete.click(function() {
-  $btnConfirm.click(function() {
-    $btnCommentDelete.parent('form').submit();
-  })
+  confirmAndSubmit(this);
 })
 
 // Topic delete
 $btnTopicDelete.click(function() {
-  $btnConfirm.click(function() {
-    $btnTopicDelete.parent('form').submit();
-  })
+  confirmAndSubmit(this);
 })
 </script>

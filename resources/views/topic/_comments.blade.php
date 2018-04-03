@@ -33,6 +33,15 @@
                 <a id="comment_{{ $reply->id }}"></a>
                 <div class="media-body">
                   <div class="heading"><i class="v-line"></i>作者回复</div>
+                  <div class="operations">
+                    @if ($can['delete-comment'])
+                      <form action="{{ route('comment.destroy', $reply->id) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <a class="btn btn-light btn-sm btn-comment-delete" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $comment->user->name }} 的此条留言？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg><span>删除</span></a>
+                      </form>
+                    @endif
+                  </div>
                   <div class="content">{!! $reply->content !!}</div>
                   <div class="created">{{ $comment->updated_at->diffForHumans() }}</div>
                 </div>
