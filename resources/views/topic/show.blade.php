@@ -8,15 +8,22 @@
     <div class="head clearfix">
       <h1 class="float-left">{{ $topic->title }}</h1>
       <div class="float-right">
-        <div class="button"><a class="btn btn-light btn-sm btn-topic-like" role="button"><svg class="icon" aria-hidden="true" title="收藏"><use xlink:href="#icon-hearto"></use></svg>收藏</a></div>
-        <div class="button"><a class="btn btn-light btn-sm btn-topic-edit" role="button"><svg class="icon" aria-hidden="true" title="编辑"><use xlink:href="#icon-edit"></use></svg>编辑</a></div>
-        <div class="button">
-          <form action="{{ route('topic.destroy', $topic->id) }}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <a class="btn btn-light btn-sm btn-topic-delete" role="button" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $topic->title }} ？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg>删除</a>
-          </form>
-        </div>
+        {{-- Login user can use the like function --}}
+        {{-- @auth
+          <div class="button"><a class="btn btn-light btn-sm btn-topic-like" role="button"><svg class="icon" aria-hidden="true" title="收藏"><use xlink:href="#icon-hearto"></use></svg>收藏</a></div>
+        @endauth --}}
+
+        {{-- User can delete and edit his/her own topic --}}
+        @can('update', $topic)
+          <div class="button"><a href="{{ route('topic.edit', $topic) }}" class="btn btn-light btn-sm btn-topic-edit" role="button"><svg class="icon" aria-hidden="true" title="编辑"><use xlink:href="#icon-edit"></use></svg>编辑</a></div>
+          <div class="button">
+            <form action="{{ route('topic.destroy', $topic) }}" method="post">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <a class="btn btn-light btn-sm btn-topic-delete" role="button" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $topic->title }} ？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg>删除</a>
+            </form>
+          </div>
+        @endcan
       </div>
     </div>
     <div class="body">{!! $topic->content !!}</div>

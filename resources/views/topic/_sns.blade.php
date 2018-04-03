@@ -9,7 +9,7 @@
     <a href="#" class="bds_print" data-cmd="print" title="打印"></a>
     <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
   </div>
-  @auth
+  {{-- @auth
     <div class="addition"><a class="btn btn-light btn-sm"><svg class="icon" aria-hidden="true" title="收藏"><use xlink:href="#icon-hearto"></use></svg><span>收藏</span></a></div>
-  @endauth
+  @endauth --}}
 </div>

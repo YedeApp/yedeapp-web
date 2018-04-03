@@ -35,7 +35,7 @@ Route::get('course/{course}/chapters', 'CourseController@chapters')->name('cours
 Route::get('course/{course}/purchase', 'CourseController@purchase')->name('course.purchase');
 
 // Topic Routes
-Route::resource('topic', 'TopicController', ['only' => ['create', 'destroy']]);
+Route::resource('topic', 'TopicController', ['only' => ['create', 'edit', 'store', 'edit', 'destroy']]);
 Route::get('course/{course}/topic/{topic}/{slug?}', 'TopicController@show')->name('topic.show');
 
 // Comment Routes

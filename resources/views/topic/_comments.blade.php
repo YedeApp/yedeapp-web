@@ -1,7 +1,7 @@
 @component('components.card')
   <div class="clearfix">
     <div class="float-left">留言精选</div>
-    <div class="float-right"><a id="jumper" data-trigger="hover" data-placement="top" data-content="留言请先订阅"><svg class="icon" aria-hidden="true" title="写留言"><use xlink:href="#icon-form"></use></svg>写留言</a></div>
+    <div class="float-right"><a id="jumper" data-trigger="hover" data-placement="top" data-content="留言请先订阅课程"><svg class="icon" aria-hidden="true" title="写留言"><use xlink:href="#icon-form"></use></svg>写留言</a></div>
   </div>
   <div class="comments">
     @foreach ($comments as $comment)
@@ -71,7 +71,7 @@
         </div>
       </div>
     @else
-      <div class="text-center my-3"><a href="#">留言请先订阅</a></div>
+      <div class="text-center my-3"><a href="{{ route('course.purchase', $course) }}">留言请先订阅课程</a></div>
     @endcan
   </div>
 

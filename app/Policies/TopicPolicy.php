@@ -21,13 +21,25 @@ class TopicPolicy extends ModelPolicy
     }
 
     /**
-     * Check if can user delete his/her own topic.
+     * Check if can user delete the topic.
      *
      * @param  Illuminate\Foundation\Auth\User  $user
      * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
      * @return boolean
      */
     public function destroy(User $user, Topic $topic)
+    {
+        return $user->isAuthorOf($topic);
+    }
+
+    /**
+     * Check if can user update the topic.
+     *
+     * @param  Illuminate\Foundation\Auth\User  $user
+     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return boolean
+     */
+    public function update(User $user, Topic $topic)
     {
         return $user->isAuthorOf($topic);
     }

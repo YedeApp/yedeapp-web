@@ -38,7 +38,7 @@ class TopicController extends Controller
         $replies = $topic->comments()->where('parent_id', '>', 0)->orderBy('created_at', 'asc')->get();
 
         // Only Admin can delete and reply comments
-        if ( 1 ) {
+        if ( Auth::user()->isAdmin() ) {
             $can['delete-comment'] = true;
             $can['reply-comment'] = true;
         } else {
