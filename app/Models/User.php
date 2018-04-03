@@ -53,4 +53,20 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isSuperAdmin()
+    {
+        if ($this->hasRole('SuperAdmin')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if ($this->hasAnyRole(['Admin', 'SuperAdmin'])) {
+            return true;
+        }
+        return false;
+    }
 }

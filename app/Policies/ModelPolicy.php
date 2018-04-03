@@ -32,4 +32,18 @@ class ModelPolicy
         return $user->isSubscriberOf($course);
     }
 
+    /**
+     * Check if user has subscribed to the course.
+     *
+     * @param  Illuminate\Foundation\Auth\User  $user
+     * @param  string  $ability
+     * @return boolean
+     */
+    public function before($user, $ability)
+	{
+	    if ($user->isSuperAdmin()) {
+	    	return true;
+        }
+	}
+
 }
