@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TopicRequest;
 use App\Models\Topic;
 use App\Models\Course;
 use Auth;
@@ -38,7 +39,7 @@ class TopicController extends Controller
         $replies = $topic->comments()->where('parent_id', '>', 0)->orderBy('created_at', 'asc')->get();
 
         // Only Admin can delete and reply comments
-        if ( Auth::user()->isAdmin() ) {
+        if ( optional(Auth::user())->isAdmin() ) {
             $can['delete-comment'] = true;
             $can['reply-comment'] = true;
         } else {
@@ -48,6 +49,68 @@ class TopicController extends Controller
 
         return view('topic.show', compact('course', 'topic', 'comments', 'replies', 'prev', 'next', 'can'));
     }
+
+    /**
+     * Topic create page.
+     *
+     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return Illuminate\Contracts\View\View
+     */
+	public function create(Topic $topic)
+	{
+        $this->authorize('create', $topic);
+
+		$courses = Course::where('user_id', Auth::id())->get();
+
+		return view('topic.create_and_edit', compact('courses', 'topic'));
+	}
+
+    /**
+     * Topic edit page.
+     *
+     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return Illuminate\Contracts\View\View
+     */
+	public function edit(Topic $topic)
+	{
+		$this->authorize('update', $topic);
+
+        $courses = Course::all()->load('chapters');
+
+		return view('topic.create_and_edit', compact('courses', 'topic'));
+    }
+
+    /**
+     * Store a new topic.
+     *
+     * @param  Illuminate\Foundation\Http\FormRequest\TopicRequest  $request
+	 * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return redirect
+     */
+	public function store(TopicRequest $request, Topic $topic)
+	{
+		$topic->fill($request->all());
+		$topic->user_id = Auth::id();
+		$topic->save();
+
+		return redirect($topic->link())->with('message', '新建成功');
+	}
+
+    /**
+     * Update a topic.
+     *
+     * @param  Illuminate\Foundation\Http\FormRequest\TopicRequest  $request
+	 * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return redirect
+     */
+	public function update(TopicRequest $request, Topic $topic)
+	{
+        $this->authorize('update', $topic);
+
+		$topic->update($request->all());
+
+		return redirect($topic->link())->with('message', '更新成功');
+	}
 
     /**
      * Delete a topic.

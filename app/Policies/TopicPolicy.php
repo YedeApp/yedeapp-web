@@ -21,6 +21,17 @@ class TopicPolicy extends ModelPolicy
     }
 
     /**
+     * Check if can user create a topic.
+     *
+     * @param  Illuminate\Foundation\Auth\User  $user
+     * @return boolean
+     */
+    public function create(User $user)
+    {
+        return $user->isWriter();
+    }
+
+    /**
      * Check if can user delete the topic.
      *
      * @param  Illuminate\Foundation\Auth\User  $user

@@ -10399,3 +10399,15 @@ footer .info {
   margin-top: 6px;
 }
 
+.topic-edit-page .head,
+.topic-create-page .head {
+  padding: 0px 5px 15px;
+  font-size: 16px;
+  border-bottom: #dadada 1px solid;
+}
+
+.topic-edit-page .body,
+.topic-create-page .body {
+  padding: 10px 5px;
+}
+

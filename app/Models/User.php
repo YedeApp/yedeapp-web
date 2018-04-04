@@ -69,4 +69,12 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isWriter()
+    {
+        if ($this->hasRole(['Writer'])) {
+            return true;
+        }
+        return false;
+    }
 }

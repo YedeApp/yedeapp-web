@@ -29,7 +29,8 @@ class CommentPolicy extends ModelPolicy
      */
     public function destroy(User $user, Comment $comment)
     {
-        // User can't destroy his/her own comments.
+        // Users always been forbidden to destroy his/her own comments.
+        // Only sa can do.
         return false;
     }
 }

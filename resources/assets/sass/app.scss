@@ -398,4 +398,17 @@ footer {
 
   } // end comments
 
+}// end topic-show-page
+
+.topic-edit-page,
+.topic-create-page {
+  .head {
+    padding: 0px 5px 15px;
+    font-size: 16px;
+    border-bottom: #dadada 1px solid;
+  }
+
+  .body {
+    padding: 10px 5px;
+  }
 }
