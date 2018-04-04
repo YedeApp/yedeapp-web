@@ -82,6 +82,10 @@
   @endcomponent
 @endsection
 
+@section('styles')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/mditor.min.css') }}">
+@endsection
+
 @section('scripts')
 <script>
 var $courses = $('#courses');
@@ -124,5 +128,13 @@ function reloadChapters(selector) {
 }
 
 initControls();
+
+// Init Mditor
+$(document).ready(function() {
+    var mditor =  Mditor.fromTextarea(document.getElementById('content'));
+})
 </script>
+
+{{-- Import mditor --}}
+<script type="text/javascript"  src="{{ asset('js/mditor.min.js') }}"></script>
 @endsection
