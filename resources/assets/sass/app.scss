@@ -23,6 +23,18 @@
   }
 }
 
+@mixin editing {
+  .head {
+    padding: 0px 5px 15px;
+    font-size: 16px;
+    border-bottom: #dadada 1px solid;
+  }
+
+  .body {
+    padding: 10px 5px;
+  }
+}
+
 // Iconfont
 .icon {
   width: 1.1rem;
@@ -412,13 +424,23 @@ footer {
 
 .topic-edit-page,
 .topic-create-page {
-  .head {
-    padding: 0px 5px 15px;
-    font-size: 16px;
-    border-bottom: #dadada 1px solid;
-  }
+  @include editing;
+}
+
+// User
+.user-edit-page {
+  @include editing;
 
   .body {
-    padding: 10px 5px;
+    padding-top: 20px;
+
+    .tips {
+      color: #999;
+    }
+
+    .preview {
+      margin-top: 10px;
+      cursor: pointer;
+    }
   }
 }

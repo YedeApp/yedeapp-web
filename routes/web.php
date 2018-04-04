@@ -40,3 +40,7 @@ Route::get('course/{course}/topic/{topic}/{slug?}', 'TopicController@show')->nam
 
 // Comment Routes
 Route::resource('comment', 'CommentController', ['only' => ['store', 'destroy']]);
+
+// User Routes
+Route::resource('user', 'UserController', ['only' => ['update', 'edit']]);
+Route::get('user/{user}/{tab?}', 'UserController@show')->name('user.show');

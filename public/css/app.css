@@ -10421,3 +10421,26 @@ footer .info {
   padding: 10px 5px;
 }
 
+.user-edit-page .head {
+  padding: 0px 5px 15px;
+  font-size: 16px;
+  border-bottom: #dadada 1px solid;
+}
+
+.user-edit-page .body {
+  padding: 10px 5px;
+}
+
+.user-edit-page .body {
+  padding-top: 20px;
+}
+
+.user-edit-page .body .tips {
+  color: #999;
+}
+
+.user-edit-page .body .preview {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
