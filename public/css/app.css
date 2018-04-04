@@ -10028,6 +10028,16 @@ a.text-dark:focus {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .card .mditor {
+    padding-top: 66px;
+  }
+
+  .card .mditor .head {
+    height: 66px;
+  }
+}
+
 html {
   position: relative;
   min-height: 100%;

@@ -32,6 +32,16 @@
   overflow: hidden;
 }
 
+// Mditor
+@media (max-width: 768px) {
+  .card .mditor {
+    padding-top: 66px;
+    .head {
+      height: 66px;
+    }
+  }
+}
+
 // Common
 html {
   position: relative;
