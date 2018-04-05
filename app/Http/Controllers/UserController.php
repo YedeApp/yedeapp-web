@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Handlers\ImageUploadHandler;
 
 class UserController extends Controller
 {
+    /**
+     * User avatar max-width set to 362px
+     *
+     * @var int
+     */
+    private $avatarMaxWidth = 362;
+
     /**
      * Create a new controller instance.
      *
@@ -48,11 +56,8 @@ class UserController extends Controller
 
         $data = $request->all();
 
-        // Set tha avatar's width to 362px
-        $avatar_max_width = 362;
-
         if ($request->avatar) {
-            $result = $uploader->save($request->avatar, 'avatars', $user->id, $avatar_max_width);
+            $result = $uploader->save($request->avatar, 'avatars', $user->id, $this->avatarMaxWitdh);
             if ($result) {
                 $data['avatar'] = $result['path'];
             }

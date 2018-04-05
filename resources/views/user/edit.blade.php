@@ -15,7 +15,7 @@
 
     {{-- Body and form --}}
     <div class="body">
-      <form action="{{ route('user.update', $user->id) }}" method="POST" accept-charset="UTF-8">
+      <form action="{{ route('user.update', $user->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
 
@@ -55,9 +55,11 @@
           <label for="avatar" class="col-md-2 col-form-label text-md-right">头　像</label>
           <div class="col-md-5">
             <input type="file" name="avatar" id="avatar">
-            <label for="avatar">
-              <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail preview" width="200">
-            </label>
+            @if ($user->avatar)
+              <label for="avatar">
+                <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail preview" width="200">
+              </label>
+            @endif
           </div>
           <div class="col-md-5 col-form-label tips">请上传小于 1M 的图片</div>
         </div>
