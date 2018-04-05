@@ -28,6 +28,10 @@
     padding: 0px 5px 15px;
     font-size: 16px;
     border-bottom: #dadada 1px solid;
+
+    svg {
+      margin-right: 3px;
+    }
   }
 
   .body {
@@ -438,7 +442,11 @@ footer {
       color: #999;
     }
 
-    .preview {
+    #avatar {
+      cursor: pointer;
+    }
+
+    .avatar-preview {
       margin-top: 10px;
       cursor: pointer;
     }

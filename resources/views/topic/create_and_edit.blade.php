@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $topic->title ? '编辑 ' . $topic->title : '新建文章')
+@section('title', $topic->id ? '编辑 ' . $topic->title : '新建文章')
 
 @section('content')
   @component('components.card')

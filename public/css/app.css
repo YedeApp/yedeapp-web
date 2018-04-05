@@ -10416,6 +10416,11 @@ footer .info {
   border-bottom: #dadada 1px solid;
 }
 
+.topic-edit-page .head svg,
+.topic-create-page .head svg {
+  margin-right: 3px;
+}
+
 .topic-edit-page .body,
 .topic-create-page .body {
   padding: 10px 5px;
@@ -10425,6 +10430,10 @@ footer .info {
   padding: 0px 5px 15px;
   font-size: 16px;
   border-bottom: #dadada 1px solid;
+}
+
+.user-edit-page .head svg {
+  margin-right: 3px;
 }
 
 .user-edit-page .body {
@@ -10439,7 +10448,11 @@ footer .info {
   color: #999;
 }
 
-.user-edit-page .body .preview {
+.user-edit-page .body #avatar {
+  cursor: pointer;
+}
+
+.user-edit-page .body .avatar-preview {
   margin-top: 10px;
   cursor: pointer;
 }

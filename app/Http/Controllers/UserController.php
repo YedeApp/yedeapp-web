@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Handlers\ImageUploadHandler;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
      *
      * @var int
      */
-    private $avatarMaxWidth = 362;
+    protected $avatarMaxWidth = 362;
 
     /**
      * Create a new controller instance.
@@ -47,7 +48,7 @@ class UserController extends Controller
      *
      * @param  Illuminate\Foundation\Http\FormRequest\UserRequest  $request
      * @param  App\Handlers\ImageUploadHandler  $uploader
-     * @param  App\Models\User  $user
+     * @param  Illuminate\Foundation\Auth\User  $user
      * @return View
      */
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
@@ -57,7 +58,12 @@ class UserController extends Controller
         $data = $request->all();
 
         if ($request->avatar) {
-            $result = $uploader->save($request->avatar, 'avatars', $user->id, $this->avatarMaxWitdh);
+            // Use userid as top-level folder
+            $folder = $user->id;
+            $file_prefix = 'avatar';
+
+            $result = $uploader->save($request->avatar, $folder, $file_prefix, $this->avatarMaxWidth);
+
             if ($result) {
                 $data['avatar'] = $result['path'];
             }
@@ -65,6 +71,6 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('user.show', $user->id)->with('success', '更新成功');
+        return redirect()->route('user.edit', $user->id)->with('success', '更新成功');
     }
 }

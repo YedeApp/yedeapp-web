@@ -22,7 +22,7 @@
         <div class="form-group row">
           <label for="name" class="col-md-2 col-form-label text-md-right">用户名</label>
           <div class="col-md-5">
-            <input name="name" id="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" min-length="3" required>
+            <input name="name" id="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" min-length="2" required>
           </div>
           <div class="col-md-5 col-form-label tips">可使用中英文</div>
         </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="phone" class="col-md-2 col-form-label text-md-right">个人简介</label>
+          <label for="introduction" class="col-md-2 col-form-label text-md-right">个人简介</label>
           <div class="col-md-5">
             <textarea name="introduction" id="introduction" class="form-control" rows="4">{{ old('introduction', $user->introduction) }}</textarea>
           </div>
@@ -52,14 +52,12 @@
         </div>
 
         <div class="form-group row">
-          <label for="avatar" class="col-md-2 col-form-label text-md-right">头　像</label>
+          <label class="col-md-2 col-form-label text-md-right">头　像</label>
           <div class="col-md-5">
-            <input type="file" name="avatar" id="avatar">
-            @if ($user->avatar)
-              <label for="avatar">
-                <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail preview" width="200">
-              </label>
-            @endif
+            <input name="avatar" id="avatar" type="file" accept="image/png,image/jpeg,image/jpg">
+            <label for="avatar">
+              <img id="image" src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail avatar-preview" width="200">
+            </label>
           </div>
           <div class="col-md-5 col-form-label tips">请上传小于 1M 的图片</div>
         </div>
@@ -74,4 +72,39 @@
       </form>
     </div>
   @endcomponent
+@endsection
+
+@section('styles')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/cropper.min.css') }}">
+@endsection
+
+@section('scripts')
+<script type="text/javascript"  src="{{ asset('js/cropper.min.js') }}"></script>
+<script type="text/javascript"  src="{{ asset('js/jquery-cropper.min.js') }}"></script>
+
+<script>
+$(document).ready(function() {
+//   var $image = $('#image');
+
+//   $image.cropper({
+//     aspectRatio: 16 / 9,
+//     crop: function(event) {
+//       console.log(event.detail.x);
+//       console.log(event.detail.y);
+//       console.log(event.detail.width);
+//       console.log(event.detail.height);
+//       console.log(event.detail.rotate);
+//       console.log(event.detail.scaleX);
+//       console.log(event.detail.scaleY);
+//     }
+//   });
+
+//   // Get the Cropper.js instance after initialized
+//   var cropper = $image.data('cropper');
+
+  $('#avatar').change(function() {
+
+  })
+})
+</script>
 @endsection

@@ -65,7 +65,10 @@ class ImageUploadHandler
 
         // Tailor the avatar
         if ($max_width && $extension != 'gif') {
-            $this->resize($physical_path . '/' . $filename, $max_width);
+            // Tailor functions require physical path.
+            $file_path = $physical_path . '/' . $filename;
+
+            $this->resize($file_path, $max_width);
         }
 
         // Return uploaded file's url.
