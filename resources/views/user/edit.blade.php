@@ -54,9 +54,9 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label text-md-right">头　像</label>
           <div class="col-md-5">
-            <input name="avatar" id="avatar" type="file" accept="image/png,image/jpeg,image/jpg">
+            <input name="avatar" id="avatar" type="file" accept="image/png,image/jpeg">
             <label for="avatar">
-              <img id="image" src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail avatar-preview" width="200">
+              <img id="user-avatar" src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail img-avatar" width="200">
             </label>
           </div>
           <div class="col-md-5 col-form-label tips">请上传小于 1M 的图片</div>
@@ -71,40 +71,102 @@
 
       </form>
     </div>
+
+    {{-- Cropper modal --}}
+    <div class="modal fade" id="modalCropper" tabindex="-1" role="dialog" aria-labelledby="modalCropperLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">编辑头像</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="image-wrapper"><img id="upload-avatar"></div>
+            <div class="image-tools"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-cropper btn-w-100 mr-2">保存</button>
+            <button type="button" class="btn btn-secondary btn-confirm-no btn-w-100" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
   @endcomponent
 @endsection
 
+{{-- Cropper styles --}}
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/cropper.min.css') }}">
 @endsection
 
+{{-- Cropper scripts --}}
 @section('scripts')
 <script type="text/javascript"  src="{{ asset('js/cropper.min.js') }}"></script>
 <script type="text/javascript"  src="{{ asset('js/jquery-cropper.min.js') }}"></script>
 
 <script>
-$(document).ready(function() {
-//   var $image = $('#image');
+var $inputAvatar = $('#avatar');
+var $userAvatar = $('#user-avatar');
+var $uploadAvatar = $('#upload-avatar');
 
-//   $image.cropper({
-//     aspectRatio: 16 / 9,
-//     crop: function(event) {
-//       console.log(event.detail.x);
-//       console.log(event.detail.y);
-//       console.log(event.detail.width);
-//       console.log(event.detail.height);
-//       console.log(event.detail.rotate);
-//       console.log(event.detail.scaleX);
-//       console.log(event.detail.scaleY);
-//     }
-//   });
+// Create and init cropper
+var options = {
+  aspectRatio: 1 / 1,
+}
+$uploadAvatar.cropper(options);
 
-//   // Get the Cropper.js instance after initialized
-//   var cropper = $image.data('cropper');
+// Get cropper instance after initialized.
+var cropper = $uploadAvatar.data('cropper');
+var originalImageURL = $uploadAvatar.attr('src');
+var uploadedImageType = 'image/jpeg';
+var uploadedImageName = 'cropped.jpg';
+var uploadedImageURL;
 
-  $('#avatar').change(function() {
+// Get DataURL from uploaded image.
+$inputAvatar.change(function() {
+  // Show the modal
+  $('#modalCropper').modal('show');
 
-  })
+  var files = this.files;
+  var file;
+
+  if (cropper && files && files.length) {
+    file = files[0];
+
+     if (/^image\/\w+/.test(file.type)) {
+      uploadedImageType = file.type;
+      uploadedImageName = file.name;
+
+      if (uploadedImageURL) {
+        URL.revokeObjectURL(uploadedImageURL);
+      }
+
+      image.src = uploadedImageURL = URL.createObjectURL(file);
+      cropper.destroy();
+      cropper = new Cropper(image, options);
+      inputImage.value = null;
+    } else {
+      window.alert('Please choose an image file.');
+    }
+  }
+
+  var reader = new FileReader();
+
+  // Get DataURL from reader.result then refresh image's src.
+  reader.onload = function(){
+    var url = reader.result;
+    // setImageURL($imgCropper, url);
+    $imgCropper.cropper('reset', true).cropper('replace', url);
+  };
+  reader.readAsDataURL(file);
+})
+
+// Clear the avatar input value when modal hiding, so that
+// input's onchange event can be triggered again
+$('#modalCropper').on('hide.bs.modal', function (event) {
+  $inputAvatar.val('');
 })
 </script>
 @endsection

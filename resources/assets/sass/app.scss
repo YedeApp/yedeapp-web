@@ -48,6 +48,11 @@
   overflow: hidden;
 }
 
+// Close button
+button.close {
+  outline: none;
+}
+
 // Mditor
 @media (max-width: 768px) {
   .card .mditor {
@@ -446,9 +451,31 @@ footer {
       cursor: pointer;
     }
 
-    .avatar-preview {
+    .img-avatar {
       margin-top: 10px;
       cursor: pointer;
+    }
+  }
+
+  .modal {
+    .image-wrapper {
+      margin: auto;
+      max-width: 300px;
+      max-height: 300px;
+      text-align: center;
+
+      & > img {
+        max-width: 100%;
+      }
+    }
+
+    .image-tools {
+      width: 220px;
+      margin: 10px auto;
+    }
+
+    #image {
+      max-width: 100%;
     }
   }
 }

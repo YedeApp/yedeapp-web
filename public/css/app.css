@@ -10028,6 +10028,10 @@ a.text-dark:focus {
   overflow: hidden;
 }
 
+button.close {
+  outline: none;
+}
+
 @media (max-width: 768px) {
   .card .mditor {
     padding-top: 66px;
@@ -10452,8 +10456,28 @@ footer .info {
   cursor: pointer;
 }
 
-.user-edit-page .body .avatar-preview {
+.user-edit-page .body .img-avatar {
   margin-top: 10px;
   cursor: pointer;
+}
+
+.user-edit-page .modal .image-wrapper {
+  margin: auto;
+  max-width: 300px;
+  max-height: 300px;
+  text-align: center;
+}
+
+.user-edit-page .modal .image-wrapper > img {
+  max-width: 100%;
+}
+
+.user-edit-page .modal .image-tools {
+  width: 220px;
+  margin: 10px auto;
+}
+
+.user-edit-page .modal #image {
+  max-width: 100%;
 }
 
