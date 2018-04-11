@@ -8,7 +8,7 @@
       @else
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span class="avatar"><img src="{{ Auth::user()->avatar }}" class="img-fluid rounded-circle" width="30px" height="30px"></span>
+            <span class="avatar"><img src="{{ Auth::user()->avatar }}" class="img-fluid" width="30px" height="30px"></span>
             <span class="username">{{ Auth::user()->name }}</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right">

@@ -181,6 +181,9 @@ header {
 
       .avatar {
         margin-right: 5px;
+        img {
+          border-radius: 2px;
+        }
       }
 
       .username {
@@ -448,16 +451,60 @@ footer {
     }
 
     #avatar {
-      cursor: pointer;
+      display: none;
     }
 
-    .img-avatar {
-      margin-top: 10px;
-      cursor: pointer;
+    .avatar-wrapper {
+      position: relative;
+      &:hover > .avatar-mask {
+        opacity: 1;
+      }
+
+      .img-avatar {
+        cursor: pointer;
+      }
+
+      .avatar-mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity .2s ease-in;
+        cursor: pointer;
+
+        .mask-bg {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: .4;
+          background: #1a1a1a;
+          border-radius: 0.25rem;
+        }
+
+        .mask-content {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          color: #fff;
+          text-align: center;
+          -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+        }
+
+        .mask-text {
+          margin-top: 10px;
+        }
+      }
     }
   }
 
   .modal {
+    text-align: center;
+
     .image-wrapper {
       margin: auto;
       max-width: 300px;
@@ -470,12 +517,17 @@ footer {
     }
 
     .image-tools {
-      width: 220px;
-      margin: 10px auto;
-    }
+      display: inline-block;
+      margin: 10px auto 0;
 
-    #image {
-      max-width: 100%;
+      .wrapper {
+        margin: -.5rem -.75rem;
+        padding: .5rem .75rem;
+
+        .fa {
+          font-size: 16px;
+        }
+      }
     }
   }
 }

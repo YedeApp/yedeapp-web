@@ -45,7 +45,7 @@ class ImageUploadHandler
          *
          * @var string
          */
-        $extension = strtolower($file->getClientOriginalExtension()) ?: 'png';
+        $extension = strtolower($file->getClientOriginalExtension()) ?: 'jpg';
 
         /**
          * Set a new filename. The prefiex could be user's id.

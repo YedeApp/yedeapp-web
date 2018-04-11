@@ -55,8 +55,15 @@
           <label class="col-md-2 col-form-label text-md-right">头　像</label>
           <div class="col-md-5">
             <input name="avatar" id="avatar" type="file" accept="image/png,image/jpeg">
-            <label for="avatar">
-              <img id="user-avatar" src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail img-avatar" width="200">
+            <label for="avatar" class="avatar-wrapper">
+              <img id="avatar-image" src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail img-avatar" width="200">
+              <div class="avatar-mask">
+                <div class="mask-bg"></div>
+                <div class="mask-content">
+                  <div class="mask-icon"><svg class="icon" aria-hidden="true" style="width:40px;height:40px;"><use xlink:href="#icon-camera"></use></svg></div>
+                  <div class="mask-text">修改我的头像</div>
+                </div>
+              </div>
             </label>
           </div>
           <div class="col-md-5 col-form-label tips">请上传小于 1M 的图片</div>
@@ -84,10 +91,26 @@
           </div>
           <div class="modal-body">
             <div class="image-wrapper"><img id="upload-avatar"></div>
-            <div class="image-tools"></div>
+            <div class="image-tools">
+              <button type="button" class="btn btn-secondary" data-method="reset">
+                <span class="wrapper" data-toggle="tooltip" title="刷新">
+                  <span class="fa fa-refresh"></span>
+                </span>
+              </button>
+              <button type="button" class="btn btn-secondary" data-method="zoom" data-option="0.1">
+                <span class="wrapper" data-toggle="tooltip" title="放大">
+                  <span class="fa fa-search-plus"></span>
+                </span>
+              </button>
+              <button type="button" class="btn btn-secondary" data-method="zoom" data-option="-0.1">
+                <span class="wrapper" data-toggle="tooltip" title="缩小">
+                  <span class="fa fa-search-minus"></span>
+                </span>
+              </button>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-cropper btn-w-100 mr-2">保存</button>
+            <button type="button" class="btn btn-primary btn-cropper btn-w-100 mr-2" data-dismiss="modal">保存</button>
             <button type="button" class="btn btn-secondary btn-confirm-no btn-w-100" data-dismiss="modal">取消</button>
           </div>
         </div>
@@ -107,64 +130,143 @@
 <script type="text/javascript"  src="{{ asset('js/jquery-cropper.min.js') }}"></script>
 
 <script>
+var URL = window.URL || window.webkitURL;
+var API = "{{ route('user.upload', Auth::id()) }}";
+var token = '{{ csrf_token() }}';
+
 var $inputAvatar = $('#avatar');
-var $userAvatar = $('#user-avatar');
+var $userAvatar = $('#avatar-image');
 var $uploadAvatar = $('#upload-avatar');
+var $headerAvatar = $('header .info .avatar img');
+var $btnCropper = $('.btn-cropper');
 
-// Create and init cropper
-var options = {
-  aspectRatio: 1 / 1,
-}
-$uploadAvatar.cropper(options);
-
-// Get cropper instance after initialized.
-var cropper = $uploadAvatar.data('cropper');
 var originalImageURL = $uploadAvatar.attr('src');
 var uploadedImageType = 'image/jpeg';
 var uploadedImageName = 'cropped.jpg';
 var uploadedImageURL;
+var cropper;
 
-// Get DataURL from uploaded image.
-$inputAvatar.change(function() {
-  // Show the modal
-  $('#modalCropper').modal('show');
-
-  var files = this.files;
-  var file;
-
-  if (cropper && files && files.length) {
-    file = files[0];
-
-     if (/^image\/\w+/.test(file.type)) {
-      uploadedImageType = file.type;
-      uploadedImageName = file.name;
-
-      if (uploadedImageURL) {
-        URL.revokeObjectURL(uploadedImageURL);
-      }
-
-      image.src = uploadedImageURL = URL.createObjectURL(file);
-      cropper.destroy();
-      cropper = new Cropper(image, options);
-      inputImage.value = null;
-    } else {
-      window.alert('Please choose an image file.');
-    }
-  }
-
-  var reader = new FileReader();
-
-  // Get DataURL from reader.result then refresh image's src.
-  reader.onload = function(){
-    var url = reader.result;
-    // setImageURL($imgCropper, url);
-    $imgCropper.cropper('reset', true).cropper('replace', url);
-  };
-  reader.readAsDataURL(file);
+// Tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
 })
 
-// Clear the avatar input value when modal hiding, so that
-// input's onchange event can be triggered again
+// Cropper
+var options = {
+  aspectRatio: 1 / 1,
+  minContainerWidth: 300,
+  minContainerHeight: 300,
+  minCropBoxWidth: 200,
+  minCropBoxHeight: 200,
+  minCanvasHeight: 230,
+  dragMode: 'move',
+  cropBoxMovable: false,
+  cropBoxResizable: false,
+  toggleDragModeOnDblclick: false
+}
+
+$uploadAvatar.cropper(options);
+cropper = $uploadAvatar.data('cropper');
+
+// Import image
+if (URL) {
+  $inputAvatar.change(function() {
+    // Show modal
+    $('#modalCropper').modal('show');
+
+    var files = this.files;
+    var file;
+
+    if (!cropper) {
+      return;
+    }
+
+    if (files && files.length) {
+      file = files[0];
+
+      if (/^image\/\w+/.test(file.type)) {
+        uploadedImageType = file.type;
+        uploadedImageName = file.name;
+
+        if (uploadedImageURL) {
+          URL.revokeObjectURL(uploadedImageURL);
+        }
+
+        uploadedImageURL = URL.createObjectURL(file);
+        $uploadAvatar.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+      } else {
+        alert('请选择图片文件');
+      }
+    }
+
+  });
+}
+
+// Methods
+$('.image-tools').on('click', '[data-method]', function() {
+  var $this = $(this);
+  var data = $this.data();
+  var cropped;
+  var result;
+
+  if ($this.prop('disabled') || $this.hasClass('disabled')) {
+    return;
+  }
+
+  if (cropper && data.method) {
+    // Clone a new one
+    data = $.extend({}, data);
+    cropped = cropper.cropped;
+    result = $uploadAvatar.cropper(data.method, data.option, data.secondOption);
+  }
+})
+
+// Upload cropped image
+$btnCropper.click(function() {
+  var canvas;
+  var canvasOptions = {
+    width: 200,
+    height: 200,
+    minWidth: 200,
+    minHeight: 200,
+    maxWidth: 4096,
+    maxHeight: 4096,
+    fillColor: '#fff',
+    imageSmoothingEnabled: false,
+    imageSmoothingQuality: 'high',
+  };
+
+  // Upload cropped image to server if the browser supports `HTMLCanvasElement.toBlob`
+  canvas = $uploadAvatar.cropper('getCroppedCanvas', canvasOptions);
+  canvas.toBlob(function (blob) {
+    var formData = new FormData();
+    formData.append('avatar', blob);
+    formData.append('_token', token);
+
+    // Use `jQuery.ajax` method
+    $.ajax(API, {
+      method: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function () {
+        console.log('Upload success');
+      },
+      error: function () {
+        console.log('Upload error');
+      }
+    });
+
+  }, 'image/jpeg');
+
+  // Set new avatar
+  var dataURL = canvas.toDataURL();
+  $userAvatar.attr('src', dataURL);
+  $headerAvatar.attr('src', dataURL);
+  $inputAvatar.val('');
+});
+
+// Clear the avatar input value when modal's dismissing.
 $('#modalCropper').on('hide.bs.modal', function (event) {
   $inputAvatar.val('');
 })
