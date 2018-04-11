@@ -164,7 +164,6 @@ var options = {
   cropBoxResizable: false,
   toggleDragModeOnDblclick: false
 }
-
 $uploadAvatar.cropper(options);
 cropper = $uploadAvatar.data('cropper');
 
@@ -223,7 +222,6 @@ $('.image-tools').on('click', '[data-method]', function() {
 
 // Upload cropped image
 $btnCropper.click(function() {
-  var canvas;
   var canvasOptions = {
     width: 200,
     height: 200,
@@ -237,7 +235,7 @@ $btnCropper.click(function() {
   };
 
   // Upload cropped image to server if the browser supports `HTMLCanvasElement.toBlob`
-  canvas = $uploadAvatar.cropper('getCroppedCanvas', canvasOptions);
+  var canvas = $uploadAvatar.cropper('getCroppedCanvas', canvasOptions);
   canvas.toBlob(function (blob) {
     var formData = new FormData();
     formData.append('avatar', blob);
@@ -259,7 +257,7 @@ $btnCropper.click(function() {
 
   }, 'image/jpeg');
 
-  // Set new avatar
+  // Refresh new avatar
   var dataURL = canvas.toDataURL();
   $userAvatar.attr('src', dataURL);
   $headerAvatar.attr('src', dataURL);
