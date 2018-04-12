@@ -10352,6 +10352,7 @@ footer .info {
 .topic-show-page .comments .avatar {
   width: 40px;
   height: 40px;
+  border-radius: 2px;
 }
 
 .topic-show-page .comments .comment {

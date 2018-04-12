@@ -7,7 +7,7 @@
     @foreach ($comments as $comment)
       <div class="comment media">
         <a id="comment_{{ $comment->id }}"></a>
-        <img class="avatar rounded-circle mr-3" src="{{ $comment->user->avatar }}">
+        <img class="avatar mr-3" src="{{ $comment->user->avatar }}">
         <div class="media-body">
           <div class="heading">{{ $comment->user->name }}</div>
           <div class="operations">
@@ -56,7 +56,7 @@
     @can ('show', $course)
       <div id="reply-wrapper">
         <div class="post-reply media">
-          <img class="avatar rounded-circle mr-3" src="{{ Auth::user()->avatar }}">
+          <img class="avatar mr-3" src="{{ Auth::user()->avatar }}">
           <div class="media-body">
             <div>
               <form action="{{ route('comment.store') }}" method="post">
