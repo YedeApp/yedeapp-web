@@ -128,6 +128,7 @@
 @section('scripts')
 <script type="text/javascript"  src="{{ asset('js/cropper.min.js') }}"></script>
 <script type="text/javascript"  src="{{ asset('js/jquery-cropper.min.js') }}"></script>
+<script type="text/javascript"  src="{{ asset('js/canvas-to-blob.min.js') }}"></script>
 
 <script>
 var URL = window.URL || window.webkitURL;
