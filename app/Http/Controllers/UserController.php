@@ -75,9 +75,8 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         if ($request->avatar) {
-            // Use userid as top-level folder
-            $folder = $user->id;
-            $file_prefix = 'avatar';
+            $folder = 'avatars';
+            $file_prefix = $user->id;
 
             $result = $uploader->save($request->avatar, $folder, $file_prefix, $this->avatarMaxWidth);
 
