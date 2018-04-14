@@ -26,7 +26,7 @@
         @endcan
       </div>
     </div>
-    <div class="body">{!! $topic->content !!}</div>
+    <div class="body markdown-body">{!! htmlspecialchars_decode($topic->content) !!}</div>
     <div class="sns">@include('topic._sns')</div>
     <div class="prev-next clearfix">
       @if ($prev)
@@ -42,7 +42,56 @@
   @include ('topic._comments')
 @endsection
 
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/mditor.min.css') }}">
+@endsection
+
 @section('scripts')
+  {{-- Markdown parser --}}
+  <script type="text/javascript"  src="{{ asset('js/mditor.min.js') }}"></script>
+  <script>
+    var HtmlUtil = {
+      // 用正则表达式转码 html
+      htmlEncodeByRegExp: function (str) {
+        var s = "";
+
+        if (str.length == 0) return "";
+
+        s = str.replace(/&/g,"&amp;");
+        s = s.replace(/</g,"&lt;");
+        s = s.replace(/>/g,"&gt;");
+        s = s.replace(/ /g,"&nbsp;");
+        s = s.replace(/\'/g,"&#39;");
+        s = s.replace(/\"/g,"&quot;");
+
+        return s;
+      },
+
+      // 用正则表达式解码 html
+      htmlDecodeByRegExp: function (str) {
+          var s = "";
+
+          if (str.length == 0) return "";
+
+          s = str.replace(/&amp;/g,"&");
+          s = s.replace(/&lt;/g,"<");
+          s = s.replace(/&gt;/g,">");
+          s = s.replace(/&nbsp;/g," ");
+          s = s.replace(/&#39;/g,"\'");
+          s = s.replace(/&quot;/g,"\"");
+
+          return s;
+      }
+    };
+
+    var $markdown = $('.markdown-body');
+    var parser = new Mditor.Parser();
+    var decodedHtml = HtmlUtil.htmlDecodeByRegExp($markdown.html());
+
+    var topicHtml = parser.parse(decodedHtml);
+    $markdown.html(topicHtml);
+  </script>
+
   {{-- Comments scripts --}}
   @include ('topic._scripts')
 

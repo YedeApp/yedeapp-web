@@ -12,7 +12,7 @@ class CommentObserver
     public function saving(Comment $comment)
     {
         // XSS filtering
-        $comment->content = clean($comment->content, 'html');
+        $comment->content = clean($comment->content, 'comment');
     }
 
 }

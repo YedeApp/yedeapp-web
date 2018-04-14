@@ -330,9 +330,12 @@ footer {
     }
   }
 
-  .body {
+  .markdown-body {
     margin: 1rem auto;
     line-height: 1.8rem;
+    font-size: 15px;
+    font-family: $font-family-base;
+    color: $font-color-base;
     letter-spacing: $letter-spacing;
   }
 

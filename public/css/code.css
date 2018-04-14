@@ -1,0 +1,54 @@
+.code{height:auto !important;margin:1rem;font-size:14px;line-height:20px;white-space:pre-wrap;word-break:break-word;}
+.token.attr-name{color:#c5a5c5;}
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata{color:#999999;}
+.token.property,
+.token.number,
+.token.function-name,
+.token.constant,
+.token.symbol,
+.token.deleted{color:#5a9bcf;}.token.boolean{color:#ff8b50;}.token.tag{color:#fc929e;}.token.string{color:#8dc891;}.token.punctuation{color:#5FB3B3;}
+.token.selector,
+.token.char,
+.token.builtin,
+.token.inserted{color:#D8DEE9;}.token.function{color:#79b6f2;}
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable{color:#d7deea;}.token.attr-value{color:#8dc891;}.token.keyword{color:#c5a5c5;}
+.token.atrule,
+.token.class-name{color:#FAC863;}.token.important{font-weight:400;}.token.bold{font-weight:700;}.token.italic{font-style:italic;}.token.entity{cursor:help;}.namespace{opacity:0.7;}html {
+  font-family: sans-serif; /* 1 */
+  line-height: 1.15; /* 2 */
+  -ms-text-size-adjust: 100%; /* 3 */
+  -webkit-text-size-adjust: 100%; /* 3 */
+}pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+  background:#282c34;color:#ffffff;border-radius:10px;overflow:auto;tab-size:1.5em;-moz-tab-size:1.5em;
+}code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}dfn {
+  font-style: italic;
+}mark {
+  background-color: #ff0;
+  color: #000;
+}small {
+  font-size: 80%;
+}sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}sub {
+  bottom: -0.25em;
+}sup {
+  top: -0.5em;
+}

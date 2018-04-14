@@ -15,7 +15,7 @@
   @yield('styles')
 </head>
 <body>
-  {{-- No support for IE --}}
+  {{-- No support for IE which version less than 10 --}}
   <!--[if lt IE 10]>
   <div class="alert alert-warning alert-dismissible fade show m-0 rounded-0" role="alert">
     您目前使用的 IE 浏览器版本过于陈旧。请使用现代的浏览器以获得最佳的浏览效果。

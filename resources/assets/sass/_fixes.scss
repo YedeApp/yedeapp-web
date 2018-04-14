@@ -25,6 +25,23 @@
   color: $placeholder-color;
 }
 
+// Validation
 .invalid-feedback {
   font-size: 100%;
+}
+
+// Mditor
+.markdown-body :not(pre)>code[class*=language-],
+.markdown-body pre[class*=language-]
+{
+  background: #f2f4f5;
+}
+
+.markdown-body code[class*=language-],
+.markdown-body pre[class*=language-]
+{
+  color: #333;
+  font-size: 13.6px;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  text-shadow: none;
 }
