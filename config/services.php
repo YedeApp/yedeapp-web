@@ -35,4 +35,15 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'baidu_translate' => [
+        'appid' => env('BAIDU_TRANSLATE_APPID'),
+        'key' => env('BAIDU_TRANSLATE_KEY'),
+    ],
+
+    'youzan' => [
+        'clientid' => env('YOUZAN_CLIENT_ID'),
+        'secret' => env('YOUZAN_CLIENT_SECRET'),
+        'kdtid' => env('YOUZAN_KDT_ID'),
+    ],
+
 ];
