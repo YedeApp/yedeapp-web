@@ -35,7 +35,7 @@
   }
 
   .body {
-    padding: 10px 5px;
+    padding: 20px 5px 10px;
   }
 }
 
@@ -295,6 +295,37 @@ footer {
   }
 }
 
+// Course purchase page
+.course-purchase-page {
+  @include editing;
+
+  .purchase-info {
+    width: 80%;
+    margin: 20px auto 0;
+
+    td {
+      vertical-align: middle;
+      p {
+        margin-bottom: 10px;
+      }
+    }
+
+    .caption {
+      min-width: 100px;
+      font-weight: bold;
+    }
+
+    .item {
+      text-indent: 15px;
+
+      .price {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 // Topic pages
 .topic-show-page {
 
@@ -448,7 +479,6 @@ footer {
   @include editing;
 
   .body {
-    padding-top: 20px;
 
     .tips {
       color: #999;

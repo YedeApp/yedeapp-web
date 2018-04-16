@@ -33,6 +33,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('course', 'CourseController', ['only' => ['show', 'create', 'store', 'update', 'edit']]);
 Route::get('course/{course}/chapters', 'CourseController@chapters')->name('course.chapters');
 Route::get('course/{course}/purchase', 'CourseController@purchase')->name('course.purchase');
+Route::get('course/purchase/push', 'CourseController@push')->name('course.push');
+Route::get('course/purchase/pull', 'CourseController@pull')->name('course.pull');
 
 // Topic Routes
 Route::resource('topic', 'TopicController', ['only' => ['create', 'edit', 'store', 'update', 'destroy']]);

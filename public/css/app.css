@@ -10296,6 +10296,47 @@ footer .info {
   margin-right: 10px;
 }
 
+.course-purchase-page .head {
+  padding: 0px 5px 15px;
+  font-size: 16px;
+  border-bottom: #dadada 1px solid;
+}
+
+.course-purchase-page .head svg {
+  margin-right: 3px;
+}
+
+.course-purchase-page .body {
+  padding: 20px 5px 10px;
+}
+
+.course-purchase-page .purchase-info {
+  width: 80%;
+  margin: 20px auto 0;
+}
+
+.course-purchase-page .purchase-info td {
+  vertical-align: middle;
+}
+
+.course-purchase-page .purchase-info td p {
+  margin-bottom: 10px;
+}
+
+.course-purchase-page .purchase-info .caption {
+  min-width: 100px;
+  font-weight: bold;
+}
+
+.course-purchase-page .purchase-info .item {
+  text-indent: 15px;
+}
+
+.course-purchase-page .purchase-info .item .price {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .topic-show-page .card-body {
   padding: 2rem;
 }
@@ -10448,7 +10489,7 @@ footer .info {
 
 .topic-edit-page .body,
 .topic-create-page .body {
-  padding: 10px 5px;
+  padding: 20px 5px 10px;
 }
 
 .user-edit-page .head {
@@ -10462,11 +10503,7 @@ footer .info {
 }
 
 .user-edit-page .body {
-  padding: 10px 5px;
-}
-
-.user-edit-page .body {
-  padding-top: 20px;
+  padding: 20px 5px 10px;
 }
 
 .user-edit-page .body .tips {

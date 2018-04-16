@@ -82,4 +82,64 @@ class CourseController extends Controller
 
         return view('course.purchase', compact('course', 'qrcode', 'qrid'));
     }
+
+    /**
+     * Recieve Youzan push data.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return void
+     */
+    public function push(Request $request)
+    {
+        $type = $request->get('type');
+        $status = $request->get('status');
+
+        if ($type == 'TRADE_ORDER_STATE' && $status == 'TRADE_SUCCESS') {
+            $order = Youzan::request('youzan.trade.get', ['tid' => $request->id]);
+            $qrid = $order['trade']['qr_id'];
+            $payment = Payment::where('qr_id', $qrid)->first();
+        }
+
+        if ($payment && $payment->status !== Payment::STATUS_SUCCEED) {
+            $payment->status = Payment::STATUS_SUCCEED;
+            $payment->save();
+
+            // Register the subscription for the user if he/she didn't subscribe it.
+            $subscription = Subscription::firstOrCreate(
+                ['user_id' => Auth::id()],
+                ['course_id' => $payment->course_id]
+            );
+        }
+    }
+
+    /**
+     * Pull data from Youzan by self. If the trade has been succeed, update the subscription.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return integer
+     */
+    public function pull(Request $request)
+    {
+        if ($request->qrid) {
+            $payment = Payment::where('qr_id', $request->qrid)->first();
+            $result = Youzan::request('youzan.trades.qr.get', [
+                'qr_id' => $payment->qr_id,
+                'status' => 'TRADE_RECEIVED'
+            ]);
+
+            if ($result['total_results'] > 0) {
+                $payment->status = Payment::STATUS_SUCCEED;
+                $payment->save();
+
+                $subscription = Subscription::firstOrCreate(
+                    ['user_id' => Auth::id()],
+                    ['course_id' => $payment->course_id]
+                );
+
+                return 1;
+            }
+        }
+
+        return 0;
+    }
 }
