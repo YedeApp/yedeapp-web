@@ -12,11 +12,11 @@
             <span class="username">{{ Auth::user()->name }}</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-              <svg class="icon button-icon" aria-hidden="true"><use xlink:href="#icon-user"></use></svg>我的页面
+            <a class="dropdown-item" href="{{ route('user.show', Auth::id()) }}">
+              <svg class="icon button-icon" aria-hidden="true"><use xlink:href="#icon-user"></use></svg>个人资料
             </a>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-              <svg class="icon button-icon" aria-hidden="true"><use xlink:href="#icon-setting"></use></svg>设置
+            <a class="dropdown-item" href="{{ route('user.edit', Auth::id()) }}">
+              <svg class="icon button-icon" aria-hidden="true"><use xlink:href="#icon-setting"></use></svg>修改资料
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
               <svg class="icon button-icon" aria-hidden="true"><use xlink:href="#icon-export"></use></svg>退出

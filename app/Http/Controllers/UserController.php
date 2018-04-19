@@ -17,6 +17,13 @@ class UserController extends Controller
     protected $avatarMaxWidth = 200;
 
     /**
+     * Set common pagesize
+     *
+     * @var int
+     */
+    protected $pageSize = 15;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -25,6 +32,35 @@ class UserController extends Controller
     {
         // Auth all the methods except show.
         $this->middleware('auth');
+    }
+
+    /**
+     * User profile show page.
+     *
+     * @param  Illuminate\Foundation\Auth\User  $user
+     * @return Illuminate\Contracts\View\View
+     */
+    public function show(User $user, $tab = 'activities')
+    {
+        switch ($tab) {
+            case 'comments':
+                $comments = $user->comments()->with('course', 'topic')->paginate($this->pageSize);
+
+                $compact = compact('tab', 'user', 'comments');
+
+                break;
+
+            default: //activities
+                $subscriptions = $user->subscriptions()->with('course')->get();
+
+                $comments = $user->comments()->with('course', 'topic')->take(10)->get();
+
+                $compact = compact('tab', 'user', 'comments', 'subscriptions');
+
+                break;
+        }
+
+        return view('user.show', $compact);
     }
 
     /**
@@ -59,7 +95,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('user.edit', $user->id)->with('success', '更新成功');
+        return redirect()->route('user.show', $user->id)->with('success', '更新成功');
     }
 
     /**

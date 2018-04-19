@@ -25,6 +25,6 @@ function truncate($value, $length = 200)
     return str_limit($string, $length);
 }
 
-function jumpToComment($comment) {
-    return $comment->topic->link() . '#comment_' . $comment->id;
+function jumpToComment($comment, $courseSlug = '') {
+    return $comment->topic->link($courseSlug) . '#comment_' . $comment->id;
 }

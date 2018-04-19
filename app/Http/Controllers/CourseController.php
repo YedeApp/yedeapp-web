@@ -105,10 +105,10 @@ class CourseController extends Controller
             $payment->save();
 
             // Register the subscription for the user if he/she didn't subscribe it.
-            $subscription = Subscription::firstOrCreate(
-                ['user_id' => Auth::id()],
-                ['course_id' => $payment->course_id]
-            );
+            $subscription = Subscription::firstOrCreate([
+                'user_id' => Auth::id(),
+                'course_id' => $payment->course_id
+            ]);
         }
     }
 
@@ -131,10 +131,10 @@ class CourseController extends Controller
                 $payment->status = Payment::STATUS_SUCCEED;
                 $payment->save();
 
-                $subscription = Subscription::firstOrCreate(
-                    ['user_id' => Auth::id()],
-                    ['course_id' => $payment->course_id]
-                );
+                $subscription = Subscription::firstOrCreate([
+                    'user_id' => Auth::id(),
+                    'course_id' => $payment->course_id
+                ]);
 
                 return 1;
             }

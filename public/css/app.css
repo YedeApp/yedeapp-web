@@ -10492,6 +10492,43 @@ footer .info {
   padding: 20px 5px 10px;
 }
 
+.user-show-page .profile .name {
+  margin-top: 10px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.user-show-page .profile .intro {
+  margin: 10px 0px;
+  color: #666;
+}
+
+.user-show-page .profile .btn {
+  margin-bottom: 10px;
+}
+
+.user-show-page .tab-content > .tab-pane table {
+  margin: 25px auto;
+}
+
+.user-show-page .tab-content > .tab-pane table thead {
+  text-align: center;
+}
+
+.user-show-page .tab-content > .tab-pane table tbody td {
+  border-top: 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.user-show-page .tab-content > .tab-pane table tbody .datetime {
+  color: #999;
+  font-size: 13px;
+}
+
+.user-show-page .tab-content > .tab-pane table tbody .hint {
+  margin: 0 10px;
+}
+
 .user-edit-page .head {
   padding: 0px 5px 15px;
   font-size: 16px;

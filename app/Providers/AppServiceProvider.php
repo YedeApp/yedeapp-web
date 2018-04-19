@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Comment::observe(\App\Observers\CommentObserver::class);
 
         \Carbon\Carbon::setLocale('zh');
+
+        \Illuminate\Pagination\Paginator::defaultView('pagination::bootstrap-4');
     }
 
     /**

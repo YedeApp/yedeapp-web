@@ -475,6 +475,51 @@ footer {
 }
 
 // User
+.user-show-page {
+  .profile {
+    .name {
+      margin-top: 10px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .intro {
+      margin: 10px 0px;
+      color: #666;
+    }
+
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+
+  .tab-content > .tab-pane {
+    table {
+      margin: 25px auto;
+
+      thead {
+        text-align: center;
+      }
+
+      tbody {
+        td {
+          border-top: 0;
+          border-bottom: 1px solid #dee2e6;
+        }
+
+        .datetime {
+          color: #999;
+          font-size: 13px;
+        }
+
+        .hint {
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+}
+
 .user-edit-page {
   @include editing;
 
