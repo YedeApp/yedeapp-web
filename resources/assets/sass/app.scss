@@ -39,6 +39,19 @@
   }
 }
 
+@mixin mini-card {
+  .card {
+    margin-top: 8%;
+    font-size: 0.9rem;
+
+    .card-header {
+      margin: 0 20px;
+      background-color: #fff;
+      text-align: center;
+    }
+  }
+}
+
 // Iconfont
 .icon {
   width: 1.1rem;
@@ -51,16 +64,6 @@
 // Close button
 button.close {
   outline: none;
-}
-
-// Mditor
-@media (max-width: 768px) {
-  .card .mditor {
-    padding-top: 66px;
-    .head {
-      height: 66px;
-    }
-  }
 }
 
 // Common
@@ -231,27 +234,6 @@ footer {
       letter-spacing: $letter-spacing;
     }
   }
-}
-
-// Login page
-.login-page {
-  .card {
-    margin-top: 8%;
-    font-size: 0.9rem;
-
-    a {
-      color: $font-color-base;
-    }
-
-    .tab-content {
-      padding-top: 25px;
-    }
-
-    .captcha {
-      margin-top: 10px;
-      cursor: pointer;
-    }
-  } // end card
 }
 
 // Course pages
@@ -474,23 +456,41 @@ footer {
   @include editing;
 }
 
+// User login page
+.login-page {
+  @include mini-card;
+
+  .card {
+    a {
+      color: $font-color-base;
+    }
+
+    .tab-content {
+      padding-top: 25px;
+    }
+
+    .captcha {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  } // end card
+}
+
 // User
 .user-show-page {
-  .profile {
-    .name {
-      margin-top: 10px;
-      font-size: 26px;
-      font-weight: bold;
-    }
+  .name {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: bold;
+  }
 
-    .intro {
-      margin: 10px 0px;
-      color: #666;
-    }
+  .intro {
+    margin: 10px 0px;
+    color: #666;
+  }
 
-    .btn {
-      margin-bottom: 10px;
-    }
+  .btn {
+    margin-bottom: 10px;
   }
 
   .tab-content > .tab-pane {
@@ -520,8 +520,23 @@ footer {
   }
 }
 
-.user-edit-page {
+.user-edit-page,
+.user-password-page {
   @include editing;
+
+  .sidebar {
+    padding: 10px 10px;
+
+    .list-group-item {
+      padding: 0.5rem 1.25rem;
+
+      &.active {
+        color: #495057;
+        background-color: #e9ecef;
+        border-color: #e9ecef;
+      }
+    }
+  }
 
   .body {
 
@@ -609,4 +624,10 @@ footer {
       }
     }
   }
+}
+
+// Password reset
+.password-request-page,
+.password-reset-page {
+  @include mini-card;
 }

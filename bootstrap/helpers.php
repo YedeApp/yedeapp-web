@@ -42,19 +42,34 @@ function jumpToComment($comment, $courseSlug = '') {
 }
 
 /**
- * Check if the current tab is actived by url params.
+ * Insert is-invalid css class to the input field if it has any error emerged.
  */
-function checkNavActive($if_route, $if_route_param) {
-    return active_class($if_route && $if_route_param);
+function checkError($errors, $field) {
+    return $errors->has($field) ? 'is-invalid' : '';
 }
 
 /**
- * Check nav active status on user profile page.
+ * Show the errors info below the input field which causes error occured.
  */
-function checkUserNavActive($value = '', $key = 'tab') {
-    $if_route = if_route('user.show');
+function showErrorFeedback($errors, $field) {
+    if ($errors->has($field)) {
+        return '<div class="invalid-feedback">' . $errors->first($field) . '</div>';
+    }
 
-    $if_route_param = if_route_param($key, $value);
+    return '';
+}
 
-    return checkNavActive($if_route, $if_route_param);
+/**
+ * Show session stroed message on the page.
+ */
+function showSessionMessage($key) {
+    if (Session::has($key)) {
+        $s = '<div class="alert alert-primary alert-dismissible fade show d-inline-block" role="alert">';
+        $s .= Session::get($key);
+        $s .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        $s .= '</div>';
+        return $s;
+    }
+
+    return '';
 }

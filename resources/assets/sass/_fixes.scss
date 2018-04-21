@@ -31,12 +31,19 @@
 }
 
 // Mditor
+@media (max-width: 768px) {
+  .card .mditor {
+    padding-top: 66px;
+    .head {
+      height: 66px;
+    }
+  }
+}
 .markdown-body :not(pre)>code[class*=language-],
 .markdown-body pre[class*=language-]
 {
   background: #f2f4f5;
 }
-
 .markdown-body code[class*=language-],
 .markdown-body pre[class*=language-]
 {

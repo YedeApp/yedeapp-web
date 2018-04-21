@@ -10020,6 +10020,16 @@ a.text-dark:focus {
   font-size: 100%;
 }
 
+@media (max-width: 768px) {
+  .card .mditor {
+    padding-top: 66px;
+  }
+
+  .card .mditor .head {
+    height: 66px;
+  }
+}
+
 .markdown-body :not(pre) > code[class*=language-],
 .markdown-body pre[class*=language-] {
   background: #f2f4f5;
@@ -10043,16 +10053,6 @@ a.text-dark:focus {
 
 button.close {
   outline: none;
-}
-
-@media (max-width: 768px) {
-  .card .mditor {
-    padding-top: 66px;
-  }
-
-  .card .mditor .head {
-    height: 66px;
-  }
 }
 
 html {
@@ -10224,24 +10224,6 @@ footer .info {
   margin-top: 1rem;
   line-height: 1.8rem;
   letter-spacing: 0.5px;
-}
-
-.login-page .card {
-  margin-top: 8%;
-  font-size: 0.9rem;
-}
-
-.login-page .card a {
-  color: #393939;
-}
-
-.login-page .card .tab-content {
-  padding-top: 25px;
-}
-
-.login-page .card .captcha {
-  margin-top: 10px;
-  cursor: pointer;
 }
 
 .course-show-page h1 {
@@ -10492,18 +10474,42 @@ footer .info {
   padding: 20px 5px 10px;
 }
 
-.user-show-page .profile .name {
+.login-page .card {
+  margin-top: 8%;
+  font-size: 0.9rem;
+}
+
+.login-page .card .card-header {
+  margin: 0 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.login-page .card a {
+  color: #393939;
+}
+
+.login-page .card .tab-content {
+  padding-top: 25px;
+}
+
+.login-page .card .captcha {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.user-show-page .name {
   margin-top: 10px;
   font-size: 26px;
   font-weight: bold;
 }
 
-.user-show-page .profile .intro {
+.user-show-page .intro {
   margin: 10px 0px;
   color: #666;
 }
 
-.user-show-page .profile .btn {
+.user-show-page .btn {
   margin-bottom: 10px;
 }
 
@@ -10529,41 +10535,67 @@ footer .info {
   margin: 0 10px;
 }
 
-.user-edit-page .head {
+.user-edit-page .head,
+.user-password-page .head {
   padding: 0px 5px 15px;
   font-size: 16px;
   border-bottom: #dadada 1px solid;
 }
 
-.user-edit-page .head svg {
+.user-edit-page .head svg,
+.user-password-page .head svg {
   margin-right: 3px;
 }
 
-.user-edit-page .body {
+.user-edit-page .body,
+.user-password-page .body {
   padding: 20px 5px 10px;
 }
 
-.user-edit-page .body .tips {
+.user-edit-page .sidebar,
+.user-password-page .sidebar {
+  padding: 10px 10px;
+}
+
+.user-edit-page .sidebar .list-group-item,
+.user-password-page .sidebar .list-group-item {
+  padding: 0.5rem 1.25rem;
+}
+
+.user-edit-page .sidebar .list-group-item.active,
+.user-password-page .sidebar .list-group-item.active {
+  color: #495057;
+  background-color: #e9ecef;
+  border-color: #e9ecef;
+}
+
+.user-edit-page .body .tips,
+.user-password-page .body .tips {
   color: #999;
 }
 
-.user-edit-page .body #avatar {
+.user-edit-page .body #avatar,
+.user-password-page .body #avatar {
   display: none;
 }
 
-.user-edit-page .body .avatar-wrapper {
+.user-edit-page .body .avatar-wrapper,
+.user-password-page .body .avatar-wrapper {
   position: relative;
 }
 
-.user-edit-page .body .avatar-wrapper:hover > .avatar-mask {
+.user-edit-page .body .avatar-wrapper:hover > .avatar-mask,
+.user-password-page .body .avatar-wrapper:hover > .avatar-mask {
   opacity: 1;
 }
 
-.user-edit-page .body .avatar-wrapper .img-avatar {
+.user-edit-page .body .avatar-wrapper .img-avatar,
+.user-password-page .body .avatar-wrapper .img-avatar {
   cursor: pointer;
 }
 
-.user-edit-page .body .avatar-wrapper .avatar-mask {
+.user-edit-page .body .avatar-wrapper .avatar-mask,
+.user-password-page .body .avatar-wrapper .avatar-mask {
   position: absolute;
   left: 0;
   top: 0;
@@ -10575,7 +10607,8 @@ footer .info {
   cursor: pointer;
 }
 
-.user-edit-page .body .avatar-wrapper .avatar-mask .mask-bg {
+.user-edit-page .body .avatar-wrapper .avatar-mask .mask-bg,
+.user-password-page .body .avatar-wrapper .avatar-mask .mask-bg {
   position: absolute;
   left: 0;
   top: 0;
@@ -10586,7 +10619,8 @@ footer .info {
   border-radius: 0.25rem;
 }
 
-.user-edit-page .body .avatar-wrapper .avatar-mask .mask-content {
+.user-edit-page .body .avatar-wrapper .avatar-mask .mask-content,
+.user-password-page .body .avatar-wrapper .avatar-mask .mask-content {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -10596,36 +10630,56 @@ footer .info {
   transform: translate(-50%, -50%);
 }
 
-.user-edit-page .body .avatar-wrapper .avatar-mask .mask-text {
+.user-edit-page .body .avatar-wrapper .avatar-mask .mask-text,
+.user-password-page .body .avatar-wrapper .avatar-mask .mask-text {
   margin-top: 10px;
 }
 
-.user-edit-page .modal {
+.user-edit-page .modal,
+.user-password-page .modal {
   text-align: center;
 }
 
-.user-edit-page .modal .image-wrapper {
+.user-edit-page .modal .image-wrapper,
+.user-password-page .modal .image-wrapper {
   margin: auto;
   max-width: 300px;
   max-height: 300px;
   text-align: center;
 }
 
-.user-edit-page .modal .image-wrapper > img {
+.user-edit-page .modal .image-wrapper > img,
+.user-password-page .modal .image-wrapper > img {
   max-width: 100%;
 }
 
-.user-edit-page .modal .image-tools {
+.user-edit-page .modal .image-tools,
+.user-password-page .modal .image-tools {
   display: inline-block;
   margin: 10px auto 0;
 }
 
-.user-edit-page .modal .image-tools .wrapper {
+.user-edit-page .modal .image-tools .wrapper,
+.user-password-page .modal .image-tools .wrapper {
   margin: -.5rem -.75rem;
   padding: .5rem .75rem;
 }
 
-.user-edit-page .modal .image-tools .wrapper .fa {
+.user-edit-page .modal .image-tools .wrapper .fa,
+.user-password-page .modal .image-tools .wrapper .fa {
   font-size: 16px;
+}
+
+.password-request-page .card,
+.password-reset-page .card {
+  margin-top: 8%;
+  font-size: 0.9rem;
+}
+
+.password-request-page .card .card-header,
+.password-reset-page .card .card-header {
+  margin: 0 20px;
+  background-color: #fff;
+  text-align: center;
 }
 

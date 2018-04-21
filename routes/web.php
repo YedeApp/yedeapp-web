@@ -45,5 +45,6 @@ Route::resource('comment', 'CommentController', ['only' => ['store', 'destroy']]
 
 // User Routes
 Route::resource('user', 'UserController', ['only' => ['update', 'edit']]);
+Route::get('user/{user}/password', 'UserController@password')->name('user.password');
 Route::get('user/{user}/{tab?}', 'UserController@show')->name('user.show');
 Route::post('user/{user}/upload', 'UserController@upload')->name('user.upload');

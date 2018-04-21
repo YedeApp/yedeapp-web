@@ -24,7 +24,7 @@
               {{ csrf_field() }}
 
               <div class="form-group row">
-                <label for="account" class="col-3 col-form-label text-right">帐　号</label>
+                <label for="account" class="col-md-3 col-form-label text-md-right">帐　号</label>
                 <div class="col-md-7">
                   <input id="account" type="text" class="form-control {{ $errors->has('account') ? 'is-invalid' : '' }}" name="account" value="{{ old('account') }}" placeholder="请输入手机或邮箱" required autofocus>
 
@@ -35,7 +35,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="password" class="col-3 col-form-label text-right">密　码</label>
+                <label for="password" class="col-md-3 col-form-label text-md-right">密　码</label>
                 <div class="col-md-7">
                   <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" placeholder="请输入密码" required>
 
@@ -46,7 +46,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="captcha" class="col-3 col-form-label text-right">验证码</label>
+                <label for="captcha" class="col-md-3 col-form-label text-md-right">验证码</label>
                 <div class="col-md-7">
                   <input id="captcha" type="text" class="form-control {{ $errors->has('captcha') ? 'is-invalid' : '' }}" name="captcha" placeholder="请输入验证码" required>
 
@@ -68,7 +68,7 @@
 
               <div class="form-group row">
                 <div class="col-md-7 offset-md-3">
-                  <button type="submit" class="btn btn-primary btn-w-100">登录</button>
+                  <button type="submit" class="btn btn-primary btn-w-120">登录</button>
                   <a class="btn btn-link text-right" href="{{ route('password.request') }}">忘记密码？</a>
                 </div>
               </div>

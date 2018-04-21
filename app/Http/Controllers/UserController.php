@@ -80,6 +80,19 @@ class UserController extends Controller
     }
 
     /**
+     * User password edit page.
+     *
+     * @param  Illuminate\Foundation\Auth\User  $user
+     * @return Illuminate\Contracts\View\View
+     */
+    public function password(User $user)
+    {
+        $this->authorize('update', $user);
+
+        return view('user.password', compact('user'));
+    }
+
+    /**
      * Update user profile.
      *
      * @param  Illuminate\Foundation\Http\FormRequest\UserRequest  $request

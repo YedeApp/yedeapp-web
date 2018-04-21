@@ -30,6 +30,12 @@
     @include('layouts._header')
 
     <div class="container">
+      {{-- Messages --}}
+      <div class="text-center">
+        @include('layouts._messages')
+      </div>
+
+      {{-- Content --}}
       @yield('content')
     </div>
 

@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-7 align-self-end">
         <div class="name">{{ $user->name }}</div>
-        <div class="intro">{{ truncate($user->introduction, 120) }}</div>
+        <div class="intro">{{ $user->introduction }}</div>
       </div>
       @can('update', $user)
       <div class="col-md-2 align-self-end text-right">
