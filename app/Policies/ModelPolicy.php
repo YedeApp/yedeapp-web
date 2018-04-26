@@ -23,8 +23,8 @@ class ModelPolicy
     /**
      * Check if user has subscribed to the course.
      *
-     * @param  Illuminate\Foundation\Auth\User  $user
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
+     * @param  \Illuminate\Foundation\Auth\User  $user
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
      * @return boolean
      */
     public function show(User $user, Course $course)
@@ -35,7 +35,7 @@ class ModelPolicy
     /**
      * Check if user has subscribed to the course.
      *
-     * @param  Illuminate\Foundation\Auth\User  $user
+     * @param  \Illuminate\Foundation\Auth\User  $user
      * @param  string  $ability
      * @return boolean
      */

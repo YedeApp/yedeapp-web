@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use App\Handlers\ImageUploadHandler;
 
 class UserController extends Controller
 {
+    use Traits\ResetPassword;
+
     /**
      * User avatar max-width set to 200px
      *
@@ -37,8 +41,8 @@ class UserController extends Controller
     /**
      * User profile show page.
      *
-     * @param  Illuminate\Foundation\Auth\User  $user
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Foundation\Auth\User  $user
+     * @return \Illuminate\View\View
      */
     public function show(User $user, $tab = 'activities')
     {
@@ -66,8 +70,8 @@ class UserController extends Controller
     /**
      * User profile edit page.
      *
-     * @param  Illuminate\Foundation\Auth\User  $user
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Foundation\Auth\User  $user
+     * @return \Illuminate\View\View
      */
     public function edit(User $user)
     {
@@ -80,27 +84,14 @@ class UserController extends Controller
     }
 
     /**
-     * User password edit page.
-     *
-     * @param  Illuminate\Foundation\Auth\User  $user
-     * @return Illuminate\Contracts\View\View
-     */
-    public function password(User $user)
-    {
-        $this->authorize('update', $user);
-
-        return view('user.password', compact('user'));
-    }
-
-    /**
      * Update user profile.
      *
-     * @param  Illuminate\Foundation\Http\FormRequest\UserRequest  $request
-     * @param  App\Handlers\ImageUploadHandler  $uploader
-     * @param  Illuminate\Foundation\Auth\User  $user
-     * @return Redirect
+     * @param  \Illuminate\Foundation\Http\FormRequest\UserRequest  $request
+     * @param  \App\Handlers\ImageUploadHandler  $uploader
+     * @param  \Illuminate\Foundation\Auth\User  $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $this->authorize('update', $user);
 
@@ -108,15 +99,15 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('user.show', $user->id)->with('success', '更新成功');
+        return redirect()->route('user.show', $user->id)->with('success', '个人资料更新成功');
     }
 
     /**
      * Upload user avatar.
      *
-     * @param  Illuminate\Http\Request  $request
-     * @param  App\Handlers\ImageUploadHandler  $uploader
-     * @param  Illuminate\Foundation\Auth\User  $user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Handlers\ImageUploadHandler  $uploader
+     * @param  \Illuminate\Foundation\Auth\User  $user
      * @return void
      */
     public function upload(Request $request, ImageUploadHandler $uploader, User $user)

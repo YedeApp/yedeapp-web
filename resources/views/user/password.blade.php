@@ -25,8 +25,7 @@
           {{-- Show error --}}
           @include('components.error')
 
-          <form action="{{ route('user.update', $user->id) }}" method="POST" accept-charset="UTF-8">
-            {{ method_field('PUT') }}
+          <form action="{{ route('user.reset', $user->id) }}" method="POST" accept-charset="UTF-8">
             {{ csrf_field() }}
 
             <div class="form-group row">
@@ -39,8 +38,8 @@
             <div class="form-group row">
               <label for="old-password" class="col-md-2 col-form-label text-md-right">旧密码</label>
               <div class="col-md-5">
-                <input name="old-password" id="old-password" type="password" class="form-control {{ checkError($errors, 'old-password') }}" value="" required>
-                {!! showErrorFeedback($errors, 'old-password') !!}
+                <input name="old_password" id="old-password" type="password" class="form-control {{ checkError($errors, 'old_password') }}" value="" required>
+                {!! showErrorFeedback($errors, 'old_password') !!}
               </div>
               <div class="col-md-5 col-form-label tips">请输入旧密码</div>
             </div>

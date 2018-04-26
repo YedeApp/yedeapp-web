@@ -23,10 +23,10 @@ class TopicController extends Controller
     /**
      * Topic show page.
      *
-     * @param  Illuminate\Http\Request  $request
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
-     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @param  \Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return \Illuminate\View\View
      */
     public function show(Request $request, Course $course, Topic $topic)
     {
@@ -53,8 +53,8 @@ class TopicController extends Controller
     /**
      * Topic create page.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return \Illuminate\View\View
      */
 	public function create(Topic $topic)
 	{
@@ -68,8 +68,8 @@ class TopicController extends Controller
     /**
      * Topic edit page.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return \Illuminate\View\View
      */
 	public function edit(Topic $topic)
 	{
@@ -83,9 +83,9 @@ class TopicController extends Controller
     /**
      * Store a new topic.
      *
-     * @param  Illuminate\Foundation\Http\FormRequest\TopicRequest  $request
-	 * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
-     * @return redirect
+     * @param  \Illuminate\Foundation\Http\FormRequest\TopicRequest  $request
+	 * @param  \Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return \Illuminate\Http\RedirectResponse
      */
 	public function store(TopicRequest $request, Topic $topic)
 	{
@@ -99,9 +99,9 @@ class TopicController extends Controller
     /**
      * Update a topic.
      *
-     * @param  Illuminate\Foundation\Http\FormRequest\TopicRequest  $request
-	 * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
-     * @return redirect
+     * @param  \Illuminate\Foundation\Http\FormRequest\TopicRequest  $request
+	 * @param  \Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return \Illuminate\Http\RedirectResponse
      */
 	public function update(TopicRequest $request, Topic $topic)
 	{
@@ -115,8 +115,8 @@ class TopicController extends Controller
     /**
      * Delete a topic.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Topic  $topic
-     * @return redirect
+     * @param  \Illuminate\Database\Eloquent\Model\Topic  $topic
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Topic $topic)
     {

@@ -20,8 +20,8 @@ class CommentPolicy extends ModelPolicy
     /**
      * Check if can the user delete the comment.
      *
-     * @param  Illuminate\Foundation\Auth\User  $user
-     * @param  Illuminate\Database\Eloquent\Model\Comment  $comment
+     * @param  \Illuminate\Foundation\Auth\User  $user
+     * @param  \Illuminate\Database\Eloquent\Model\Comment  $comment
      * @return boolean
      */
     public function destroy(User $user, Comment $comment)

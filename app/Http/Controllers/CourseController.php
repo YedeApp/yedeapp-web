@@ -24,8 +24,8 @@ class CourseController extends Controller
     /**
      * Course introduction page.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return \Illuminate\View\View
      */
     public function show(Course $course)
     {
@@ -35,8 +35,8 @@ class CourseController extends Controller
     /**
      * Course chapters page.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return \Illuminate\View\View
      */
     public function chapters(Course $course)
     {
@@ -51,8 +51,8 @@ class CourseController extends Controller
     /**
      * Course purchase page.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Course  $course
-     * @return Illuminate\Contracts\View\View
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return \Illuminate\View\View
      */
     public function purchase(Course $course)
     {
@@ -86,7 +86,7 @@ class CourseController extends Controller
     /**
      * Recieve Youzan push data.
      *
-     * @param  Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     public function push(Request $request)
@@ -115,7 +115,7 @@ class CourseController extends Controller
     /**
      * Pull data from Youzan by self. If the trade has been succeed, update the subscription.
      *
-     * @param  Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return integer
      */
     public function pull(Request $request)

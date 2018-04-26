@@ -12,8 +12,8 @@ class CommentController extends Controller
     /**
      * Store a new comment.
      *
-     * @param  Illuminate\Foundation\Http\FormRequest\CommentRequest  $request
-	 * @param  Illuminate\Database\Eloquent\Model\Comment  $comment
+     * @param  \Illuminate\Foundation\Http\FormRequest\CommentRequest  $request
+	 * @param  \Illuminate\Database\Eloquent\Model\Comment  $comment
      * @return void
      */
 	public function store(CommentRequest $request, Comment $comment)
@@ -28,8 +28,8 @@ class CommentController extends Controller
     /**
      * Delete a comment.
      *
-     * @param  Illuminate\Database\Eloquent\Model\Comment  $comment
-     * @return redirect
+     * @param  \Illuminate\Database\Eloquent\Model\Comment  $comment
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Comment $comment)
     {

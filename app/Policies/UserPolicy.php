@@ -22,8 +22,8 @@ class UserPolicy extends ModelPolicy
      * is updating their profile. If they are the same one, then updating their
      * own profile, and the policy pass the update action. If not, block.
      *
-     * @param  App\Models\User  $currentUser
-     * @param  App\Models\User  $user
+     * @param  \App\Models\User  $currentUser
+     * @param  \App\Models\User  $user
      * @return boolean
      */
     public function update(User $currentUser, User $user)
