@@ -48,4 +48,4 @@ Route::resource('user', 'UserController', ['only' => ['update', 'edit']]);
 Route::get('user/{user}/password', 'UserController@showResetPasswordForm')->name('user.password');
 Route::post('user/{user}/password', 'UserController@resetPassword')->name('user.reset');
 Route::get('user/{user}/{tab?}', 'UserController@show')->name('user.show');
-Route::post('user/{user}/upload', 'UserController@upload')->name('user.upload');
+Route::post('user/{user}/upload', 'UserController@uploadAvatar')->name('user.upload');

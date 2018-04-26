@@ -4,28 +4,13 @@ namespace App\Http\Controllers;
 
 use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 
 class UserController extends Controller
 {
     use Traits\ResetPassword;
-
-    /**
-     * User avatar max-width set to 200px
-     *
-     * @var int
-     */
-    protected $avatarMaxWidth = 200;
-
-    /**
-     * Set common pagesize
-     *
-     * @var int
-     */
-    protected $pageSize = 15;
+    use Traits\UploadAvatar;
 
     /**
      * Create a new controller instance.
@@ -46,9 +31,11 @@ class UserController extends Controller
      */
     public function show(User $user, $tab = 'activities')
     {
+        $pageSize = 15;
+
         switch ($tab) {
             case 'comments':
-                $comments = $user->comments()->with('course', 'topic')->paginate($this->pageSize);
+                $comments = $user->comments()->with('course', 'topic')->paginate($pageSize);
 
                 $compact = compact('tab', 'user', 'comments');
 
@@ -102,28 +89,4 @@ class UserController extends Controller
         return redirect()->route('user.show', $user->id)->with('success', '个人资料更新成功');
     }
 
-    /**
-     * Upload user avatar.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Handlers\ImageUploadHandler  $uploader
-     * @param  \Illuminate\Foundation\Auth\User  $user
-     * @return void
-     */
-    public function upload(Request $request, ImageUploadHandler $uploader, User $user)
-    {
-        $this->authorize('update', $user);
-
-        if ($request->avatar) {
-            $folder = 'avatars';
-            $file_prefix = $user->id;
-
-            $result = $uploader->save($request->avatar, $folder, $file_prefix, $this->avatarMaxWidth);
-
-            if ($result) {
-                $data['avatar'] = $result['path'];
-                $user->update($data);
-            }
-        }
-    }
 }

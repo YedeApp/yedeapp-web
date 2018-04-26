@@ -34,44 +34,69 @@ trait ResetPassword
     {
         $this->authorize('update', $user);
 
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required|min:6',
-            'password' => 'required|confirmed|min:6',
-            'password_confirmation' => 'required|min:6'
-        ], [
-            'old_password.required' => '请输入旧密码',
-            'old_password.min' => '旧密码至少为 6 个字符'
-        ]);
+        $validator = Validator::make($request->all(), $this->rules(), $this->validationErrorMessages());
 
-        // Check old password
         $validator->after(function ($validator) use ($request, $user) {
             if (!Hash::check($request->old_password, $user->password)) {
                 $validator->errors()->add('old_password', '旧密码不正确');
             }
         });
 
-        // Actions after validation
         if ($validator->fails()) {
-            // Response to previous page with errors
             return redirect()->back()->withErrors($validator)->withInput();
-
         } else {
-            // Update user password
-            $data = ['_token' => $request->_token, 'password' => bcrypt($request->password)];
-
-            $user->update($data);
-
-            return redirect()->route('user.show', $user->id)->with('success', '密码修改成功');
+            $this->updatePassword($request, $user);
         }
+
+        return redirect()->route('user.show', $user->id)->with('success', '密码修改成功');
     }
 
     /**
-     * Get the guard to be used during password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * Update the new user's password to db.
      */
-    protected function guard()
+    protected function updatePassword(Request $request, User $user)
     {
-        return Auth::guard();
+        $user->update($this->credentials($request));
+    }
+
+    /**
+     * Get the password reset credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        return [
+            '_token' => $request->_token,
+            'password' => bcrypt($request->password),
+        ];
+    }
+
+    /**
+     * Get the password reset validation rules.
+     *
+     * @return array
+     */
+    protected function rules()
+    {
+        return [
+            'old_password' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required|min:6',
+        ];
+    }
+
+    /**
+     * Get the password reset validation error messages.
+     *
+     * @return array
+     */
+    protected function validationErrorMessages()
+    {
+        return [
+            'old_password.required' => '请输入旧密码',
+            'old_password.min' => '旧密码至少为 6 个字符',
+        ];
     }
 }
