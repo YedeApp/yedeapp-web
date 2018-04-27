@@ -5,6 +5,9 @@
 @section('content')
   {{-- Topic --}}
   @component('components.card')
+    {{-- Breadcrumb --}}
+    @include('components.breadcrumb')
+
     <div class="head clearfix">
       <h1 class="float-left">{{ $topic->title }}</h1>
       <div class="float-right">
