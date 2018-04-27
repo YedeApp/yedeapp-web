@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Produce a css class by page's route name
+ * Make up a css class by page's route name
  */
 function getRouteCls()
 {
