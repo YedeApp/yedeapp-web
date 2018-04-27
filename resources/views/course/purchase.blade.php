@@ -75,7 +75,7 @@ var timer = setInterval(function() {
 $(document).ready(function() {
   $('#btnIHadPaid').click(function() {
     checkPayment();
-    alert('服务器尚未传回支付信息，请等待5秒后再次尝试');
+    alert('正在为您查询支付信息');
   });
 });
 </script>
