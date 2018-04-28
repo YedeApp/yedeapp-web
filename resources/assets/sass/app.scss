@@ -341,6 +341,18 @@ footer {
       vertical-align: middle;
       font-size: 14px;
     }
+
+    .breadcrumb {
+      margin-bottom: 10px;
+      padding: 0 2px;
+      font-size: 14px;
+      line-height: 2;
+      background-color: #fff;
+
+      a {
+        color: #777;
+      }
+    }
   }
 
   .markdown-body {

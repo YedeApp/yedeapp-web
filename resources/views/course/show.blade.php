@@ -3,9 +3,6 @@
 @section('title', $course->name)
 
 @section('content')
-
-  @include('components.breadcrumb')
-
   @component('components.card')
     <div class="row p-md-2">
       <div class="col-md-8"><h1>{{ $course->name }}</h1></div>
