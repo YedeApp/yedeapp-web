@@ -10410,6 +10410,14 @@ a.text-dark:focus {
   color: #ccc;
 }
 
+.form-check-input {
+  margin-left: 0;
+}
+
+.form-check-label {
+  margin-left: 18px;
+}
+
 .invalid-feedback {
   font-size: 100%;
 }
@@ -10882,7 +10890,7 @@ footer .info {
 
 .login-page .card {
   margin-top: 8%;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .login-page .card .card-header {
@@ -10891,7 +10899,7 @@ footer .info {
   text-align: center;
 }
 
-.login-page .card a {
+.login-page .card .nav-tabs .nav-link {
   color: #393939;
 }
 
@@ -10902,6 +10910,17 @@ footer .info {
 .login-page .card .captcha {
   margin-top: 10px;
   cursor: pointer;
+}
+
+.register-page .card {
+  margin-top: 8%;
+  font-size: 14px;
+}
+
+.register-page .card .card-header {
+  margin: 0 20px;
+  background-color: #fff;
+  text-align: center;
 }
 
 .user-show-page .name {
@@ -11079,7 +11098,7 @@ footer .info {
 .password-request-page .card,
 .password-reset-page .card {
   margin-top: 8%;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .password-request-page .card .card-header,

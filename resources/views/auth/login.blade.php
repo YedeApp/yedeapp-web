@@ -26,52 +26,50 @@
               <div class="form-group row">
                 <label for="account" class="col-md-3 col-form-label text-md-right">帐　号</label>
                 <div class="col-md-7">
-                  <input id="account" type="text" class="form-control {{ $errors->has('account') ? 'is-invalid' : '' }}" name="account" value="{{ old('account') }}" placeholder="请输入手机或邮箱" required autofocus>
-
-                  @if ($errors->has('account'))
-                    <div class="invalid-feedback">{{ $errors->first('account') }}</div>
-                  @endif
+                  <input id="account" type="text" class="form-control {{ checkError($errors, 'account') }}" name="account" value="{{ old('account') }}" placeholder="请输入手机或邮箱" required autofocus>
+                  {!! showErrorFeedback($errors, 'account') !!}
                 </div>
               </div>
 
               <div class="form-group row">
                 <label for="password" class="col-md-3 col-form-label text-md-right">密　码</label>
                 <div class="col-md-7">
-                  <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" placeholder="请输入密码" required>
-
-                  @if ($errors->has('password'))
-                    <div class="invalid-feedback">{{ $errors->first('password') }}</div>
-                  @endif
+                  <input id="password" type="password" class="form-control {{ checkError($errors, 'password') }}" name="password" placeholder="请输入密码" required>
+                  {!! showErrorFeedback($errors, 'password') !!}
                 </div>
               </div>
 
               <div class="form-group row">
                 <label for="captcha" class="col-md-3 col-form-label text-md-right">验证码</label>
                 <div class="col-md-7">
-                  <input id="captcha" type="text" class="form-control {{ $errors->has('captcha') ? 'is-invalid' : '' }}" name="captcha" placeholder="请输入验证码" required>
-
-                  @if ($errors->has('captcha'))
-                    <div class="invalid-feedback">{{ $errors->first('captcha') }}</div>
-                  @endif
-
+                  <input id="captcha" type="text" class="form-control {{ checkError($errors, 'captcha') }}" name="captcha" placeholder="请输入验证码 不区分大小写" required>
+                  {!! showErrorFeedback($errors, 'captcha') !!}
                   <img class="captcha rounded" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片刷新验证码">
                 </div>
               </div>
 
               <div class="form-group row">
-                <div class="col-md-7 offset-md-3">
-                  <div class="checkbox">
-                    <label><input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 下次自动登录</label>
-                  </div>
+                <div class="col-md-4 offset-md-3 col-7">
+                  <input class="form-check-input" type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                  <label class="form-check-label" for="remember">下次自动登录</label>
+                </div>
+                <div class="col-md-3 text-right col-5">
+                  <a href="{{ route('password.request') }}">忘记密码？</a>
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-7 offset-md-3">
-                  <button type="submit" class="btn btn-primary btn-w-120">登录</button>
-                  <a class="btn btn-link text-right" href="{{ route('password.request') }}">忘记密码？</a>
+                  <button type="submit" class="btn btn-primary w-100">登录</button>
                 </div>
               </div>
+
+              <div class="form-group row mt-5">
+                <div class="col-md-7 offset-md-3 text-center">
+                  没有帐号？ <a href="{{ route('register') }}">立即注册</a>
+                </div>
+              </div>
+
             </form>
           </div>
         </div>

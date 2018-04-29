@@ -42,7 +42,7 @@
 @mixin mini-card {
   .card {
     margin-top: 8%;
-    font-size: 0.9rem;
+    font-size: 14px;
 
     .card-header {
       margin: 0 20px;
@@ -468,12 +468,12 @@ footer {
   @include editing;
 }
 
-// User login page
+// User login
 .login-page {
   @include mini-card;
 
   .card {
-    a {
+    .nav-tabs .nav-link {
       color: $font-color-base;
     }
 
@@ -488,7 +488,12 @@ footer {
   } // end card
 }
 
-// User
+// User register
+.register-page {
+  @include mini-card;
+}
+
+// User show profile
 .user-show-page {
   .name {
     margin-top: 10px;
@@ -532,6 +537,7 @@ footer {
   }
 }
 
+// User edit and password reset page
 .user-edit-page,
 .user-password-page {
   @include editing;
