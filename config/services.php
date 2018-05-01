@@ -46,4 +46,11 @@ return [
         'kdtid' => env('YOUZAN_KDT_ID'),
     ],
 
+    'aliyun' => [
+        'keyid' => env('ALIYUN_KEY_ID'),
+        'secret' => env('ALIYUN_KEY_SECRET'),
+        'sign' => env('ALIYUN_SIGN_NAME'),
+        'template' => env('ALIYUN_TEMPLATE_CODE'),
+    ],
+
 ];

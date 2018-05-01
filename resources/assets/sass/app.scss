@@ -491,6 +491,11 @@ footer {
 // User register
 .register-page {
   @include mini-card;
+
+  #generate_code {
+    width: 97px;
+    border-color: #ddd;
+  }
 }
 
 // User show profile

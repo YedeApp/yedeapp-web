@@ -10923,6 +10923,11 @@ footer .info {
   text-align: center;
 }
 
+.register-page #generate_code {
+  width: 97px;
+  border-color: #ddd;
+}
+
 .user-show-page .name {
   margin-top: 10px;
   font-size: 26px;
