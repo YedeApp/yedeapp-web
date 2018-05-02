@@ -90,9 +90,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => 'YedeApp_'.str_random(8),
+            'name' => 'YedeApp_' . str_random(7),
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
+            'avatar' => asset('images/avatar.png'),
         ]);
     }
 

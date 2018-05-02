@@ -41,7 +41,7 @@
             <div class="form-group row">
               <label for="email" class="col-md-2 col-form-label text-md-right">邮　箱</label>
               <div class="col-md-5">
-                <input name="email" id="email" type="email" class="form-control {{ checkError($errors, 'email') }}" value="{{ old('email', $user->email) }}" required>
+                <input name="email" id="email" type="email" class="form-control {{ checkError($errors, 'email') }}" value="{{ old('email', $user->email) }}">
                 {!! showErrorFeedback($errors, 'email') !!}
               </div>
               <div class="col-md-5 col-form-label tips">邮箱用于登录和找回密码</div>

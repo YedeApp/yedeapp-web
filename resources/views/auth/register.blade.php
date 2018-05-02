@@ -99,7 +99,7 @@ $(document).ready(function() {
     } else if (regex.test(phone)) {
       $.get(url, {phone: phone}, function(data) {
         if (data != 1) {
-          alert('您操作过于频繁，请稍后再试');
+          alert('您之前已获取过短信，请稍后一分钟再试');
         } else {
           countdown(60);
         }
