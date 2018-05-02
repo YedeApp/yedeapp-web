@@ -4,9 +4,9 @@
 # {{ $greeting }}
 @else
 @if ($level == 'error')
-# 出错了！
+# 出错了，
 @else
-# 您好！
+# 你好，
 @endif
 @endif
 

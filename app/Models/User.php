@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Traits\UserResetPassword;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use UserResetPassword;
 
     /**
      * The attributes that are mass assignable.
