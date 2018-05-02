@@ -49,10 +49,10 @@ class ResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('密码重置')
-                    ->line('你正在请求密码重置，请点击下方按钮进行密码重置')
-                    ->action('密码重置', url(config('app.url').route('password.reset', $this->token, false)))
-                    ->line('如非你本人操作，请忽略此邮件。');
+                ->subject('密码重置')
+                ->line('你正在请求密码重置，请点击下方按钮进行操作')
+                ->action('密码重置', url(config('app.url').route('password.reset', $this->token, false)))
+                ->line('如非你本人操作，请忽略此邮件。');
     }
 
 }

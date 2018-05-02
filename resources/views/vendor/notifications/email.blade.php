@@ -45,7 +45,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-{{ config('app.name') }} 团队
+{{ config('app.name') }} ( yedeapp.com )
 @endif
 
 {{-- Subcopy --}}
