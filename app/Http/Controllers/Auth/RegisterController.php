@@ -51,6 +51,14 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the agreement page.
+     */
+    public function agreement()
+    {
+        return view('auth.agreement');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data

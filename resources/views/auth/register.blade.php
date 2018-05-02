@@ -45,7 +45,7 @@
           <div class="form-group row mt-4">
             <div class="col-md-8 offset-md-3">
               <input class="form-check-input" type="checkbox" id="invalidCheck" name="agreement" required>
-              <label class="form-check-label" for="invalidCheck">我已阅读并同意 <a href="#">《野得APP服务协议》</a></label>
+              <label class="form-check-label" for="invalidCheck">我已阅读并同意 <a href="{{ route('agreement') }}" target="_blank">《野得APP服务协议》</a></label>
               <div class="invalid-feedback">请先阅读并同意服务协议后再注册</div>
             </div>
           </div>
