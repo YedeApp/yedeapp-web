@@ -10,7 +10,7 @@
           <a class="cover mt-4 mt-sm-0" href="{{ route('course.show', $course) }}"><img class="img-fluid img-shadow" src="{{ $course->cover }}"></a>
         </div>
         <div class="col-md-9">
-          <div class="name mt-4 mt-sm-0">{{ $course->name }}</div>
+          <div class="name mt-4 mt-sm-0"><a href="{{ route('course.show', $course) }}">{{ $course->name }}</a></div>
           <div class="intro">
             <p>{{ $course->intro }}</p>
           </div>

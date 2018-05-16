@@ -222,7 +222,7 @@ footer {
 // Home page
 .home-page {
   .card {
-    .name {
+    .name > a {
       color: #333;
       font-size: 1.4rem;
       font-weight: 700;

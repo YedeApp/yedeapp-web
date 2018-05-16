@@ -10616,7 +10616,7 @@ footer .info {
   padding: 20px 0px;
 }
 
-.home-page .card .name {
+.home-page .card .name > a {
   color: #333;
   font-size: 1.4rem;
   font-weight: 700;
