@@ -10503,6 +10503,10 @@ ul > li {
           box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
+.img-thumbnail {
+  padding: 0;
+}
+
 header {
   height: 50px;
   margin-bottom: 15px;
