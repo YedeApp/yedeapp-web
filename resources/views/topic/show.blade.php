@@ -33,7 +33,7 @@
     </div>
 
     <div class="body markdown-body">{!! htmlspecialchars_decode($topic->content) !!}</div>
-    <div class="sns">@include('topic._sns')</div>
+    {{--<div class="sns">@include('topic._sns')</div>--}}
     <div class="prev-next clearfix">
       @if ($prev)
         <a href="{{ route('topic.show', [$course, $prev]) }}" class="btn btn-light float-left prev" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{ $prev->title }}"><svg class="icon" aria-hidden="true" title="上一节"><use xlink:href="#icon-left"></use></svg>上一节</a>
@@ -102,5 +102,6 @@
   @include ('topic._scripts')
 
   {{-- Baidu sns-share --}}
-  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":["tqq","tieba","qzone","fbook","twi"],"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+  {{--<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":["tqq","tieba","qzone","fbook","twi"],"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>--}}
+
 @endsection

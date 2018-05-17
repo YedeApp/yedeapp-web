@@ -10737,6 +10737,10 @@ footer .info {
   border-color: #ddd;
 }
 
+.topic-show-page .card-body .prev-next {
+  margin-top: 3rem;
+}
+
 .topic-show-page .head {
   line-height: 50px;
   border-bottom: #ddd 1px solid;
