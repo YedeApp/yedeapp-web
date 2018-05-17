@@ -140,6 +140,7 @@
 {{-- Cropper styles --}}
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/cropper.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.min.css') }}">
 @endsection
 
 {{-- Cropper scripts --}}

@@ -84,6 +84,7 @@
 
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/mditor.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.min.css') }}">
 @endsection
 
 @section('scripts')
