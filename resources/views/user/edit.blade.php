@@ -17,7 +17,7 @@
       @component('components.card')
         {{-- Head --}}
         <div class="head">
-          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-form"></use></svg> 编辑个人资料
+          <i class="anticon icon-form"></i> 编辑个人资料
         </div>
 
         {{-- Body and form --}}
@@ -74,7 +74,7 @@
                   <div class="avatar-mask">
                     <div class="mask-bg"></div>
                     <div class="mask-content">
-                      <div class="mask-icon"><svg class="icon" aria-hidden="true" style="width:40px;height:40px;"><use xlink:href="#icon-camera"></use></svg></div>
+                      <div class="mask-icon"><i class="anticon icon-camera" style="width:40px;height:40px;"></i></div>
                       <div class="mask-text">修改我的头像</div>
                     </div>
                   </div>

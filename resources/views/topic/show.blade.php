@@ -12,17 +12,17 @@
         <div class="float-right">
           {{-- Login user can use the like function --}}
           {{-- @auth
-            <div class="button"><a class="btn btn-light btn-sm btn-topic-like" role="button"><svg class="icon" aria-hidden="true" title="收藏"><use xlink:href="#icon-hearto"></use></svg>收藏</a></div>
+            <div class="button"><a class="btn btn-light btn-sm btn-topic-like" role="button"><i class="anticon icon-hearto"></i>收藏</a></div>
           @endauth --}}
 
           {{-- User can delete and edit his/her own topic --}}
           @can('update', $topic)
-            <div class="button"><a href="{{ route('topic.edit', $topic->id) }}" class="btn btn-light btn-sm btn-topic-edit" role="button"><svg class="icon" aria-hidden="true" title="编辑"><use xlink:href="#icon-edit"></use></svg>编辑</a></div>
+            <div class="button"><a href="{{ route('topic.edit', $topic->id) }}" class="btn btn-light btn-sm btn-topic-edit" role="button"><i class="anticon icon-edit"></i>编辑</a></div>
             <div class="button">
               <form action="{{ route('topic.destroy', $topic->id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <a class="btn btn-light btn-sm btn-topic-delete" role="button" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $topic->title }} ？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg>删除</a>
+                <a class="btn btn-light btn-sm btn-topic-delete" role="button" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $topic->title }} ？"><i class="anticon icon-delete"></i>删除</a>
               </form>
             </div>
           @endcan
@@ -36,10 +36,10 @@
     {{--<div class="sns">@include('topic._sns')</div>--}}
     <div class="prev-next clearfix">
       @if ($prev)
-        <a href="{{ route('topic.show', [$course, $prev]) }}" class="btn btn-light float-left prev" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{ $prev->title }}"><svg class="icon" aria-hidden="true" title="上一节"><use xlink:href="#icon-left"></use></svg>上一节</a>
+        <a href="{{ route('topic.show', [$course, $prev]) }}" class="btn btn-light float-left prev" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{ $prev->title }}"><i class="anticon icon-left"></i>上一节</a>
       @endif
       @if ($next)
-        <a href="{{ route('topic.show', [$course, $next]) }}" class="btn btn-light float-right next" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{ $next->title }}">下一节<svg class="icon ml-1 mr-0" aria-hidden="true" title="下一节"><use xlink:href="#icon-right"></use></svg></a>
+        <a href="{{ route('topic.show', [$course, $next]) }}" class="btn btn-light float-right next" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{ $next->title }}">下一节<i class="anticon icon-right"></i></a>
       @endif
     </div>
   @endcomponent

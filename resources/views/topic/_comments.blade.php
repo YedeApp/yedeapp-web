@@ -1,7 +1,7 @@
 @component('components.card')
   <div class="clearfix">
     <div class="float-left">留言精选</div>
-    <div class="float-right"><a id="jumper" data-trigger="hover" data-placement="top" data-content="留言请先订阅课程"><svg class="icon" aria-hidden="true" title="写留言"><use xlink:href="#icon-form"></use></svg>写留言</a></div>
+    <div class="float-right"><a id="jumper" data-trigger="hover" data-placement="top" data-content="留言请先订阅课程"><i class="anticon icon-form"></i>写留言</a></div>
   </div>
   <div class="comments">
     @foreach ($comments as $comment)
@@ -12,13 +12,13 @@
           <div class="heading">{{ $comment->user->name }}</div>
           <div class="operations">
             @if ($can['reply-comment'])
-              <a class="btn btn-light btn-sm btn-comment-reply" role="button" data="{{ $comment->id }}"><svg class="icon" aria-hidden="true" title="回复"><use xlink:href="#icon-message1"></use></svg><span>回复</span></a>
+              <a class="btn btn-light btn-sm btn-comment-reply" role="button" data="{{ $comment->id }}"><i class="anticon icon-message1"></i><span>回复</span></a>
             @endif
             @if ($can['delete-comment'])
               <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <a class="btn btn-light btn-sm btn-comment-delete" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $comment->user->name }} 的此条留言？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg><span>删除</span></a>
+                <a class="btn btn-light btn-sm btn-comment-delete" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $comment->user->name }} 的此条留言？"><i class="anticon icon-delete"></i><span>删除</span></a>
               </form>
             @endif
           </div>
@@ -38,7 +38,7 @@
                       <form action="{{ route('comment.destroy', $reply->id) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <a class="btn btn-light btn-sm btn-comment-delete" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $comment->user->name }} 的此条留言？"><svg class="icon" aria-hidden="true" title="删除"><use xlink:href="#icon-delete"></use></svg><span>删除</span></a>
+                        <a class="btn btn-light btn-sm btn-comment-delete" data-toggle="modal" data-target="#modalConfirm" data-message="是否删除 {{ $comment->user->name }} 的此条留言？"><i class="anticon icon-delete"></i><span>删除</span></a>
                       </form>
                     @endif
                   </div>

@@ -7,7 +7,7 @@
 
     {{-- Head --}}
     <div class="head">
-      <svg class="icon" aria-hidden="true"><use xlink:href="#icon-shoppingcart"></use></svg> 订阅课程
+      <i class="anticon icon-shoppingcart"></i> 订阅课程
     </div>
 
     {{-- Body --}}

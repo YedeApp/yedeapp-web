@@ -29,13 +29,17 @@
     font-size: 16px;
     border-bottom: #dadada 1px solid;
 
-    svg {
+    .anticon {
       margin-right: 3px;
     }
   }
 
   .body {
     padding: 20px 5px 10px;
+
+    .tips {
+      color: #999;
+    }
   }
 }
 
@@ -50,15 +54,6 @@
       text-align: center;
     }
   }
-}
-
-// Iconfont
-.icon {
-  width: 1.1rem;
-  height: 1.1rem;
-  vertical-align: -0.2rem;
-  fill: currentColor;
-  overflow: hidden;
 }
 
 // Close button
@@ -240,7 +235,7 @@ footer {
   }
 }
 
-// Course pages
+// Course show page
 .course-show-page {
   @include course-header;
 
@@ -256,6 +251,7 @@ footer {
   }
 }
 
+// Course chapter list page
 .course-chapters-page {
   @include course-header;
 
@@ -312,14 +308,31 @@ footer {
   }
 }
 
+// Course create and edit page
+.course-create-page,
+.course-edit-page {
+  @include editing;
+
+  .dummy-node {
+    .spacing {
+      width: 90%;
+      margin: 3px 0;
+    }
+    a {
+      cursor: pointer;
+      font-size: 22px;
+    }
+  }
+}
+
 // Topic pages
 .topic-show-page {
 
   .card-body {
     padding: 2rem;
 
-    svg {
-      margin-right: 6px;
+    .anticon {
+      margin-right: 5px;
     }
 
     .btn-light {
@@ -328,6 +341,11 @@ footer {
 
     .prev-next {
       margin-top: 3rem;
+
+      .next > i {
+        margin-left: 6px;
+        margin-right: 0;
+      }
     }
 
   }
@@ -570,10 +588,6 @@ footer {
   }
 
   .body {
-
-    .tips {
-      color: #999;
-    }
 
     #avatar {
       display: none;

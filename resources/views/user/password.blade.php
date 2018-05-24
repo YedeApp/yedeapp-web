@@ -17,7 +17,7 @@
       @component('components.card')
         {{-- Head --}}
         <div class="head">
-          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-key"></use></svg> 修改密码
+          <i class="anticon icon-key"></i> 修改密码
         </div>
 
         {{-- Body and form --}}

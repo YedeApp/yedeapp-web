@@ -12,6 +12,7 @@
 
   {{-- Styles --}}
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/iconfont.css') }}" rel="stylesheet">
   @yield('styles')
 </head>
 <body>
@@ -50,6 +51,5 @@
   {{-- Scripts --}}
   <script src="{{ asset('js/app.js') }}"></script>
   @yield('scripts')
-  <script src="{{ asset('js/iconfont.js') }}"></script>
 </body>
 </html>

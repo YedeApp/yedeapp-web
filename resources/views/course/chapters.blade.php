@@ -33,7 +33,7 @@
                   @endif
 
                   @if (!$topic->is_free)
-                    <span class="float-right"><svg class="icon" aria-hidden="true" title="订阅后开启"><use xlink:href="#icon-lock"></use></svg></span>
+                    <span class="float-right"><i class="anticon icon-lock"></i></span>
                   @endif
                 @endif
               </dd>

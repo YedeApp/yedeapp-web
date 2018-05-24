@@ -49,6 +49,58 @@ class CourseController extends Controller
     }
 
     /**
+     * Create a new course.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return \Illuminate\View\View
+     */
+    public function create(Course $course)
+	{
+		return view('course.create_and_edit', compact('course'));
+    }
+
+    /**
+     * Store the course.
+     *
+     * @param  \Illuminate\Foundation\Http\FormRequest\CourseRequest  $request
+     * @param  \App\Handlers\ImageUploadHandler  $uploader
+	 * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return void
+     */
+	public function store(CourseRequest $request, ImageUploadHandler $uploader, Course $course)
+	{
+        $course->fill($request->all());
+
+        $cover_max_width = $this->cover_max_width;
+
+        if ($request->cover) {
+            $result = $uploader->save($request->cover, 'courses', Auth::id(), $cover_max_width);
+            if ($result) {
+                $course->cover = $result['path'];
+            }
+        }
+
+        $course->user_id = Auth::id();
+
+        $course->save();
+
+		return redirect()->route('course.show', $course->slug)->with('message', '创建成功');
+	}
+
+    /**
+     * Course edit page.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return \Illuminate\View\View
+     */
+    public function edit(Course $course)
+    {
+        $this->authorize('update', $course);
+
+        return view('course.create_and_edit', compact('course'));
+    }
+
+    /**
      * Course purchase page.
      *
      * @param  \Illuminate\Database\Eloquent\Model\Course  $course

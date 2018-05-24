@@ -10445,14 +10445,6 @@ a.text-dark:focus {
   text-shadow: none;
 }
 
-.icon {
-  width: 1.1rem;
-  height: 1.1rem;
-  vertical-align: -0.2rem;
-  fill: currentColor;
-  overflow: hidden;
-}
-
 button.close {
   outline: none;
 }
@@ -10690,12 +10682,16 @@ footer .info {
   border-bottom: #dadada 1px solid;
 }
 
-.course-purchase-page .head svg {
+.course-purchase-page .head .anticon {
   margin-right: 3px;
 }
 
 .course-purchase-page .body {
   padding: 20px 5px 10px;
+}
+
+.course-purchase-page .body .tips {
+  color: #999;
 }
 
 .course-purchase-page .purchase-info {
@@ -10725,12 +10721,46 @@ footer .info {
   font-weight: bold;
 }
 
+.course-create-page .head,
+.course-edit-page .head {
+  padding: 0px 5px 15px;
+  font-size: 16px;
+  border-bottom: #dadada 1px solid;
+}
+
+.course-create-page .head .anticon,
+.course-edit-page .head .anticon {
+  margin-right: 3px;
+}
+
+.course-create-page .body,
+.course-edit-page .body {
+  padding: 20px 5px 10px;
+}
+
+.course-create-page .body .tips,
+.course-edit-page .body .tips {
+  color: #999;
+}
+
+.course-create-page .dummy-node .spacing,
+.course-edit-page .dummy-node .spacing {
+  width: 90%;
+  margin: 3px 0;
+}
+
+.course-create-page .dummy-node a,
+.course-edit-page .dummy-node a {
+  cursor: pointer;
+  font-size: 22px;
+}
+
 .topic-show-page .card-body {
   padding: 2rem;
 }
 
-.topic-show-page .card-body svg {
-  margin-right: 6px;
+.topic-show-page .card-body .anticon {
+  margin-right: 5px;
 }
 
 .topic-show-page .card-body .btn-light {
@@ -10739,6 +10769,11 @@ footer .info {
 
 .topic-show-page .card-body .prev-next {
   margin-top: 3rem;
+}
+
+.topic-show-page .card-body .prev-next .next > i {
+  margin-left: 6px;
+  margin-right: 0;
 }
 
 .topic-show-page .head {
@@ -10886,14 +10921,19 @@ footer .info {
   border-bottom: #dadada 1px solid;
 }
 
-.topic-edit-page .head svg,
-.topic-create-page .head svg {
+.topic-edit-page .head .anticon,
+.topic-create-page .head .anticon {
   margin-right: 3px;
 }
 
 .topic-edit-page .body,
 .topic-create-page .body {
   padding: 20px 5px 10px;
+}
+
+.topic-edit-page .body .tips,
+.topic-create-page .body .tips {
+  color: #999;
 }
 
 .login-page .card {
@@ -10980,14 +11020,19 @@ footer .info {
   border-bottom: #dadada 1px solid;
 }
 
-.user-edit-page .head svg,
-.user-password-page .head svg {
+.user-edit-page .head .anticon,
+.user-password-page .head .anticon {
   margin-right: 3px;
 }
 
 .user-edit-page .body,
 .user-password-page .body {
   padding: 20px 5px 10px;
+}
+
+.user-edit-page .body .tips,
+.user-password-page .body .tips {
+  color: #999;
 }
 
 .user-edit-page .sidebar,
@@ -11005,11 +11050,6 @@ footer .info {
   color: #495057;
   background-color: #e9ecef;
   border-color: #e9ecef;
-}
-
-.user-edit-page .body .tips,
-.user-password-page .body .tips {
-  color: #999;
 }
 
 .user-edit-page .body #avatar,

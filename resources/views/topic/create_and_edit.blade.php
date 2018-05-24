@@ -7,7 +7,7 @@
 
     {{-- Head --}}
     <div class="head">
-      <svg class="icon" aria-hidden="true"><use xlink:href="#icon-form"></use></svg>
+      <i class="anticon icon-form"></i>
       @if($topic->id)
         编辑文章
       @else
