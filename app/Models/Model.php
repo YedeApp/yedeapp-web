@@ -13,6 +13,6 @@ class Model extends EloquentModel
 
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sorting', 'desc');
+        return $query->orderBy('sorting', 'asc');
     }
 }

@@ -74,7 +74,7 @@
                   <div class="avatar-mask">
                     <div class="mask-bg"></div>
                     <div class="mask-content">
-                      <div class="mask-icon"><i class="anticon icon-camera" style="width:40px;height:40px;"></i></div>
+                      <div class="mask-icon"><i class="anticon icon-camera"></i></div>
                       <div class="mask-text">修改我的头像</div>
                     </div>
                   </div>

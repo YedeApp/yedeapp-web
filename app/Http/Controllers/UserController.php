@@ -74,7 +74,6 @@ class UserController extends Controller
      * Update user profile.
      *
      * @param  \Illuminate\Foundation\Http\FormRequest\UserRequest  $request
-     * @param  \App\Handlers\ImageUploadHandler  $uploader
      * @param  \Illuminate\Foundation\Auth\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */

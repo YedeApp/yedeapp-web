@@ -25,6 +25,11 @@
   color: $placeholder-color;
 }
 
+// Input
+input[type="file"] {
+  cursor: pointer;
+}
+
 // Checkbox
 .form-check-input {
   margin-left: 0;

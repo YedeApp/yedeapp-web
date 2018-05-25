@@ -3,14 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CourseRequest;
+use App\Handlers\ImageUploadHandler;
 use App\Models\Course;
-use Overtrue\LaravelYouzan\Youzan;
+use App\Models\Chapter;
 use App\Models\Payment;
 use App\Models\Subscription;
+use Overtrue\LaravelYouzan\Youzan;
 use Auth;
 
 class CourseController extends Controller
 {
+    /**
+     * Set course cover's max-width to 600px
+     *
+     * @var int
+     */
+    protected $coverMaxWidth = 500;
+
     /**
      * Create a new controller instance.
      *
@@ -40,7 +50,7 @@ class CourseController extends Controller
      */
     public function chapters(Course $course)
     {
-        $chapters = $course->chapters->load('topics');
+        $chapters = $course->chapters()->ordered()->get()->load('topics');
 
         // Check if user has subscribed to the course.
         $canshow = optional(Auth::user())->can('show', $course);
@@ -56,7 +66,10 @@ class CourseController extends Controller
      */
     public function create(Course $course)
 	{
-		return view('course.create_and_edit', compact('course'));
+        // A new blank course has no chapters.
+        $chapters = false;
+
+		return view('course.create_and_edit', compact('course', 'chapters'));
     }
 
     /**
@@ -69,20 +82,20 @@ class CourseController extends Controller
      */
 	public function store(CourseRequest $request, ImageUploadHandler $uploader, Course $course)
 	{
-        $course->fill($request->all());
+        $fields = $request->except('insert_chapters', 'update_chapters', 'delete_chapters');
 
-        $cover_max_width = $this->cover_max_width;
+        $course->fill($fields);
 
-        if ($request->cover) {
-            $result = $uploader->save($request->cover, 'courses', Auth::id(), $cover_max_width);
-            if ($result) {
-                $course->cover = $result['path'];
-            }
+        if ($path = $this->uploadImage($request, $uploader)) {
+            $course->cover = $path;
         }
 
         $course->user_id = Auth::id();
 
         $course->save();
+
+        // Update the chapters
+        $this->updateChapters($request, $course);
 
 		return redirect()->route('course.show', $course->slug)->with('message', '创建成功');
 	}
@@ -97,7 +110,36 @@ class CourseController extends Controller
     {
         $this->authorize('update', $course);
 
-        return view('course.create_and_edit', compact('course'));
+        $chapters = $course->chapters()->ordered()->get();
+
+        return view('course.create_and_edit', compact('course', 'chapters'));
+    }
+
+    /**
+     * Update the course.
+     *
+     * @param  \Illuminate\Foundation\Http\FormRequest\CourseRequest  $request
+     * @param  \App\Handlers\ImageUploadHandler  $uploader
+	 * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return void
+     */
+	public function update(CourseRequest $request, ImageUploadHandler $uploader, Course $course)
+	{
+        $this->authorize('update', $course);
+
+        // Update the chapters
+        $this->updateChapters($request, $course);
+
+        // Update the course
+        $data = $request->except('insert_chapters', 'update_chapters', 'delete_chapters');
+
+        if ($path = $this->uploadImage($request, $uploader)) {
+            $data['cover'] = $path;
+        }
+
+        $course->update($data);
+
+		return redirect()->route('course.chapters', $course->slug)->with('message', '更新成功');
     }
 
     /**
@@ -194,4 +236,59 @@ class CourseController extends Controller
 
         return 0;
     }
+
+    /**
+     * Upload the course cover image.
+     *
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  \App\Handlers\ImageUploadHandler  $uploader
+     * @return string
+     */
+    protected function uploadImage(Request $request, ImageUploadHandler $uploader)
+    {
+        if ($request->cover) {
+            $result = $uploader->save($request->cover, 'courses', Auth::id(), $this->coverMaxWidth);
+            if ($result) {
+                return $result['path'];
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Upload the course cover image.
+     *
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return void
+     */
+    protected function updateChapters(Request $request, Course $course)
+    {
+        // Chapters updating, inserting and deleting
+        $updateData = json_decode($request->update_chapters, true);
+        $insertData = json_decode($request->insert_chapters, true);
+        $deleteData = json_decode($request->delete_chapters, true);
+
+        if (!empty($updateData)) {
+            foreach ($updateData as $rs) {
+                $chapter = Chapter::find($rs['id']);
+                $chapter->name = $rs['name'];
+                $chapter->sorting = $rs['sorting'];
+                $chapter->save();
+            }
+        }
+
+        if (!empty($insertData)) {
+            // Fill current user's id into the inserting data
+            $insertData = data_fill($insertData, '*.user_id', Auth::id());
+
+            $course->chapters()->createMany($insertData);
+        }
+
+        if (!empty($deleteData)) {
+            Chapter::destroy($deleteData);
+        }
+    }
+
 }

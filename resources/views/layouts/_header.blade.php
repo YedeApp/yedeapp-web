@@ -13,13 +13,13 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{ route('user.show', Auth::id()) }}">
-              <i class="anticon icon-user"></i>个人资料
+              <i class="anticon icon-user button-icon"></i>个人资料
             </a>
             <a class="dropdown-item" href="{{ route('user.edit', Auth::id()) }}">
-              <i class="anticon icon-setting"></i>修改资料
+              <i class="anticon icon-setting button-icon"></i>修改资料
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-              <i class="anticon icon-export"></i>退出
+              <i class="anticon icon-poweroff button-icon" style="font-size:16px;"></i>退出
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}

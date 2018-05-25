@@ -50,13 +50,13 @@
             <div class="form-group row">
               <label for="cover" class="col-md-2 col-form-label text-md-right">封面图</label>
               <div class="col-md-5"><input type="file" name="cover" id="cover" ></div>
-              <div class="col-md-5 col-form-label tips">封面图片，尺寸：300 x 500</div>
+              <div class="col-md-5 col-form-label tips">封面图片，尺寸：500 x 625</div>
             </div>
 
             @if($course->cover)
               <div class="form-group row">
                 <div class="col-md-7 offset-md-2">
-                  <label for="cover"><img class="img-fluid img-shadow" src="{{ $course->cover }}" width="200" /></label>
+                  <label for="cover"><img class="img-fluid img-shadow cover-image" src="{{ $course->cover }}" width="200" style="cursor:pointer" /></label>
                 </div>
               </div>
             @endif
@@ -70,9 +70,11 @@
             <div class="form-group row">
               <label for="cover" class="col-md-2 col-form-label text-md-right">分章</label>
               <div class="col-md-5 clearfix chapters">
-                <input type="hidden" id="chapters_hidden" name="chapters" value="{{ old('chapters', $course->chapters) }}" />
+                <input type="hidden" id="update_chapters" name="update_chapters" value="{{ old('update_chapters', $chapters) }}" />
+                <input type="hidden" id="insert_chapters" name="insert_chapters" value="{{ old('insert_chapters') }}" />
+                <input type="hidden" id="delete_chapters" name="delete_chapters" value="{{ old('delete_chapters') }}" />
               </div>
-              <div class="col-md-5 col-form-label tips">添加章节，填写每章标题</div>
+              <div class="col-md-5 col-form-label tips">每章标题和排序，排序数越小越靠前</div>
             </div>
 
             <div class="form-group row">
@@ -102,29 +104,44 @@
 
 @section('scripts')
 <script>
+var URL = window.URL || window.webkitURL;
+var $inputCover = $('#cover');
+var $imageCover = $('.cover-image');
+var uploadedImageURL;
+
 var $chapters = $('.chapters');
-var $hiddenNode = $('#chapters_hidden');
-var maxId = 1, maxOrder = 1;
-var strNode = '<div class="dummy-node">'
-  + '<input class="form-control float-left spacing" type="text" value="[value]" />'
+var $updateChapters = $('#update_chapters');
+var $insertChapters = $('#insert_chapters');
+var $deleteChapters = $('#delete_chapters');
+
+var strDummyNode = '<div class="dummy-node">'
+  + '<input class="form-control float-left chapter-name spacing" type="text" value="[nameValue]" />'
+  + '<input class="form-control float-left chapter-sorting spacing" type="text" value="[sortingValue]" onfocus="this.select()" />'
   + '<a class="float-right button" onclick="handle(this, \'[symbol]\')">'
-  + '<i class="anticon icon-[symbol]"></i>'
+  + '<i class="anticon icon-[symbol]circleo"></i>'
   + '</a>'
   + '</div>';
 
 function handle(btn, plusOrMinus) {
   var $row = $(btn).parent();
-  var hasValue = $row.children('input').val();
+  var hasValue = $row.children('input.chapter-name').val();
   var node;
 
-  // Add row
   if (plusOrMinus == 'plus') {
-    node = strNode.replace(/\[value\]/g, '').replace(/\[symbol\]/g, 'minus');
+    // Add a row
+    node = strDummyNode
+      .replace(/\[nameValue\]/g, '')
+      .replace(/\[sortingValue\]/g, '0')
+      .replace(/\[symbol\]/g, 'minus');
+
     $(node).appendTo($chapters);
+
   } else {
-    // Delete row. Confirm when it contains contents.
+    // Delete a row. Confirm when it contains contents.
     if (hasValue) {
       if (confirm('确认删除 ' + hasValue + ' ？')) {
+        // Pump the chapter id to the delete node for later deleting
+        $deleteChapters.val($deleteChapters.val() + $row.data().id + ',');
         $row.remove();
       }
     } else {
@@ -135,74 +152,113 @@ function handle(btn, plusOrMinus) {
   return false;
 }
 
-$(document).ready(function(){
+function setNodeValue($node, str) {
+  str = '[' + str.substring(0, str.length-1) + ']';
+  $node.val(str);
+}
+
+// Form submits
+$('#course_form').submit(function(e){
+  // Compose string chapters
+  var strUpdateChapters = '',
+      strInsertChapters = '';
+
+  $('.dummy-node').each(function(i) {
+    var data = $(this).data();
+    var name = $(this).children('input.chapter-name').val();
+    var sorting = $(this).children('input.chapter-sorting').val();
+    var json;
+
+    if (name) {
+      // Update
+      if (data.id) {
+        json = {
+          'id': data.id,
+          'name': name,
+          'sorting': sorting
+        };
+        strUpdateChapters += JSON.stringify(json) + ',';
+
+      // Insert
+      } else {
+        json = {
+          'name': name,
+          'sorting': sorting
+        };
+        strInsertChapters += JSON.stringify(json) + ',';
+      }
+    }
+  });
+
+  // Set node value
+  setNodeValue($updateChapters, strUpdateChapters);
+  setNodeValue($insertChapters, strInsertChapters);
+  setNodeValue($deleteChapters, $deleteChapters.val());
+});
+
+// Main
+(function() {
   // The old function can retrieve data from input field or db
-  var hasChapters = $hiddenNode.val();
+  var hasChapters = $updateChapters.val();
 
   // Set chapter items
   if (hasChapters) {
     var chapters = JSON.parse(hasChapters);
+    var chapter, node;
 
     // List all chapters
     for (var i = 0; i < chapters.length; i++) {
-      var chapter = chapters[i];
-      var node = strNode.replace(/\[value\]/g, chapter.name);
+      chapter = chapters[i];
+
+      node = strDummyNode
+        .replace(/\[nameValue\]/g, chapter.name)
+        .replace(/\[sortingValue\]/g, chapter.sorting);
 
       // Set the first node with plus button
       if (i == 0) {
         node = node.replace(/\[symbol\]/g, 'plus');
-      } else {
-        // Set the other nodes with minus button
+      } else { // Set the other nodes with minus button
         node = node.replace(/\[symbol\]/g, 'minus');
       }
 
-      // Store data and append to wrapper
+      // Store the chapter data to the node which
+      // should be appended to the wrapper later.
       $(node).data(chapter).appendTo($chapters);
-
-      // Calculate the next id and order
-      maxId = chapter.id;
-      maxOrder = chapter.order;
     }
 
   } else {
     // When creating a blank new course
-    var node = strNode.replace(/\[value\]/g, '').replace(/\[symbol\]/g, 'plus');
+    node = strDummyNode
+      .replace(/\[nameValue\]/g, '')
+      .replace(/\[sortingValue\]/g, '0')
+      .replace(/\[symbol\]/g, 'plus');
+
     $(node).appendTo($chapters);
   }
 
-  // Submit
-  $('#course_form').submit(function(e){
-    // Compose string chapters
-    var strChapters = '';
+  // Import image
+  if (URL) {
+    $inputCover.change(function() {
+      var files = this.files;
+      var file;
 
-    $('.dummy-node').each(function(i){
-      var data = $(this).data();
+      if (files && files.length) {
+        file = files[0];
 
-      if (data.id) {
-        var json = {
-          'id': data.id,
-          'name': $(this).children('input').val(),
-          'topics': data.topics,
-          'order': data.order
+        if (/^image\/\w+/.test(file.type)) {
+          if (uploadedImageURL) {
+            URL.revokeObjectURL(uploadedImageURL);
+          }
+          uploadedImageURL = URL.createObjectURL(file);
+
+          $imageCover.attr('src', uploadedImageURL);
+        } else {
+          alert('请选择图片文件');
         }
-        strChapters += JSON.stringify(json) + ',';
-      } else {
-        maxId += 1;
-        maxOrder += 1;
-        var json = {
-          'id': maxId,
-          'name': $(this).children('input').val(),
-          'topics': [],
-          'order': maxOrder
-        }
-        strChapters += JSON.stringify(json) + ',';
       }
     });
+  }
 
-    // Post chapters
-    strChapters = '[' + strChapters.substring(0, strChapters.length-1) + ']';
-    $hiddenNode.val(strChapters);
-  });
-})
+})();
 </script>
 @stop

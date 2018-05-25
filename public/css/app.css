@@ -10410,6 +10410,10 @@ a.text-dark:focus {
   color: #ccc;
 }
 
+input[type="file"] {
+  cursor: pointer;
+}
+
 .form-check-input {
   margin-left: 0;
 }
@@ -10574,7 +10578,8 @@ header .info li .dropdown-menu .dropdown-item:active {
 
 header .info li .dropdown-menu .button-icon {
   margin-right: 6px;
-  font-size: 15px;
+  font-size: 18px;
+  vertical-align: middle;
 }
 
 header .info li .avatar {
@@ -10743,16 +10748,30 @@ footer .info {
   color: #999;
 }
 
-.course-create-page .dummy-node .spacing,
-.course-edit-page .dummy-node .spacing {
-  width: 90%;
-  margin: 3px 0;
+.course-create-page .dummy-node .chapter-name,
+.course-edit-page .dummy-node .chapter-name {
+  width: 80%;
 }
 
-.course-create-page .dummy-node a,
-.course-edit-page .dummy-node a {
+.course-create-page .dummy-node .chapter-sorting,
+.course-edit-page .dummy-node .chapter-sorting {
+  width: 10%;
+}
+
+.course-create-page .dummy-node .spacing,
+.course-edit-page .dummy-node .spacing {
+  margin: 2px 2px 2px 0;
+}
+
+.course-create-page .dummy-node .button,
+.course-edit-page .dummy-node .button {
+  padding-top: 6px;
   cursor: pointer;
-  font-size: 22px;
+}
+
+.course-create-page .dummy-node .button i,
+.course-edit-page .dummy-node .button i {
+  font-size: 18px;
 }
 
 .topic-show-page .card-body {
@@ -10760,7 +10779,7 @@ footer .info {
 }
 
 .topic-show-page .card-body .anticon {
-  margin-right: 5px;
+  margin-right: 3px;
 }
 
 .topic-show-page .card-body .btn-light {
@@ -10772,7 +10791,7 @@ footer .info {
 }
 
 .topic-show-page .card-body .prev-next .next > i {
-  margin-left: 6px;
+  margin-left: 3px;
   margin-right: 0;
 }
 
@@ -11108,9 +11127,9 @@ footer .info {
   transform: translate(-50%, -50%);
 }
 
-.user-edit-page .body .avatar-wrapper .avatar-mask .mask-text,
-.user-password-page .body .avatar-wrapper .avatar-mask .mask-text {
-  margin-top: 10px;
+.user-edit-page .body .avatar-wrapper .avatar-mask .mask-content .mask-icon > i,
+.user-password-page .body .avatar-wrapper .avatar-mask .mask-content .mask-icon > i {
+  font-size: 40px;
 }
 
 .user-edit-page .modal,
