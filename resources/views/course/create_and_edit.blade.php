@@ -41,7 +41,7 @@
             <div class="form-group row">
               <label for="slug" class="col-md-2 col-form-label text-md-right">英文名</label>
               <div class="col-md-5">
-                <input name="slug" id="slug" type="slug" class="form-control {{ checkError($errors, 'slug') }}" value="{{ old('slug', $course->slug) }}">
+                <input name="slug" id="slug" type="slug" class="form-control {{ checkError($errors, 'slug') }}" value="{{ old('slug', $course->slug) }}" required>
                 {!! showErrorFeedback($errors, 'slug') !!}
               </div>
               <div class="col-md-5 col-form-label tips">可用连字符，不能用空格。例如：my-course</div>
@@ -63,7 +63,7 @@
 
             <div class="form-group row">
               <label for="price" class="col-md-2 col-form-label text-md-right">价格</label>
-              <div class="col-md-2"><input class="form-control" type="text" name="price" id="price" value="{{ old('price', $course->price) }}" required /></div>
+              <div class="col-md-2"><input class="form-control" type="number" name="price" id="price" value="{{ old('price', $course->price) }}" required /></div>
               <div class="col-md-5 offset-md-3 col-form-label tips">单位：分。例如：39.0 元，填写 3990</div>
             </div>
 
@@ -79,13 +79,13 @@
 
             <div class="form-group row">
               <label for="intro" class="col-md-2 col-form-label text-md-right">描述</label>
-              <div class="col-md-7"><textarea name="intro" id="intro" class="form-control" rows="7" required>{{ old('intro', $course->intro) }}</textarea></div>
+              <div class="col-md-7"><textarea name="intro" id="intro" class="form-control" rows="7" required minlength="10">{{ old('intro', $course->intro) }}</textarea></div>
               <div class="col-md-3 col-form-label tips">用于首页和课程目录上方</div>
             </div>
 
             <div class="form-group row">
               <label for="introduction" class="col-md-2 col-form-label text-md-right">介绍</label>
-              <div class="col-md-7"><textarea name="introduction" id="introduction" class="form-control" rows="15" required>{{ old('introduction', $course->introduction) }}</textarea></div>
+              <div class="col-md-7"><textarea name="introduction" id="introduction" class="form-control" rows="15" required minlength="20">{{ old('introduction', $course->introduction) }}</textarea></div>
               <div class="col-md-3 col-form-label tips">用于推广页面，详述课程亮点</div>
             </div>
 
