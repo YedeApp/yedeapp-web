@@ -10621,6 +10621,7 @@ footer .info {
   color: #333;
   font-size: 1.4rem;
   font-weight: 700;
+  text-decoration: none;
 }
 
 .home-page .card .intro {
@@ -10827,9 +10828,9 @@ footer .info {
 }
 
 .topic-show-page .markdown-body {
-  margin: 1rem auto;
+  margin: 1.5rem auto 1rem;
   line-height: 1.8rem;
-  font-size: 15px;
+  font-size: 1rem;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
   color: #393939;
   letter-spacing: 0.5px;

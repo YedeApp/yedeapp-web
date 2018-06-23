@@ -56,40 +56,6 @@
   {{-- Markdown parser --}}
   <script type="text/javascript"  src="{{ asset('js/mditor.min.js') }}"></script>
   <script>
-    var HtmlUtil = {
-      // 用正则表达式转码 html
-      htmlEncodeByRegExp: function (str) {
-        var s = "";
-
-        if (str.length == 0) return "";
-
-        s = str.replace(/&/g,"&amp;");
-        s = s.replace(/</g,"&lt;");
-        s = s.replace(/>/g,"&gt;");
-        s = s.replace(/ /g,"&nbsp;");
-        s = s.replace(/\'/g,"&#39;");
-        s = s.replace(/\"/g,"&quot;");
-
-        return s;
-      },
-
-      // 用正则表达式解码 html
-      htmlDecodeByRegExp: function (str) {
-          var s = "";
-
-          if (str.length == 0) return "";
-
-          s = str.replace(/&amp;/g,"&");
-          s = s.replace(/&lt;/g,"<");
-          s = s.replace(/&gt;/g,">");
-          s = s.replace(/&nbsp;/g," ");
-          s = s.replace(/&#39;/g,"\'");
-          s = s.replace(/&quot;/g,"\"");
-
-          return s;
-      }
-    };
-
     var $markdown = $('.markdown-body');
     var parser = new Mditor.Parser();
     var decodedHtml = HtmlUtil.htmlDecodeByRegExp($markdown.html());
@@ -103,5 +69,4 @@
 
   {{-- Baidu sns-share --}}
   {{--<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":["tqq","tieba","qzone","fbook","twi"],"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='https://ss1.baidu.com/9rA4cT8aBw9FktbgoI7O1ygwehsv/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>--}}
-
 @endsection

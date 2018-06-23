@@ -226,6 +226,7 @@ footer {
       color: #333;
       font-size: 1.4rem;
       font-weight: 700;
+      text-decoration: none;
     }
 
     .intro {
@@ -396,9 +397,9 @@ footer {
   }
 
   .markdown-body {
-    margin: 1rem auto;
+    margin: 1.5rem auto 1rem;
     line-height: 1.8rem;
-    font-size: 15px;
+    font-size: 1rem;
     font-family: $font-family-base;
     color: $font-color-base;
     letter-spacing: $letter-spacing;
