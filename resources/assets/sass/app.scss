@@ -56,6 +56,21 @@
   }
 }
 
+@mixin markdown {
+  .markdown-body {
+    margin: 1.5rem auto 1rem;
+    line-height: 1.8rem;
+    font-size: 1rem;
+    font-family: $font-family-base;
+    color: $font-color-base;
+    letter-spacing: $letter-spacing;
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: bold;
+    }
+  }
+}
+
 // Close button
 button.close {
   outline: none;
@@ -240,6 +255,7 @@ footer {
 // Course show page
 .course-show-page {
   @include course-header;
+  @include markdown;
 
   .intro {
     margin-top: 15px;
@@ -343,6 +359,7 @@ footer {
 
 // Topic pages
 .topic-show-page {
+  @include markdown;
 
   .card-body {
     padding: 2rem;
@@ -394,19 +411,6 @@ footer {
       a {
         color: #777;
       }
-    }
-  }
-
-  .markdown-body {
-    margin: 1.5rem auto 1rem;
-    line-height: 1.8rem;
-    font-size: 1rem;
-    font-family: $font-family-base;
-    color: $font-color-base;
-    letter-spacing: $letter-spacing;
-
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: bold;
     }
   }
 

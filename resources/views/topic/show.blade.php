@@ -49,12 +49,12 @@
 @endsection
 
 @section('styles')
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/mditor.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/mditor.min.css') }}">
 @endsection
 
 @section('scripts')
   {{-- Markdown parser --}}
-  <script type="text/javascript"  src="{{ asset('js/mditor.min.js') }}"></script>
+  <script src="{{ asset('js/mditor.min.js') }}"></script>
   <script>
     var $markdown = $('.markdown-body');
     var parser = new Mditor.Parser();
