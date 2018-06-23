@@ -44,7 +44,7 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-12 col-md-5 mb-3">
+        <div class="col-12 col-md-4 mb-3">
           <label for="courses" class="col-form-label">课程</label>
           <select name="course_id" id="courses" class="form-control" onchange="reloadChapters(this)" required>
             <option value="" hidden disabled {{ null === old('course_id', $topic->course_id) ? 'selected' : '' }}>请选择课程</option>
@@ -54,7 +54,7 @@
           </select>
         </div>
 
-        <div class="col-12 col-md-5 mb-3">
+        <div class="col-12 col-md-4 mb-3">
           <label for="chapters" class="col-form-label">章节</label>
           <select name="chapter_id" id="chapters" class="form-control" required>
             <option value="" hidden disabled {{ null === old('chapter_id', $topic->chapter_id) ? 'selected' : '' }}>请选择章节</option>
@@ -68,6 +68,14 @@
             <option value="0" {{ 0 == old('free', $topic->is_free) ? 'selected' : '' }}>否</option>
           </select>
         </div>
+
+        <div class="col-12 col-md-2 mb-3">
+          <label for="active" class="col-form-label">发布</label>
+          <select name="active" id="active" class="form-control" required>
+            <option value="1" {{ 1 == old('active', $topic->active) ? 'selected' : '' }}>是</option>
+            <option value="0" {{ 0 == old('active', $topic->active) ? 'selected' : '' }}>否</option>
+          </select>
+          </div>
       </div>
 
       <div class="form-group row">

@@ -19,24 +19,27 @@
           @foreach ($chapters as $chapter)
             <dt>{{ $chapter->name }}</dt>
             @foreach ($chapter->topics as $topic)
-              <dd>
-                {{-- Subscriber --}}
-                @if ($canshow)
-                  <a href="{{ $topic->link($course->slug) }}">{{ $topic->title }}</a>
-                {{-- Guest --}}
-                @else
-                  @if ($topic->is_free)
-                    {{-- Free topic--}}
-                    <a href="{{ $topic->link($course->slug) }}"><span class="badge badge-primary">免费试读</span>{{ $topic->title . '-' . $topic->course_id }}</a>
+              {{-- Display only active topics --}}
+              @if ($topic->active)
+                <dd>
+                  {{-- Subscriber --}}
+                  @if ($canshow)
+                    <a href="{{ $topic->link($course->slug) }}">{{ $topic->title }}</a>
+                  {{-- Guest --}}
                   @else
-                    <span>{{ $topic->title }}</span>
-                  @endif
+                    @if ($topic->is_free)
+                      {{-- Free topic--}}
+                      <a href="{{ $topic->link($course->slug) }}"><span class="badge badge-primary">免费试读</span>{{ $topic->title . '-' . $topic->course_id }}</a>
+                    @else
+                      <span>{{ $topic->title }}</span>
+                    @endif
 
-                  @if (!$topic->is_free)
-                    <span class="float-right"><i class="anticon icon-lock"></i></span>
+                    @if (!$topic->is_free)
+                      <span class="float-right"><i class="anticon icon-lock"></i></span>
+                    @endif
                   @endif
-                @endif
-              </dd>
+                </dd>
+              @endif
             @endforeach
           @endforeach
         </dl>

@@ -52,7 +52,7 @@ class CourseController extends Controller
     {
         $chapters = $course->chapters()->ordered()->get()->load('topics');
 
-        // Check if user has subscribed to the course.
+        // Check if the user has subscribed the course.
         $canshow = optional(Auth::user())->can('show', $course);
 
         return view('course.chapters', compact('course', 'chapters', 'canshow'));

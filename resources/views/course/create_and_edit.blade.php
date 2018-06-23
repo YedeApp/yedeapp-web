@@ -90,6 +90,16 @@
             </div>
 
             <div class="form-group row">
+              <label for="active" class="col-md-2 col-form-label text-md-right">发布</label>
+              <div class="col-md-2">
+                <select name="active" id="active" class="form-control" required>
+                  <option value="1" {{ 1 == old('active', $course->active) ? 'selected' : '' }}>是</option>
+                  <option value="0" {{ 0 == old('active', $course->active) ? 'selected' : '' }}>否</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
               <div class="col-md-5 offset-md-2">
                 <button type="submit" class="btn btn-primary btn-w-100 mr-2">确定</button>
               </div>

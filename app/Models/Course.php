@@ -10,7 +10,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'cover', 'banner', 'intro', 'introduction', 'price', 'sorting'
+        'name', 'slug', 'cover', 'banner', 'intro', 'introduction', 'price', 'sorting', 'active'
     ];
 
     public function user()
@@ -43,4 +43,14 @@ class Course extends Model
         return ($this->price / 100);
     }
 
+    /**
+     * Scope a query to only include active courses.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 class Topic extends Model
 {
     protected $fillable = [
-        'title', 'content', 'user_id', 'chapter_id', 'course_id', 'comment_count', 'view_count', 'is_free', 'slug', 'description', 'sorting'
+        'title', 'content', 'user_id', 'chapter_id', 'course_id', 'comment_count', 'view_count', 'is_free', 'slug', 'description', 'sorting', 'active'
     ];
 
     public function course()
@@ -37,6 +37,17 @@ class Topic extends Model
 
         // Inject parameters according to the order of the topic.show route
         return route('topic.show', [$courseSlug, $this->id, $this->slug]);
+    }
+
+    /**
+     * Scope a query to only include active courses.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
     }
 
 }
