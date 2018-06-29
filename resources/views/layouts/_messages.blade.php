@@ -6,5 +6,5 @@
 <script>
 var closeAlertMessage = setTimeout(function () {
   $('.alert-dismissible').alert('close')
-}, 5000);
+}, 3000);
 </script>

@@ -27,15 +27,14 @@
   <![endif]-->
 
   <div id="app" class="{{ getRouteCls() }}-page">
+    {{-- Messages --}}
+    <div class="fixed-top text-center">
+      @include('layouts._messages')
+    </div>
 
     @include('layouts._header')
 
     <div class="container">
-      {{-- Messages --}}
-      <div class="text-center">
-        @include('layouts._messages')
-      </div>
-
       {{-- Content --}}
       @yield('content')
     </div>
