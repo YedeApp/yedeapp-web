@@ -68,11 +68,13 @@
             </div>
 
             <div class="form-group row">
-              <label for="cover" class="col-md-2 col-form-label text-md-right">分章</label>
+              <label class="col-md-2 col-form-label text-md-right">章节</label>
               <div class="col-md-5 clearfix chapters">
-                <input type="hidden" id="update_chapters" name="update_chapters" value="{{ old('update_chapters', $chapters) }}" />
+                {{-- <input type="hidden" id="update_chapters" name="update_chapters" value="{{ old('update_chapters', $chapters) }}" />
                 <input type="hidden" id="insert_chapters" name="insert_chapters" value="{{ old('insert_chapters') }}" />
-                <input type="hidden" id="delete_chapters" name="delete_chapters" value="{{ old('delete_chapters') }}" />
+                <input type="hidden" id="delete_chapters" name="delete_chapters" value="{{ old('delete_chapters') }}" /> --}}
+              <input type="hidden" name="chapters_data" id="chapters_data" value="{{ old('chapters_data', $chapters) }}">
+              <input type="hidden" name="topics_data" id="topics_data" value="{{ old('topics_data', $topics) }}">
               </div>
               <div class="col-md-5 col-form-label tips">每章标题和排序，排序数越小越靠前</div>
             </div>
@@ -270,5 +272,13 @@ $('#course_form').submit(function(e){
   }
 
 })();
+</script>
+
+<script>
+var $chapterList = $('.chapters');
+
+var showChapters = function() {
+
+}
 </script>
 @stop

@@ -39,15 +39,4 @@ class Topic extends Model
         return route('topic.show', [$courseSlug, $this->id, $this->slug]);
     }
 
-    /**
-     * Scope a query to only include active courses.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeActive($query)
-    {
-        return $query->where('active', 1);
-    }
-
 }

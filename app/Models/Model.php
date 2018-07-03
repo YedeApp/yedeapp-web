@@ -15,4 +15,9 @@ class Model extends EloquentModel
     {
         return $query->orderBy('sorting', 'asc');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
 }

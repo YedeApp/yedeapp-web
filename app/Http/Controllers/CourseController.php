@@ -32,7 +32,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Course introduction page.
+     * Introductions of a Course.
      *
      * @param  \Illuminate\Database\Eloquent\Model\Course  $course
      * @return \Illuminate\View\View
@@ -43,7 +43,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Course chapters page.
+     * Chapters of a Course.
      *
      * @param  \Illuminate\Database\Eloquent\Model\Course  $course
      * @return \Illuminate\View\View
@@ -67,13 +67,29 @@ class CourseController extends Controller
     public function create(Course $course)
 	{
         // A new blank course has no chapters.
-        $chapters = false;
+        $chapters = $topics = false;
 
-		return view('course.create_and_edit', compact('course', 'chapters'));
+		return view('course.create_and_edit', compact('course', 'chapters', 'topics'));
     }
 
     /**
-     * Store the course.
+     * Edit an existed Course.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
+     * @return \Illuminate\View\View
+     */
+    public function edit(Course $course)
+    {
+        $this->authorize('update', $course);
+
+        $chapters = $course->chapters()->ordered()->get();
+        $topics = $course->topics()->ordered()->get();
+
+        return view('course.create_and_edit', compact('course', 'chapters', 'topics'));
+    }
+
+    /**
+     * Store a new creating course.
      *
      * @param  \Illuminate\Foundation\Http\FormRequest\CourseRequest  $request
      * @param  \App\Handlers\ImageUploadHandler  $uploader
@@ -101,22 +117,7 @@ class CourseController extends Controller
 	}
 
     /**
-     * Course edit page.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model\Course  $course
-     * @return \Illuminate\View\View
-     */
-    public function edit(Course $course)
-    {
-        $this->authorize('update', $course);
-
-        $chapters = $course->chapters()->ordered()->get();
-
-        return view('course.create_and_edit', compact('course', 'chapters'));
-    }
-
-    /**
-     * Update the course.
+     * Update an existed course.
      *
      * @param  \Illuminate\Foundation\Http\FormRequest\CourseRequest  $request
      * @param  \App\Handlers\ImageUploadHandler  $uploader
@@ -143,7 +144,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Course purchase page.
+     * Course purchasing.
      *
      * @param  \Illuminate\Database\Eloquent\Model\Course  $course
      * @return \Illuminate\View\View
@@ -178,7 +179,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Recieve Youzan push data.
+     * Callback for Youzan's invoking.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void
@@ -207,7 +208,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Pull data from Youzan by self. If the trade has been succeed, update the subscription.
+     * Query if the trade succeed from Youzan. if true, update user's subscription.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return integer
@@ -238,7 +239,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Upload the course cover image.
+     * Upload cover image of a course.
      *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \App\Handlers\ImageUploadHandler  $uploader
@@ -257,7 +258,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Upload the course cover image.
+     * Upload chapters of a course.
      *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \Illuminate\Database\Eloquent\Model\Course  $course
