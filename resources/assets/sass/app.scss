@@ -331,29 +331,55 @@ footer {
 .course-edit-page {
   @include editing;
 
-  .dummy-node {
-    .chapter-name {
-      width: 75%;
+  .dummy {
+    text-align: right;
+
+    .title {
+      display: inline-block;
+      width: 65%;
     }
 
-    .chapter-sorting {
-      width: 15%;
+    .sorting {
+      display: inline-block;
+      width: 13%;
+      margin-left: 1%;
       text-align: center;
     }
 
-    .spacing {
-      margin: 2px 2px 2px 0;
-    }
+    .buttons {
+      display: inline-block;
+      width: 20%;
+      margin-left: 1%;
+      padding-bottom: 12px;
+      text-align: left;
 
-    .button {
-      padding-top: 6px;
-      cursor: pointer;
+      .button {
+        cursor: pointer;
 
-      i {
-        font-size: 18px;
+        i {
+          font-size: 18px;
+        }
       }
     }
 
+    // mobile device
+    @media (max-width: 768px) {
+      .title {
+        width: 45%;
+      }
+
+      .topic-node .title {
+        width: 40%;
+      }
+
+      .buttons {
+        width: 35%;
+      }
+    }
+  }
+
+  .topic-node .title {
+    width: 58%;
   }
 }
 

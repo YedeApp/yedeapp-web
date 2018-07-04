@@ -63,20 +63,20 @@
 
             <div class="form-group row">
               <label for="price" class="col-md-2 col-form-label text-md-right">价格</label>
-              <div class="col-md-2"><input class="form-control" type="number" name="price" id="price" value="{{ old('price', $course->price) }}" required /></div>
-              <div class="col-md-5 offset-md-3 col-form-label tips">单位：分。例如：39.0 元，填写 3990</div>
+              <div class="col-md-2"><input class="form-control" type="number" name="price" id="price" value="{{ old('price', $course->price) }}" required></div>
+              <div class="col-md-4 offset-md-4 col-form-label tips">单位：分。例如：39.0 元，填写 3990</div>
             </div>
 
             <div class="form-group row">
               <label class="col-md-2 col-form-label text-md-right">章节</label>
-              <div class="col-md-5 clearfix chapters">
+              <div class="col-md-6 clearfix chapters">
                 {{-- <input type="hidden" id="update_chapters" name="update_chapters" value="{{ old('update_chapters', $chapters) }}" />
                 <input type="hidden" id="insert_chapters" name="insert_chapters" value="{{ old('insert_chapters') }}" />
                 <input type="hidden" id="delete_chapters" name="delete_chapters" value="{{ old('delete_chapters') }}" /> --}}
-              <input type="hidden" name="chapters_data" id="chapters_data" value="{{ old('chapters_data', $chapters) }}">
-              <input type="hidden" name="topics_data" id="topics_data" value="{{ old('topics_data', $topics) }}">
+                <input type="hidden" name="chapters_data" id="chapters_data" value="{{ old('chapters_data', $chapters) }}">
+                <input type="hidden" name="topics_data" id="topics_data" value="{{ old('topics_data', $topics) }}">
               </div>
-              <div class="col-md-5 col-form-label tips">每章标题和排序，排序数越小越靠前</div>
+              <div class="col-md-4 col-form-label tips">章节标题和排序，排序越小越靠前</div>
             </div>
 
             <div class="form-group row">
@@ -116,169 +116,233 @@
 
 @section('scripts')
 <script>
+/*
+ * Refresh uploading image
+ *
+ * Show the new image before uploading.
+ *
+ */
 var URL = window.URL || window.webkitURL;
-var $inputCover = $('#cover');
-var $imageCover = $('.cover-image');
+var $coverInput = $('#cover');
+var $coverImage = $('.cover-image');
 var uploadedImageURL;
 
-var $chapters = $('.chapters');
-var $updateChapters = $('#update_chapters');
-var $insertChapters = $('#insert_chapters');
-var $deleteChapters = $('#delete_chapters');
+if (URL) {
+  $coverInput.change(function() {
+    var files = this.files;
+    var file;
 
-var strDummyNode = '<div class="dummy-node">'
-  + '<input class="form-control float-left chapter-name spacing" type="text" value="[nameValue]" />'
-  + '<input class="form-control float-left chapter-sorting spacing" type="text" value="[sortingValue]" onfocus="this.select()" />'
-  + '<a class="float-right button" onclick="handle(this, \'[symbol]\')">'
-  + '<i class="anticon icon-[symbol]circleo"></i>'
-  + '</a>'
-  + '</div>';
+    if (files && files.length) {
+      file = files[0];
 
-function handle(btn, plusOrMinus) {
-  var $row = $(btn).parent();
-  var hasValue = $row.children('input.chapter-name').val();
-  var node;
+      if (/^image\/\w+/.test(file.type)) {
+        if (uploadedImageURL) {
+          URL.revokeObjectURL(uploadedImageURL);
+        }
+        uploadedImageURL = URL.createObjectURL(file);
 
-  if (plusOrMinus == 'plus') {
-    // Add a row
-    node = strDummyNode
-      .replace(/\[nameValue\]/g, '')
-      .replace(/\[sortingValue\]/g, '0')
-      .replace(/\[symbol\]/g, 'minus');
-
-    $(node).appendTo($chapters);
-
-  } else {
-    // Delete a row. Confirm when it contains contents.
-    if (hasValue) {
-      if (confirm('确认删除 ' + hasValue + ' ？')) {
-        // Pump the chapter id to the delete node for later deleting
-        $deleteChapters.val($deleteChapters.val() + $row.data().id + ',');
-        $row.remove();
-      }
-    } else {
-      $row.remove();
-    }
-  }
-
-  return false;
-}
-
-function setNodeValue($node, str) {
-  str = '[' + str.substring(0, str.length-1) + ']';
-  $node.val(str);
-}
-
-// Form submits
-$('#course_form').submit(function(e){
-  // Compose string chapters
-  var strUpdateChapters = '',
-      strInsertChapters = '';
-
-  $('.dummy-node').each(function(i) {
-    var data = $(this).data();
-    var name = $(this).children('input.chapter-name').val();
-    var sorting = $(this).children('input.chapter-sorting').val();
-    var json;
-
-    if (name) {
-      // Update
-      if (data.id) {
-        json = {
-          'id': data.id,
-          'name': name,
-          'sorting': sorting
-        };
-        strUpdateChapters += JSON.stringify(json) + ',';
-
-      // Insert
+        $coverImage.attr('src', uploadedImageURL);
       } else {
-        json = {
-          'name': name,
-          'sorting': sorting
-        };
-        strInsertChapters += JSON.stringify(json) + ',';
+        alert('请选择图片文件');
       }
     }
   });
+}
 
-  // Set node value
-  setNodeValue($updateChapters, strUpdateChapters);
-  setNodeValue($insertChapters, strInsertChapters);
-  setNodeValue($deleteChapters, $deleteChapters.val());
-});
+/*
+ * Chapter handling
+ *
+ * Using concating strings would be an easier solution than directly manipulating DOM elements.
+ *
+ */
+var $chapterList = $('.chapters');
+var $deleteButtons = $('.delete-button');
+var $addButtons = $('.add-button');
+var $storedChapters = $('#chapters_data');
+var $storedTopics = $('#topics_data');
 
-// Main
-(function() {
-  // The old function can retrieve data from input field or db
-  var hasChapters = $updateChapters.val();
+// object containing raw string data for later use
+var RowString = {
+  titleText: '<input class="form-control title" type="text" value="[titleValue]">',
+  sortingText: '<input class="form-control sorting" type="text" value="[sortingValue]" onfocus="this.select()">',
+  deleteButton: '<a class="button delete-button ml-2" onclick="deleteRow(this)" title="删除"><i class="anticon icon-delete"></i></a>',
+  addChapterButton: '<a class="button add-button ml-2" onclick="addChapterRow(this)" title="添加新章"><i class="anticon icon-addfolder"></i></a>',
+  addTopicButton: '<a class="button add-button ml-2" onclick="addTopicRow(this)" title="添加小节"><i class="anticon icon-addfile"></i></a>',
 
-  // Set chapter items
-  if (hasChapters) {
-    var chapters = JSON.parse(hasChapters);
-    var chapter, node;
+  // wrap buttons
+  getButtonsDiv: function(buttonsString) {
+    return '<div class="buttons">' + buttonsString + '</div>';
+  },
 
-    // List all chapters
-    for (var i = 0; i < chapters.length; i++) {
-      chapter = chapters[i];
+  // wrap all
+  getDummyDiv: function(rowType, rowString) {
+    var rowTypeClass = rowType + '-node';
+    return '<div class="dummy ' + rowTypeClass + '">' + rowString  + '</div>';
+  }
+};
 
-      node = strDummyNode
-        .replace(/\[nameValue\]/g, chapter.name)
-        .replace(/\[sortingValue\]/g, chapter.sorting);
+var getRow = function(btn) {
+  return $(btn).parent().parent('.dummy');
+}
 
-      // Set the first node with plus button
-      if (i == 0) {
-        node = node.replace(/\[symbol\]/g, 'plus');
-      } else { // Set the other nodes with minus button
-        node = node.replace(/\[symbol\]/g, 'minus');
-      }
+var getTitleFromRow = function(row) {
+  return row.children('.title').val();
+}
 
-      // Store the chapter data to the node which
-      // should be appended to the wrapper later.
-      $(node).data(chapter).appendTo($chapters);
+var isChapterRow = function(row) {
+  return row.hasClass('chapter-node');
+}
+
+var isLastChapterRow = function() {
+  if ($('.chapter-node').length > 1) return false;
+
+  return true;
+}
+
+var deleteRowAfterConfirm = function(row) {
+  var title = getTitleFromRow(row);
+
+  if (title) {
+    if (confirm('确认删除「' + title + '」吗？')) {
+      row.remove();
     }
 
   } else {
-    // When creating a blank new course
-    node = strDummyNode
-      .replace(/\[nameValue\]/g, '')
-      .replace(/\[sortingValue\]/g, '0')
-      .replace(/\[symbol\]/g, 'plus');
-
-    $(node).appendTo($chapters);
+    row.remove();
   }
+}
 
-  // Import image
-  if (URL) {
-    $inputCover.change(function() {
-      var files = this.files;
-      var file;
+var deleteRow = function(btn) {
+  var $row = getRow(btn);
 
-      if (files && files.length) {
-        file = files[0];
+  // chapter row
+  if (isChapterRow($row)) {
 
-        if (/^image\/\w+/.test(file.type)) {
-          if (uploadedImageURL) {
-            URL.revokeObjectURL(uploadedImageURL);
-          }
-          uploadedImageURL = URL.createObjectURL(file);
+    // deleted the last chapter row could cause no adding button to use
+    if (isLastChapterRow()) {
+      alert('删除失败。课程需要至少 1 个章节');
+    } else if (getTitleFromRow($row)) {
+      if (confirm('删除整章，包含的小节内容将全部丢失。是否删除？')) deleteRowAfterConfirm($row);
+    } else {
+      deleteRowAfterConfirm($row);
+    }
 
-          $imageCover.attr('src', uploadedImageURL);
-        } else {
-          alert('请选择图片文件');
-        }
-      }
-    });
+  } else {
+    // topic row
+    deleteRowAfterConfirm($row);
   }
+}
 
-})();
-</script>
+var addChapterRow = function(btn) {
+  var $row = getRow(btn);
+  var blankRow = getChapterRowString();
 
-<script>
-var $chapterList = $('.chapters');
+  $(blankRow).insertAfter($row);
+}
+
+// pay attention to the difference between adding chapters and topics
+var addTopicRow = function(btn) {
+  var $row = getRow(btn);
+  var blankRow = getTopicRowString();
+
+  if (isChapterRow($row)) {
+    $(blankRow).appendTo($row);
+  } else {
+    $(blankRow).insertAfter($row);
+  }
+}
+
+// set default values and return an object containing the values
+var getValues = function() {
+  var type = arguments[0] ? arguments[0] : false, title, sorting;
+
+  if (type === false) return;
+
+  title = arguments[1] ? arguments[1] : '';
+  sorting = arguments[2] ? arguments[2] : 0;
+
+  return {
+    type: type,
+    title: title,
+    sorting: sorting
+  };
+}
+
+// fill with data
+var getRowString = function(type, title, sorting) {
+  return arguments[0]
+      .replace(/\[titleValue\]/g, arguments[1].title)
+      .replace(/\[sortingValue\]/g, arguments[1].sorting);
+}
+
+var getChapterRowString = function() {
+  // set default value
+  var values = getValues('chapter', arguments[0], arguments[1]);
+
+  // combine to a div wrapping the chapter
+  var texts = RowString.titleText + RowString.sortingText;
+  var buttons = RowString.getButtonsDiv(RowString.deleteButton + RowString.addChapterButton + RowString.addTopicButton);
+  var div = RowString.getDummyDiv(values.type, texts + buttons);
+
+  return getRowString(div, values);
+}
+
+var getTopicRowString = function() {
+
+  // set default value
+  var values = getValues('topic', arguments[0], arguments[1]);
+
+  // combine to a div wrapping the topic
+  var texts = RowString.titleText + RowString.sortingText;
+  var buttons = RowString.getButtonsDiv(RowString.deleteButton + RowString.addTopicButton);
+  var div = RowString.getDummyDiv(values.type, texts + buttons);
+
+  return getRowString(div, values);
+}
+
+var showTopics = function(parent, topic) {
+  var row = getTopicRowString(topic.title, topic.sorting);
+  $(row).appendTo(parent);
+}
 
 var showChapters = function() {
+  var chapters = $storedChapters.val();
+  var topics = $storedTopics.val();
+  var row, $row;
 
+  if (chapters) {
+    // update
+    JSON.parse(chapters).forEach(function(chapter) {
+
+      row = getChapterRowString(chapter.name, chapter.sorting);
+
+      // It's a little bit tricky here. If you use $(row).appendTo(...) to append to $chapterList, the $(row)
+      // will always create a new DOM element, also the reference of the $(row) won't be the same in the iteration,
+      // causing later topic elements appending to a no appearing chapter.
+      $row = $(row);
+      $row.data(chapter).appendTo($chapterList);
+
+      // not a good approch, but worked.
+      JSON.parse(topics).forEach(function(topic) {
+        if (topic.chapter_id === chapter.id) {
+          showTopics($row, topic);
+        }
+      });
+
+    });
+
+  } else {
+    // create
+    row = getChapterRowString();
+
+    $(row).appendTo($chapterList);
+  }
 }
+
+var init = function() {
+  showChapters();
+}
+
+init();
 </script>
 @stop

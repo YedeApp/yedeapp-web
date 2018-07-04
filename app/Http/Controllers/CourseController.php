@@ -83,7 +83,7 @@ class CourseController extends Controller
         $this->authorize('update', $course);
 
         $chapters = $course->chapters()->ordered()->get();
-        $topics = $course->topics()->ordered()->get();
+        $topics = $course->topics()->select('title', 'chapter_id', 'sorting')->ordered()->get();
 
         return view('course.create_and_edit', compact('course', 'chapters', 'topics'));
     }
