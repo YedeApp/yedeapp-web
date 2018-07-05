@@ -70,11 +70,8 @@
             <div class="form-group row">
               <label class="col-md-2 col-form-label text-md-right">章节</label>
               <div class="col-md-6 clearfix chapters">
-                {{-- <input type="hidden" id="update_chapters" name="update_chapters" value="{{ old('update_chapters', $chapters) }}" />
-                <input type="hidden" id="insert_chapters" name="insert_chapters" value="{{ old('insert_chapters') }}" />
-                <input type="hidden" id="delete_chapters" name="delete_chapters" value="{{ old('delete_chapters') }}" /> --}}
                 <input type="hidden" name="chapters_data" id="chapters_data" value="{{ old('chapters_data', $chapters) }}">
-                <input type="hidden" name="topics_data" id="topics_data" value="{{ old('topics_data', $topics) }}">
+                <input type="hidden" name="deleted_data" id="deleted_data" value="{{ old('deleted_data') }}">
               </div>
               <div class="col-md-4 col-form-label tips">章节标题和排序，排序越小越靠前</div>
             </div>
@@ -89,6 +86,13 @@
               <label for="introduction" class="col-md-2 col-form-label text-md-right">介绍</label>
               <div class="col-md-7"><textarea name="introduction" id="introduction" class="form-control" rows="15" required minlength="20">{{ old('introduction', $course->introduction) }}</textarea></div>
               <div class="col-md-3 col-form-label tips">用于推广页面，详述课程亮点</div>
+            </div>
+
+            <div class="form-group row">
+              <label for="active" class="col-md-2 col-form-label text-md-right">排序</label>
+              <div class="col-md-2">
+                <input class="form-control" type="number" name="sorting" id="sorting" value="{{ old('sorting', $course->sorting) }}" required>
+              </div>
             </div>
 
             <div class="form-group row">
@@ -155,11 +159,56 @@ if (URL) {
  * Using concating strings would be an easier solution than directly manipulating DOM elements.
  *
  */
+var $courseForm = $('#course_form');
 var $chapterList = $('.chapters');
 var $deleteButtons = $('.delete-button');
 var $addButtons = $('.add-button');
 var $storedChapters = $('#chapters_data');
-var $storedTopics = $('#topics_data');
+var $storedDeletedItems = $('#deleted_data');
+var deletedItems = { chapters: [], topics: [] };
+
+// Events
+$courseForm.submit(function() {
+  var chapters = [];
+  var chapter, topic;
+  var chapterRow, topicRow;
+
+  // handle chapters
+  $('.chapter-node').each(function() {
+    chapterRow = $(this);
+
+    // handle topics
+    var topics = [];
+    chapterRow.children('.topic-node').each(function() {
+      topicRow = $(this);
+
+      topic = {
+        id: topicRow.data().id,
+        title: getTitleFromRow(topicRow),
+        chapter_id: topicRow.data().chapter_id,
+        sorting: getSortingFromRow(topicRow)
+      }
+
+      if (topic.title) topics.push(topic);
+    });
+
+    chapter = {
+      id: chapterRow.data().id,
+      title: getTitleFromRow(chapterRow),
+      sorting: getSortingFromRow(chapterRow),
+      topics: topics
+    }
+
+    if (chapter.title) chapters.push(chapter);
+  });
+  // save all chapters stringified data
+  if (chapters.length > 0) $storedChapters.val(JSON.stringify(chapters));
+
+  // save deleted items
+  $storedDeletedItems.val(JSON.stringify(deletedItems));
+
+  // no need to explicitly submit
+});
 
 // object containing raw string data for later use
 var RowString = {
@@ -189,6 +238,10 @@ var getTitleFromRow = function(row) {
   return row.children('.title').val();
 }
 
+var getSortingFromRow = function(row) {
+  return row.children('.sorting').val();
+}
+
 var isChapterRow = function(row) {
   return row.hasClass('chapter-node');
 }
@@ -199,15 +252,29 @@ var isLastChapterRow = function() {
   return true;
 }
 
+var storeDeletedItem = function(row) {
+  var id = row.data().id;
+
+  if (id) {
+    if (isChapterRow(row)) {
+      deletedItems.chapters.push(id);
+    } else {
+      deletedItems.topics.push(id);
+    }
+  }
+}
+
 var deleteRowAfterConfirm = function(row) {
   var title = getTitleFromRow(row);
 
   if (title) {
     if (confirm('确认删除「' + title + '」吗？')) {
+      storeDeletedItem(row);
       row.remove();
     }
 
   } else {
+    storeDeletedItem(row);
     row.remove();
   }
 }
@@ -300,14 +367,15 @@ var getTopicRowString = function() {
   return getRowString(div, values);
 }
 
+// invoked by showChapters()
 var showTopics = function(parent, topic) {
   var row = getTopicRowString(topic.title, topic.sorting);
-  $(row).appendTo(parent);
+  $(row).data({ id: topic.id, chapter_id: topic.chapter_id }).appendTo(parent);
 }
 
+// show chapter list when window loaded.
 var showChapters = function() {
   var chapters = $storedChapters.val();
-  var topics = $storedTopics.val();
   var row, $row;
 
   if (chapters) {
@@ -318,15 +386,12 @@ var showChapters = function() {
 
       // It's a little bit tricky here. If you use $(row).appendTo(...) to append to $chapterList, the $(row)
       // will always create a new DOM element, also the reference of the $(row) won't be the same in the iteration,
-      // causing later topic elements appending to a no appearing chapter.
+      // causing later topic elements appending to a disappering chapter.
       $row = $(row);
-      $row.data(chapter).appendTo($chapterList);
+      $row.data({id: chapter.id}).appendTo($chapterList);
 
-      // not a good approch, but worked.
-      JSON.parse(topics).forEach(function(topic) {
-        if (topic.chapter_id === chapter.id) {
-          showTopics($row, topic);
-        }
+      chapter.topics.forEach(function(topic) {
+        showTopics($row, topic);
       });
 
     });

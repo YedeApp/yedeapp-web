@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $courses = Course::active()->get();
+        $courses = Course::active()->ordered()->get();
 
         return view('pages.home', compact('courses'));
     }

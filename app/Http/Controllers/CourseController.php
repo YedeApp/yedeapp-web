@@ -82,10 +82,9 @@ class CourseController extends Controller
     {
         $this->authorize('update', $course);
 
-        $chapters = $course->chapters()->ordered()->get();
-        $topics = $course->topics()->select('title', 'chapter_id', 'sorting')->ordered()->get();
+        $chapters = $course->chapters()->select('id', 'name', 'sorting')->with('topics:id,title,chapter_id,sorting')->ordered()->get();
 
-        return view('course.create_and_edit', compact('course', 'chapters', 'topics'));
+        return view('course.create_and_edit', compact('course', 'chapters'));
     }
 
     /**
@@ -98,7 +97,7 @@ class CourseController extends Controller
      */
 	public function store(CourseRequest $request, ImageUploadHandler $uploader, Course $course)
 	{
-        $fields = $request->except('insert_chapters', 'update_chapters', 'delete_chapters');
+        $fields = $request->except('chapters_data', 'deleted_data');
 
         $course->fill($fields);
 
@@ -132,7 +131,7 @@ class CourseController extends Controller
         $this->updateChapters($request, $course);
 
         // Update the course
-        $data = $request->except('insert_chapters', 'update_chapters', 'delete_chapters');
+        $data = $request->except('chapters_data', 'deleted_data');
 
         if ($path = $this->uploadImage($request, $uploader)) {
             $data['cover'] = $path;
@@ -258,7 +257,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Upload chapters of a course.
+     * Update chapters of a course.
      *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \Illuminate\Database\Eloquent\Model\Course  $course
@@ -266,30 +265,73 @@ class CourseController extends Controller
      */
     protected function updateChapters(Request $request, Course $course)
     {
-        // Chapters updating, inserting and deleting
-        $updateData = json_decode($request->update_chapters, true);
-        $insertData = json_decode($request->insert_chapters, true);
-        $deleteData = json_decode($request->delete_chapters, true);
+        $chaptersData = json_decode($request->chapters_data, true);
+        $deletedData = json_decode($request->deleted_data, true);
 
-        if (!empty($updateData)) {
-            foreach ($updateData as $rs) {
-                $chapter = Chapter::find($rs['id']);
-                $chapter->name = $rs['name'];
-                $chapter->sorting = $rs['sorting'];
-                $chapter->save();
+        if (isset($chaptersData)) {
+            foreach ($chaptersData as $data) {
+                // Use for later topics inserting
+                $chapterId = '';
+
+                // Update existed item
+                if (isset($data['id'])) {
+                    $chapterId = $data['id'];
+
+                    $chapter = $course->chapters()->where('id', $chapterId)->first();
+                    $chapter->name = $data['title'];
+                    $chapter->sorting = $data['sorting'];
+                    $chapter->save();
+
+                } else {
+                    // Insert new item
+                    $chapter = $course->chapters()->create([
+                        'name' => $data['title'],
+                        'sorting' => $data['sorting'],
+                        'user_id' => Auth::id()
+                    ]);
+
+                    $chapterId = $chapter->id;
+                }
+
+                // Handle topics
+                if (isset($data['topics'])) {
+
+                    foreach ($data['topics'] as $rs) {
+                        // Update topic
+                        if (isset($rs['id'])) {
+                            $topic = $course->topics()->where('id', $rs['id'])->first();
+                            $topic->title = $rs['title'];
+                            $topic->sorting = $rs['sorting'];
+                            $topic->save();
+
+                        } else {
+                            // Insert topic
+                            $course->topics()->create([
+                                'title' => $rs['title'],
+                                'sorting' => $rs['sorting'],
+                                'chapter_id' => $chapterId,
+                                'course_id' => $course->id,
+                                'content' => 'This article is auto-created by chapter editor.',
+                                'user_id' => Auth::id()
+                            ]);
+                        }
+                    }
+                } //end handle topics
+
+            } //end chapters loop
+        } //end hanlde chapters
+
+        // Handle deleting
+        if (isset($deletedData)) {
+            if (isset($deletedData['chapters'])) {
+                $course->chapters()->whereIn('id', $deletedData['chapters'])->delete();
+            }
+
+            if (isset($deletedData['topics'])) {
+                $course->topics()->whereIn('id', $deletedData['topics'])->delete();
             }
         }
 
-        if (!empty($insertData)) {
-            // Fill current user's id into the inserting data
-            $insertData = data_fill($insertData, '*.user_id', Auth::id());
-
-            $course->chapters()->createMany($insertData);
-        }
-
-        if (!empty($deleteData)) {
-            Chapter::destroy($deleteData);
-        }
     }
 
 }
