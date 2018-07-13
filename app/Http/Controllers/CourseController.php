@@ -50,7 +50,7 @@ class CourseController extends Controller
      */
     public function chapters(Course $course)
     {
-        $chapters = $course->chapters()->ordered()->get()->load('topics');
+        $chapters = $course->chapters()->select('id', 'name', 'sorting')->with('topics:id,title,is_free,active,chapter_id,sorting')->get();
 
         // Check if the user has subscribed the course.
         $canshow = optional(Auth::user())->can('show', $course);
@@ -82,7 +82,7 @@ class CourseController extends Controller
     {
         $this->authorize('update', $course);
 
-        $chapters = $course->chapters()->select('id', 'name', 'sorting')->with('topics:id,title,chapter_id,sorting')->ordered()->get();
+        $chapters = $course->chapters()->select('id', 'name', 'sorting')->with('topics:id,title,chapter_id,sorting')->get();
 
         return view('course.create_and_edit', compact('course', 'chapters'));
     }

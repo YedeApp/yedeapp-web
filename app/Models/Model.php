@@ -13,7 +13,7 @@ class Model extends EloquentModel
 
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sorting', 'asc');
+        return $query->orderBy('sorting', 'asc')->orderBy('id', 'desc');
     }
 
     public function scopeActive($query)
