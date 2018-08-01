@@ -12,7 +12,7 @@ class TopicObserver
     public function saving(Topic $topic)
     {
         // XSS filtering
-        $topic->content = clean($topic->content, 'topic');
+        // $topic->content = clean($topic->content, 'topic');
 
         // Truncate 200 chars from topic content as its description.
         $topic->description = truncate($topic->content);
