@@ -73,3 +73,16 @@ function showSessionMessage($key) {
 
     return '';
 }
+
+/**
+ * Parse markdown to html.
+ */
+function markdown($text) {
+    if (isset($text)) {
+        $parser = new Parsedown();
+
+        return $parser->text($text);
+    }
+
+    return '';
+}

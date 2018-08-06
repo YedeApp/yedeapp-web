@@ -8,7 +8,7 @@
 require('./bootstrap');
 
 window.HtmlUtil = {
-  // 用正则表达式转码 html
+  // 用正则转码 html
   htmlEncodeByRegExp: function(str) {
     var s = "";
 
@@ -24,7 +24,7 @@ window.HtmlUtil = {
     return s;
   },
 
-  // 用正则表达式解码 html
+  // 用正则解码 html
   htmlDecodeByRegExp: function(str) {
       var s = "";
 

@@ -32,7 +32,9 @@
       <div class="clearfix">@include('topic._breadcrumb')</div>
     </div>
 
-    <div class="body markdown-body">{!! htmlspecialchars_decode($topic->content) !!}</div>
+    <div class="body markdown-body">
+      {!! markdown($topic->content) !!}
+    </div>
     {{--<div class="sns">@include('topic._sns')</div>--}}
     <div class="prev-next clearfix">
       @if ($prev)
@@ -53,16 +55,8 @@
 @endsection
 
 @section('scripts')
-  {{-- Markdown parser --}}
+  {{-- Mditor parser --}}
   <script src="{{ asset('js/mditor.min.js') }}"></script>
-  <script>
-    var $markdown = $('.markdown-body');
-    var parser = new Mditor.Parser();
-    var decodedHtml = HtmlUtil.htmlDecodeByRegExp($markdown.html());
-
-    var topicHtml = parser.parse(decodedHtml);
-    $markdown.html(topicHtml);
-  </script>
 
   {{-- Comments scripts --}}
   @include ('topic._scripts')
